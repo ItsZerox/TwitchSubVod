@@ -27,7 +27,9 @@ export const ToggleButton = styled.a<ToggleButtonProps>`
     isActive ? theme.colors.pink700 : theme.colors.white};
   transition: all 0.1s ease-in-out;
 
-  :hover {
+  :hover,
+  :focus {
+    outline: none;
     filter: brightness(0.9);
   }
 `
