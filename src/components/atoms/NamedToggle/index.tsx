@@ -21,6 +21,7 @@ const NamedToggle = ({ buttons, defaultSelected }: NamedToggleProps) => {
           <S.ToggleButton
             key={button.value}
             isActive={button.value === defaultSelected}
+            tabIndex={0}
           >
             {button.label}
           </S.ToggleButton>
