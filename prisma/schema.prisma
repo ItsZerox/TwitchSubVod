@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Streamer {
+  id          Int          @id @default(autoincrement())
+  name        String
+  displayName String
+  logo        String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  DeletedVod  DeletedVod[]
+}
+
+model DeletedVod {
+  id                       Int                        @id @default(autoincrement())
+  streamerId               Int
+  streamer                 Streamer                   @relation(fields: [streamerId], references: [id])
+  url                      String
+  createdAt                DateTime                   @default(now())
+  length                   Int
+  Directory                Directory[]
+  DirectoriesOnDeletedVods DirectoriesOnDeletedVods[]
+}
+
+model Directory {
+  id                       Int                        @id @default(autoincrement())
+  name                     String                     @unique
+  image                    String
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @default(now())
+  DeletedVod               DeletedVod[]
+  DirectoriesOnDeletedVods DirectoriesOnDeletedVods[]
+}
+
+model DirectoriesOnDeletedVods {
+  id           Int        @id @default(autoincrement())
+  deletedVodId Int
+  directoryId  Int
+  deletedVod   DeletedVod @relation(fields: [deletedVodId], references: [id])
+  directory    Directory  @relation(fields: [directoryId], references: [id])
+}
