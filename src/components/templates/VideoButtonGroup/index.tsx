@@ -20,7 +20,10 @@ const VideoButtonGroup = ({
   isMinimal,
 }: VideoButtonGroupProps) => {
   return (
-    <S.VideoButtonGroupContainer minVideoWidth={minVideoWidth}>
+    <S.VideoButtonGroupContainer
+      minVideoWidth={minVideoWidth}
+      isMinimal={isMinimal}
+    >
       {videos.map((video) => (
         <VideoButton
           key={video.vodInformation.id}
