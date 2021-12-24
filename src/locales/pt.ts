@@ -1,5 +1,6 @@
-// pt
-export default {
+import { Locale } from './types'
+
+const pt: Locale = {
   FEEDBACK: 'Feedback',
   FOLLOW: 'Seguir',
   DOWNLOAD: 'Download',
@@ -11,4 +12,8 @@ export default {
   NOTIFICATIONS: 'Notificações',
   SEND_FEEDBACK: 'Enviar feedback',
   SEARCH: 'Buscar',
+  FOLLOWERS: 'Seguidores',
+  VIEWS: 'Visualizações',
 }
+
+export default pt

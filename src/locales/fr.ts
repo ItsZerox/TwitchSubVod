@@ -1,4 +1,6 @@
-export default {
+import { Locale } from './types'
+
+const fr: Locale = {
   FEEDBACK: 'Feedback',
   FOLLOW: 'Suivre',
   DOWNLOAD: 'Télécharger',
@@ -10,4 +12,8 @@ export default {
   NOTIFICATIONS: 'Notifications',
   SEND_FEEDBACK: 'Envoyer des commentaires',
   SEARCH: 'Rechercher',
+  FOLLOWERS: 'Abonnés',
+  VIEWS: 'Vues',
 }
+
+export default fr

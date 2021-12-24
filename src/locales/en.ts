@@ -1,4 +1,4 @@
-export default {
+const en = {
   FOLLOW: 'Follow',
   DOWNLOAD: 'Download',
   ALL_STREAMER_VODS: 'All {{streamer}} VODs',
@@ -10,4 +10,8 @@ export default {
   FEEDBACK: 'Feedback',
   SEND_FEEDBACK: 'Send feedback',
   SEARCH: 'Search',
+  FOLLOWERS: 'Followers',
+  VIEWS: 'Views',
 }
+
+export default en
