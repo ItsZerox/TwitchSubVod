@@ -22,16 +22,15 @@ const VideoButton = ({
   return (
     <S.VideoButtonContainer
       isMinimal={isMinimal}
-      tabIndex={0}
       data-testid={vodInformation.id}
     >
       <Link href="/video/[vod]" as={`/video/${vodInformation.id}`} passHref>
-        <Box as="a">
+        <S.BoxLink as="a" tabIndex={0}>
           <VideoThumbnail
             src={vodInformation.thumbnail}
             title={vodInformation.title}
           />
-        </Box>
+        </S.BoxLink>
       </Link>
 
       <StreamDescription

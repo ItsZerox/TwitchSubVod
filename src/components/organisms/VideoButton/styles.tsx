@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import Box from '~/components/atoms/Box'
 
 export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
   display: flex;
@@ -6,6 +7,7 @@ export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
   align-items: center;
   justify-content: center;
   gap: 8px;
+  padding: ${({ isMinimal }) => (isMinimal ? '2px' : '2px 2px 8px')};
 
   cursor: pointer;
 
@@ -22,6 +24,11 @@ export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
     }
   }
 
+  :focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+
   ${({ isMinimal }) =>
     isMinimal &&
     css`
@@ -34,4 +41,10 @@ export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
         line-height: 1em;
       }
     `}
+`
+
+export const BoxLink = styled(Box)`
+  :focus {
+    outline: none;
+  }
 `
