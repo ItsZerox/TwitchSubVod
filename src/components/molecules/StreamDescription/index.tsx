@@ -37,7 +37,7 @@ const StreamDescription = ({
           as={`/videos/${streamerInformation.name}`}
           passHref
         >
-          <Box as="a">
+          <Box as="a" tabIndex={avatarWidth ? 0 : -1}>
             <Avatar
               title={streamerInformation.displayName}
               src={streamerInformation.logo}
