@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import Box from '~/components/atoms/Box'
 import Button from '~/components/atoms/Button'
 import StreamDescription from '~/components/molecules/StreamDescription'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
+import { useGlobal } from '~/contexts/GlobalContext'
 import * as S from './styles'
 import {
   mockedStreamerInformation,
@@ -12,9 +12,7 @@ import {
 } from './_mockedData'
 
 const Video: NextPage = () => {
-  const router = useRouter()
-
-  console.log(router)
+  const { texts } = useGlobal()
 
   return (
     <S.Container>
@@ -38,8 +36,8 @@ const Video: NextPage = () => {
               avatarWidth="64px"
             />
             <Box gap="8px">
-              <Button variant="secondary" text="Follow" />
-              <Button variant="primary" text="Download" />
+              <Button variant="secondary" text={texts.FOLLOW} />
+              <Button variant="primary" text={texts.DOWNLOAD} />
             </Box>
           </Box>
         </Box>

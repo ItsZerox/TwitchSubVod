@@ -5,6 +5,7 @@ import Button from '~/components/atoms/Button'
 import NamedToggle from '~/components/atoms/NamedToggle'
 import Typography from '~/components/atoms/Typography'
 import StreamerDescription from '~/components/molecules/StreamerDescription'
+import { useGlobal } from '~/contexts/GlobalContext'
 import * as S from './styles'
 
 interface ProfileProps {
@@ -14,6 +15,7 @@ interface ProfileProps {
 
 const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
   const router = useRouter()
+  const { texts } = useGlobal()
 
   return (
     <S.Container>
@@ -24,7 +26,7 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
           followers={streamerInformation.followers}
           description={streamerInformation.description}
         />
-        <Button text="Follow" buttonWidth="100%" />
+        <Button text={texts.FOLLOW} buttonWidth="100%" />
         <div
           style={{
             display: 'flex',
@@ -51,7 +53,10 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
           }}
         />
         <Typography variant="h3">
-          All {streamerInformation.displayName} VODs
+          {texts.ALL_STREAMER_VODS.replace(
+            '{{streamer}}',
+            streamerInformation.displayName,
+          )}
         </Typography>
         <NamedToggle
           defaultSelected={
@@ -59,13 +64,13 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
           }
           buttons={[
             {
-              label: 'Sub only VODs',
+              label: texts.SUB_ONLY_VODS,
               value: 'subOnly',
               url: '/videos/[streamer]',
               as: `/videos/${streamerInformation.name}`,
             },
             {
-              label: 'Deleted VODs',
+              label: texts.DELETED_VODS,
               value: 'deletedVods',
               url: '/deletedvods/[streamer]',
               as: `/deletedvods/${streamerInformation.name}`,

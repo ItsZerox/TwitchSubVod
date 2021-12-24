@@ -5,20 +5,23 @@ import { IoNotificationsSharp, IoPersonSharp, IoSearch } from 'react-icons/io5'
 import { RiFeedbackFill } from 'react-icons/ri'
 import ButtonPill from '~/components/atoms/ButtonPill'
 import Input from '~/components/atoms/Input'
+import { useGlobal } from '~/contexts/GlobalContext'
 import Icon from '../../atoms/Icon'
 import * as S from './styles'
 
 const Header = () => {
+  const { texts } = useGlobal()
+
   return (
     <S.HeaderWrapper>
       <S.HeaderContainer>
         <S.HeaderArea gap={30}>
           <Icon
             icon={<FiMenu />}
-            title="Open menu"
+            title={texts.OPEN_MENU}
             isButton
             onClick={() => {
-              alert('Open menu')
+              alert(texts.OPEN_MENU)
             }}
           />
           <Link href="/" as={`/`} passHref>
@@ -41,24 +44,24 @@ const Header = () => {
           <Input
             icon={<IoSearch />}
             iconPosition="left"
-            placeholder="Search..."
+            placeholder={`${texts.SEARCH}...`}
             id="search-bar"
-            aria-label="Search"
+            aria-label={texts.SEARCH}
           />
         </S.HeaderArea>
         <S.HeaderArea gap={8}>
           <ButtonPill
             icon={<RiFeedbackFill />}
             iconPosition="right"
-            text="Feedback"
-            title="Send feedback"
+            text={texts.FEEDBACK}
+            title={texts.SEND_FEEDBACK}
             onClick={() => {
               alert('Send feedback')
             }}
           />
           <Icon
             icon={<IoPersonSharp />}
-            title="Profile"
+            title={texts.PROFILE}
             isButton
             onClick={() => {
               alert('redirect to /profile')
@@ -66,7 +69,7 @@ const Header = () => {
           />
           <Icon
             icon={<IoNotificationsSharp />}
-            title="Profile"
+            title={texts.NOTIFICATIONS}
             isButton
             onClick={() => {
               alert('Open notification')
