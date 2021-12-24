@@ -23,6 +23,8 @@ const mockedStreamerInformation: StreamerInformation = {
   displayName: 'xQcOw',
   name: 'xqcow',
   logo: 'https://static-cdn.jtvnw.net/jtv_user_pictures/xqcow-profile_image-9298dca608632101-150x150.jpeg',
+  description: '',
+  followers: 321312,
 }
 
 const mockedVodInformation: VodInformation = {
