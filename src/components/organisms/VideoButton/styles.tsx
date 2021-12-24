@@ -44,6 +44,10 @@ export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
 `
 
 export const BoxLink = styled(Box)`
+  /* keep aspect ratio of 16:9 */
+  height: 0;
+  padding-bottom: 56.25%;
+
   :focus {
     outline: none;
   }
