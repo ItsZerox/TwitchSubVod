@@ -19,7 +19,7 @@ interface GlobalProviderProps {
 
 const GlobalProvider = ({ locale, children }: GlobalProviderProps) => {
   const locales = { en, es, fr, pt }
-  const texts = locales[locale as keyof typeof locales]
+  const texts = locales[locale as keyof typeof locales] || en
   const availableLocales = Object.keys(locales)
 
   const context: GlobalContextProps = {
