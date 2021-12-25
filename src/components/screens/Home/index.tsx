@@ -1,9 +1,9 @@
-import { IVideos } from '~/@types/IVideos'
+import { IVideo } from '~/@types/IVideo'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
 import * as S from './styles'
 
 interface HomeProps {
-  videos: IVideos[]
+  videos: IVideo[]
 }
 
 const Home = ({ videos }: HomeProps) => {

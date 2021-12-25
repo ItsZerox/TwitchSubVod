@@ -17,7 +17,7 @@ export const mockedVodInformation: VodInformation = {
     'https://static-cdn.jtvnw.net/cf_vods/d1m7jfoe9zdc1j/efab2dea4b65d725df0e_xqcow_44818023629_1639713975//thumb/thumb0-640x360.jpg',
   duration: 434332,
   viewCount: 30434123,
-  date: '2020-12-19T00:00:00+00:00',
+  date: '2018-12-12T00:00:00+00:00',
   id: '0',
 }
 

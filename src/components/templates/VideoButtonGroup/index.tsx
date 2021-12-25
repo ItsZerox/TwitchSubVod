@@ -1,9 +1,9 @@
-import { IVideos } from '~/@types/IVideos'
+import { IVideo } from '~/@types/IVideo'
 import VideoButton from '~/components/organisms/VideoButton'
 import * as S from './styles'
 
 interface VideoButtonGroupProps {
-  videos: IVideos[]
+  videos: IVideo[]
   minVideoWidth?: string
   isMinimal?: boolean
 }

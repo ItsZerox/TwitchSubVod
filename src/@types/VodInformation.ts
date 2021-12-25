@@ -4,5 +4,5 @@ export interface VodInformation {
   title: string
   viewCount: number
   duration: number
-  date: Date
+  date: string
 }

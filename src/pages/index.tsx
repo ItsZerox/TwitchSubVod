@@ -1,5 +1,5 @@
 import { InferGetStaticPropsType, NextPage, GetStaticPropsContext } from 'next'
-import { topVideosAdapter } from '~/adapters/topVideosAdapter'
+import { videoAdapter } from '~/adapters/videoAdapter'
 import HomePage from '~/components/screens/Home'
 import revalidate from '~/constants/revalidate'
 import { getTopVideos } from '~/services/api/getTopVideos'
@@ -10,7 +10,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     limit: 30,
   })
 
-  const videos = topVideosAdapter(topVideos)
+  const videos = topVideos.vods.map(videoAdapter)
 
   return {
     props: {

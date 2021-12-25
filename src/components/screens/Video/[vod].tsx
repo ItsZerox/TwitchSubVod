@@ -1,17 +1,17 @@
-import type { NextPage } from 'next'
+import { IVideo } from '~/@types/IVideo'
 import Box from '~/components/atoms/Box'
 import Button from '~/components/atoms/Button'
 import StreamDescription from '~/components/molecules/StreamDescription'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
 import { useGlobal } from '~/contexts/GlobalContext'
 import * as S from './styles'
-import {
-  mockedStreamerInformation,
-  mockedVodInformation,
-  videos,
-} from './_mockedData'
 
-const Video: NextPage = () => {
+interface VideoProps {
+  video: IVideo
+  relatedVideos: IVideo[]
+}
+
+const Video = ({ video, relatedVideos }: VideoProps) => {
   const { texts } = useGlobal()
 
   return (
@@ -30,8 +30,8 @@ const Video: NextPage = () => {
           />
           <Box gap="16px">
             <StreamDescription
-              streamerInformation={mockedStreamerInformation}
-              vodInformation={mockedVodInformation}
+              streamerInformation={video.streamerInformation}
+              vodInformation={video.vodInformation}
               lineLimit={1}
               avatarWidth="64px"
             />
@@ -41,7 +41,10 @@ const Video: NextPage = () => {
             </Box>
           </Box>
         </Box>
-        <VideoButtonGroup videos={videos} minVideoWidth="200px" />
+        <VideoButtonGroup
+          videos={relatedVideos.slice(-4)}
+          minVideoWidth="200px"
+        />
       </Box>
       <Box flexDirection="column">
         <div
@@ -56,17 +59,7 @@ const Video: NextPage = () => {
           }}
         />
         <VideoButtonGroup
-          videos={videos}
-          minVideoWidth="300px"
-          isMinimal={true}
-        />
-        <VideoButtonGroup
-          videos={videos}
-          minVideoWidth="300px"
-          isMinimal={true}
-        />
-        <VideoButtonGroup
-          videos={videos}
+          videos={relatedVideos}
           minVideoWidth="300px"
           isMinimal={true}
         />
