@@ -47,6 +47,7 @@ export const BoxLink = styled(Box)`
   /* keep aspect ratio of 16:9 */
   height: 0;
   padding-bottom: 56.25%;
+  width: 100%;
 
   :focus {
     outline: none;
