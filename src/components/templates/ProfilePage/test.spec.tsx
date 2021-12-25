@@ -1,7 +1,6 @@
 import { render, screen } from '~/lib/testUtils'
 
 import { StreamerInformation } from '~/@types/StreamerInformation'
-import { darkTheme } from '~/layout/theme'
 import ProfilePage from '.'
 import 'jest-styled-components'
 import { useRouter } from '../../../../node_modules/next/router'

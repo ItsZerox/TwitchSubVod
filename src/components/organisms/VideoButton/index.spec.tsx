@@ -1,8 +1,6 @@
 import { render, screen } from '~/lib/testUtils'
-
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
-import { darkTheme } from '~/layout/theme'
 import VideoButton from '.'
 import 'jest-styled-components'
 

@@ -1,6 +1,4 @@
 import { render, screen } from '~/lib/testUtils'
-
-import { darkTheme } from '~/layout/theme'
 import Typography from '.'
 import { typographyVariants } from './constants'
 import 'jest-styled-components'

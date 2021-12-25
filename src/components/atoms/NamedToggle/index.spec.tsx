@@ -1,5 +1,4 @@
 import { render, screen } from '~/lib/testUtils'
-
 import { darkTheme } from '~/layout/theme'
 import NamedToggle from '.'
 import 'jest-styled-components'

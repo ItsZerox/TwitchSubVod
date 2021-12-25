@@ -1,6 +1,4 @@
 import { render, screen } from '~/lib/testUtils'
-
-import { darkTheme } from '~/layout/theme'
 import ButtonPill from '.'
 import { RiFeedbackFill } from 'react-icons/ri'
 

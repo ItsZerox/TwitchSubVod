@@ -1,5 +1,4 @@
 import { act, render, screen } from '~/lib/testUtils'
-
 import { darkTheme } from '~/layout/theme'
 import Button from '.'
 import userEvent from '@testing-library/user-event'

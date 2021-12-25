@@ -1,7 +1,6 @@
 import { render, screen, act, fireEvent } from '~/lib/testUtils'
 import userEvent from '@testing-library/user-event'
 import { IoSearch } from 'react-icons/io5'
-
 import { darkTheme } from '~/layout/theme'
 import Input from '.'
 import 'jest-styled-components'
