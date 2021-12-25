@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
 import { darkTheme } from '~/layout/theme'
@@ -26,12 +26,10 @@ const mockedVodInformation: VodInformation = {
 describe('StreamDescription component', () => {
   it('should render correctly', () => {
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <StreamDescription
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-        />
-      </ThemeProvider>,
+      <StreamDescription
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+      />,
     )
 
     expect(container).toBeInTheDocument()
@@ -42,13 +40,11 @@ describe('StreamDescription component', () => {
 
   it('should render without avatar image', () => {
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <StreamDescription
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-          noAvatar
-        />
-      </ThemeProvider>,
+      <StreamDescription
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+        noAvatar
+      />,
     )
 
     expect(container).toBeInTheDocument()
@@ -59,13 +55,11 @@ describe('StreamDescription component', () => {
 
   it('should render with custom avatar width', () => {
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <StreamDescription
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-          avatarWidth="100px"
-        />
-      </ThemeProvider>,
+      <StreamDescription
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+        avatarWidth="100px"
+      />,
     )
 
     expect(container).toBeInTheDocument()
@@ -76,16 +70,14 @@ describe('StreamDescription component', () => {
 
   it('should render with an url in the whole container', () => {
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <StreamDescription
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-          urlProps={{
-            href: '/video/44818023629',
-            as: '/video/44818023629',
-          }}
-        />
-      </ThemeProvider>,
+      <StreamDescription
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+        urlProps={{
+          href: '/video/44818023629',
+          as: '/video/44818023629',
+        }}
+      />,
     )
 
     const title = screen.getByText(mockedVodInformation.title)

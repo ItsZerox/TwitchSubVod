@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import NamedToggle from '.'
 import 'jest-styled-components'
@@ -11,25 +11,23 @@ describe('NamedToggle component', () => {
 
   it('should render correctly', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <NamedToggle
-          defaultSelected="subOnly"
-          buttons={[
-            {
-              label: 'Sub only VODs',
-              value: 'subOnly',
-              url: '/videos/[streamer]',
-              as: `/videos/mrcow`,
-            },
-            {
-              label: 'Deleted VODs',
-              value: 'deletedVods',
-              url: '/deletedvods/[streamer]',
-              as: `/deletedvods/mrcow`,
-            },
-          ]}
-        />
-      </ThemeProvider>,
+      <NamedToggle
+        defaultSelected="subOnly"
+        buttons={[
+          {
+            label: 'Sub only VODs',
+            value: 'subOnly',
+            url: '/videos/[streamer]',
+            as: `/videos/mrcow`,
+          },
+          {
+            label: 'Deleted VODs',
+            value: 'deletedVods',
+            url: '/deletedvods/[streamer]',
+            as: `/deletedvods/mrcow`,
+          },
+        ]}
+      />,
     )
 
     const subOnlyButton = screen.getByText('Sub only VODs')

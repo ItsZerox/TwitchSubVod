@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
 import { darkTheme } from '~/layout/theme'
@@ -26,12 +26,10 @@ const mockedVodInformation: VodInformation = {
 describe('VideoButton component', () => {
   it('should render correctly', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <VideoButton
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-        />
-      </ThemeProvider>,
+      <VideoButton
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+      />,
     )
 
     const container = screen.getByTestId('44818023629')
@@ -47,13 +45,11 @@ describe('VideoButton component', () => {
 
   it('should render correctly without an avatar', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <VideoButton
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-          noAvatar
-        />
-      </ThemeProvider>,
+      <VideoButton
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+        noAvatar
+      />,
     )
 
     const container = screen.getByTestId('44818023629')
@@ -69,14 +65,12 @@ describe('VideoButton component', () => {
 
   it('should render correctly minimal version', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <VideoButton
-          streamerInformation={mockedStreamerInformation}
-          vodInformation={mockedVodInformation}
-          noAvatar
-          isMinimal
-        />
-      </ThemeProvider>,
+      <VideoButton
+        streamerInformation={mockedStreamerInformation}
+        vodInformation={mockedVodInformation}
+        noAvatar
+        isMinimal
+      />,
     )
 
     const container = screen.getByTestId('44818023629')

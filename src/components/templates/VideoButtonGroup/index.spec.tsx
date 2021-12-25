@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
 import { darkTheme } from '~/layout/theme'
@@ -33,11 +33,7 @@ const videos = Array.from({ length: 10 }).map((_, index) => ({
 
 describe('VideoButton component', () => {
   it('should render correctly', () => {
-    const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <VideoButtonGroup videos={videos} />
-      </ThemeProvider>,
-    )
+    const { container } = render(<VideoButtonGroup videos={videos} />)
 
     expect(container).toBeInTheDocument()
   })

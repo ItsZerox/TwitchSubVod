@@ -1,5 +1,5 @@
-import { act, render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { act, render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import Button from '.'
 import userEvent from '@testing-library/user-event'
@@ -8,11 +8,7 @@ import 'jest-styled-components'
 
 describe('Button component', () => {
   it('should render correctly', () => {
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <Button text="test" />
-      </ThemeProvider>,
-    )
+    render(<Button text="test" />)
 
     const button = screen.getByRole('button', { name: 'test' })
 
@@ -25,11 +21,7 @@ describe('Button component', () => {
   })
 
   it('should render correctly with secondary variant', () => {
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <Button text="test" variant="secondary" />
-      </ThemeProvider>,
-    )
+    render(<Button text="test" variant="secondary" />)
 
     const button = screen.getByRole('button', { name: 'test' })
 
@@ -39,14 +31,12 @@ describe('Button component', () => {
 
   it('should render correctly with icon on the left', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Button
-          text="test"
-          icon={<FiActivity aria-label="Activity" />}
-          iconPosition="left"
-          aria-label="test"
-        />
-      </ThemeProvider>,
+      <Button
+        text="test"
+        icon={<FiActivity aria-label="Activity" />}
+        iconPosition="left"
+        aria-label="test"
+      />,
     )
 
     const button = screen.getByRole('button', { name: 'test' })
@@ -59,14 +49,12 @@ describe('Button component', () => {
 
   it('should render correctly with icon on the right', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Button
-          text="test"
-          icon={<FiActivity aria-label="Activity" />}
-          iconPosition="right"
-          aria-label="test"
-        />
-      </ThemeProvider>,
+      <Button
+        text="test"
+        icon={<FiActivity aria-label="Activity" />}
+        iconPosition="right"
+        aria-label="test"
+      />,
     )
 
     const button = screen.getByRole('button', { name: 'test' })
@@ -79,11 +67,7 @@ describe('Button component', () => {
 
   it('should trigger onClick', () => {
     const onClick = jest.fn()
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <Button text="test" onClick={onClick} />
-      </ThemeProvider>,
-    )
+    render(<Button text="test" onClick={onClick} />)
 
     const button = screen.getByRole('button', { name: 'test' })
 

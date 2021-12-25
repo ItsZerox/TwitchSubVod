@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import ButtonPill from '.'
 import { RiFeedbackFill } from 'react-icons/ri'
@@ -8,11 +8,7 @@ describe('ButtonPill component', () => {
   it('should render correctly', () => {
     const fn = jest.fn()
 
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <ButtonPill text="Feedback" onClick={fn} />
-      </ThemeProvider>,
-    )
+    render(<ButtonPill text="Feedback" onClick={fn} />)
 
     const icon = screen.getByRole('button', { name: 'Feedback' })
     expect(icon).toBeInTheDocument()
@@ -22,15 +18,13 @@ describe('ButtonPill component', () => {
     const fn = jest.fn()
 
     render(
-      <ThemeProvider theme={darkTheme}>
-        <ButtonPill
-          icon={<RiFeedbackFill />}
-          iconPosition="left"
-          text="Feedback"
-          title="Send feedback"
-          onClick={fn}
-        />
-      </ThemeProvider>,
+      <ButtonPill
+        icon={<RiFeedbackFill />}
+        iconPosition="left"
+        text="Feedback"
+        title="Send feedback"
+        onClick={fn}
+      />,
     )
 
     const icon = screen.getByRole('button', { name: 'Send feedback' })
@@ -41,15 +35,13 @@ describe('ButtonPill component', () => {
     const fn = jest.fn()
 
     render(
-      <ThemeProvider theme={darkTheme}>
-        <ButtonPill
-          icon={<RiFeedbackFill />}
-          iconPosition="right"
-          text="Feedback"
-          title="Send feedback"
-          onClick={fn}
-        />
-      </ThemeProvider>,
+      <ButtonPill
+        icon={<RiFeedbackFill />}
+        iconPosition="right"
+        text="Feedback"
+        title="Send feedback"
+        onClick={fn}
+      />,
     )
 
     const icon = screen.getByRole('button', { name: 'Send feedback' })

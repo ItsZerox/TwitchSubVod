@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import Avatar from '.'
 import 'jest-styled-components'
@@ -10,11 +10,7 @@ describe('Avatar component', () => {
     'https://static-cdn.jtvnw.net/jtv_user_pictures/xqcow-profile_image-9298dca608632101-150x150.jpeg'
 
   it('should render correctly', () => {
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <Avatar title={title} src={src} />
-      </ThemeProvider>,
-    )
+    render(<Avatar title={title} src={src} />)
 
     const avatar = screen.getByRole('img', { name: title })
 
@@ -27,11 +23,7 @@ describe('Avatar component', () => {
   })
 
   it('should render correctly with custom width', () => {
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <Avatar title={title} src={src} width={'200px'} />
-      </ThemeProvider>,
-    )
+    render(<Avatar title={title} src={src} width={'200px'} />)
 
     const avatar = screen.getByRole('img', { name: title })
 

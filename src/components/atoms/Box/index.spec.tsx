@@ -1,32 +1,26 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import Box from '.'
 import 'jest-styled-components'
 
 describe('Box component', () => {
   it('should render correctly', () => {
-    render(
-      <ThemeProvider theme={darkTheme}>
-        <Box>Hello World</Box>
-      </ThemeProvider>,
-    )
+    render(<Box>Hello World</Box>)
 
     expect(screen.getByText('Hello World')).toBeInTheDocument()
   })
 
   it('should render correctly custom props', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Box
-          alignItems="center"
-          justifyContent="center"
-          flexDirection="column"
-          gap="10px"
-        >
-          Hello World
-        </Box>
-      </ThemeProvider>,
+      <Box
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+        gap="10px"
+      >
+        Hello World
+      </Box>,
     )
 
     expect(screen.getByText('Hello World')).toBeInTheDocument()

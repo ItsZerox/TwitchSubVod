@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import StreamerDescription from '.'
 import 'jest-styled-components'
@@ -16,14 +16,12 @@ const mockedStreamerInformation = {
 describe('StreamDescription component', () => {
   it('should render correctly', () => {
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <StreamerDescription
-          avatarUrl={mockedStreamerInformation.logo}
-          name={mockedStreamerInformation.displayName}
-          followers={mockedStreamerInformation.followers}
-          description={mockedStreamerInformation.description}
-        />
-      </ThemeProvider>,
+      <StreamerDescription
+        avatarUrl={mockedStreamerInformation.logo}
+        name={mockedStreamerInformation.displayName}
+        followers={mockedStreamerInformation.followers}
+        description={mockedStreamerInformation.description}
+      />,
     )
 
     expect(container).toBeInTheDocument()

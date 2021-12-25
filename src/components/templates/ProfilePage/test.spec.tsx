@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { darkTheme } from '~/layout/theme'
 import ProfilePage from '.'
@@ -24,11 +24,9 @@ describe('ProfilePage component', () => {
     }))
 
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <ProfilePage streamerInformation={mockedStreamerInformation}>
-          Inside content
-        </ProfilePage>
-      </ThemeProvider>,
+      <ProfilePage streamerInformation={mockedStreamerInformation}>
+        Inside content
+      </ProfilePage>,
     )
 
     expect(container).toBeInTheDocument()
@@ -44,11 +42,9 @@ describe('ProfilePage component', () => {
     }))
 
     const { container } = render(
-      <ThemeProvider theme={darkTheme}>
-        <ProfilePage streamerInformation={mockedStreamerInformation}>
-          Inside content
-        </ProfilePage>
-      </ThemeProvider>,
+      <ProfilePage streamerInformation={mockedStreamerInformation}>
+        Inside content
+      </ProfilePage>,
     )
 
     expect(container).toBeInTheDocument()

@@ -11,7 +11,7 @@ export const VideoButtonGroupContainer = styled.div<VideoButtonGroupContainerPro
     auto-fit,
     minmax(${({ minVideoWidth }) => minVideoWidth || '320px'}, 1fr)
   );
-  grid-gap: ${({ isMinimal }) => (isMinimal ? '16px' : '32px 16px;')};
+  grid-gap: ${({ isMinimal }) => (isMinimal ? '16px' : '32px 16px')};
   margin-bottom: 16px;
   width: 100%;
 

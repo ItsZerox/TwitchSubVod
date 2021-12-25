@@ -1,7 +1,7 @@
-import { render, screen, act, fireEvent } from '@testing-library/react'
+import { render, screen, act, fireEvent } from '~/lib/testUtils'
 import userEvent from '@testing-library/user-event'
 import { IoSearch } from 'react-icons/io5'
-import { ThemeProvider } from 'styled-components'
+
 import { darkTheme } from '~/layout/theme'
 import Input from '.'
 import 'jest-styled-components'
@@ -9,9 +9,7 @@ import 'jest-styled-components'
 describe('Input component', () => {
   it('should render correctly', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Input placeholder="Search..." id="search-bar" aria-label="Search" />
-      </ThemeProvider>,
+      <Input placeholder="Search..." id="search-bar" aria-label="Search" />,
     )
 
     const input = screen.getByPlaceholderText('Search...')
@@ -21,15 +19,13 @@ describe('Input component', () => {
 
   it('should render correctly with an icon on the left', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Input
-          icon={<IoSearch />}
-          iconPosition="left"
-          placeholder="Search..."
-          id="search-bar"
-          aria-label="Search"
-        />
-      </ThemeProvider>,
+      <Input
+        icon={<IoSearch />}
+        iconPosition="left"
+        placeholder="Search..."
+        id="search-bar"
+        aria-label="Search"
+      />,
     )
 
     const label = screen.getByLabelText('Search')
@@ -44,15 +40,13 @@ describe('Input component', () => {
 
   it('should render correctly with an icon on the right', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Input
-          icon={<IoSearch />}
-          iconPosition="right"
-          placeholder="Search..."
-          id="search-bar"
-          aria-label="Search"
-        />
-      </ThemeProvider>,
+      <Input
+        icon={<IoSearch />}
+        iconPosition="right"
+        placeholder="Search..."
+        id="search-bar"
+        aria-label="Search"
+      />,
     )
 
     const label = screen.getByLabelText('Search')
@@ -67,15 +61,13 @@ describe('Input component', () => {
 
   it('should focus input when label is clicked', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Input
-          icon={<IoSearch />}
-          iconPosition="left"
-          placeholder="Search..."
-          id="search-bar"
-          aria-label="Search"
-        />
-      </ThemeProvider>,
+      <Input
+        icon={<IoSearch />}
+        iconPosition="left"
+        placeholder="Search..."
+        id="search-bar"
+        aria-label="Search"
+      />,
     )
 
     const label = screen.getByTestId('label-search-bar')
@@ -99,14 +91,12 @@ describe('Input component', () => {
   it('should trigger onChange', () => {
     const onChange = jest.fn()
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Input
-          onChange={onChange}
-          placeholder="Search..."
-          id="search-bar"
-          aria-label="Search"
-        />
-      </ThemeProvider>,
+      <Input
+        onChange={onChange}
+        placeholder="Search..."
+        id="search-bar"
+        aria-label="Search"
+      />,
     )
 
     act(() => {
@@ -119,14 +109,12 @@ describe('Input component', () => {
   it('should trigger onSubmit', () => {
     const onSubmit = jest.fn()
     render(
-      <ThemeProvider theme={darkTheme}>
-        <Input
-          onSubmit={onSubmit}
-          placeholder="Search..."
-          id="search-bar"
-          aria-label="Search"
-        />
-      </ThemeProvider>,
+      <Input
+        onSubmit={onSubmit}
+        placeholder="Search..."
+        id="search-bar"
+        aria-label="Search"
+      />,
     )
 
     act(() => {

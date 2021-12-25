@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import { render, screen } from '~/lib/testUtils'
+
 import { darkTheme } from '~/layout/theme'
 import Typography from '.'
 import { typographyVariants } from './constants'
@@ -8,7 +8,7 @@ import 'jest-styled-components'
 describe('Typography component', () => {
   it('should render correctly', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
+      <>
         {Object.keys(typographyVariants).map((variant) => (
           <Typography
             key={variant}
@@ -17,7 +17,7 @@ describe('Typography component', () => {
             {variant}
           </Typography>
         ))}
-      </ThemeProvider>,
+      </>,
     )
 
     Object.keys(typographyVariants).forEach((variant) => {
@@ -44,7 +44,7 @@ describe('Typography component', () => {
 
   it('should render correctly with color', () => {
     render(
-      <ThemeProvider theme={darkTheme}>
+      <>
         {Object.keys(typographyVariants).map((variant) => (
           <Typography
             key={variant}
@@ -54,7 +54,7 @@ describe('Typography component', () => {
             {variant}
           </Typography>
         ))}
-      </ThemeProvider>,
+      </>,
     )
 
     Object.keys(typographyVariants).forEach((variant) => {
