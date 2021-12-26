@@ -4,7 +4,7 @@ import Box from '~/components/atoms/Box'
 export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 8px;
   padding: ${({ isMinimal }) => (isMinimal ? '2px' : '2px 2px 8px')};
