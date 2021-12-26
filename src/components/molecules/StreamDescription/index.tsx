@@ -8,7 +8,32 @@ import { useGlobal } from '~/contexts/GlobalContext'
 import formatDate from '~/utils/formatDate'
 import formatViews from '~/utils/formatViews'
 
-// todo: convert mockedVodInformation.viewCount to string like 111.3k views
+interface ViewAndDateProps {
+  viewCount: number
+  date: string
+  locale?: string
+  translatedViews?: string
+  isMinimal?: boolean
+}
+
+const ViewAndDate = ({
+  viewCount,
+  date,
+  locale,
+  translatedViews,
+  isMinimal,
+}: ViewAndDateProps) => (
+  <Box as="a" gap="6px">
+    <Typography variant="body2" className="stream-description-views">
+      {formatViews(viewCount)} {translatedViews}
+    </Typography>
+    {!isMinimal && (
+      <Typography variant="body2" className="stream-description-date">
+        {formatDate(date, locale)}
+      </Typography>
+    )}
+  </Box>
+)
 
 interface StreamDescriptionProps {
   streamerInformation: StreamerInformation
@@ -16,6 +41,7 @@ interface StreamDescriptionProps {
   avatarWidth?: string
   noAvatar?: boolean
   lineLimit?: number
+  isMinimal?: boolean
   urlProps?: {
     href: string
     as: string
@@ -28,6 +54,7 @@ const StreamDescription = ({
   avatarWidth,
   noAvatar,
   lineLimit,
+  isMinimal,
   urlProps,
 }: StreamDescriptionProps) => {
   const { locale, texts } = useGlobal()
@@ -50,7 +77,7 @@ const StreamDescription = ({
         </Link>
       )}
 
-      <Box flexDirection="column" gap={'2px'}>
+      <Box flexDirection="column" gap={'4px'}>
         {urlProps?.href ? (
           <Link href={urlProps.href} as={urlProps.as} passHref>
             <Typography
@@ -90,25 +117,23 @@ const StreamDescription = ({
 
         {urlProps?.href ? (
           <Link href={urlProps.href} as={urlProps.as} passHref>
-            <Box as="a" gap="6px">
-              <Typography variant="body2" className="stream-description-views">
-                {formatViews(vodInformation.viewCount)}{' '}
-                {texts.VIEWS.toLowerCase()}
-              </Typography>
-              <Typography variant="body2" className="stream-description-date">
-                {formatDate(vodInformation.date, locale)}
-              </Typography>
-            </Box>
+            <ViewAndDate
+              date={vodInformation.date}
+              viewCount={vodInformation.viewCount}
+              locale={locale}
+              translatedViews={texts.VIEWS.toLowerCase()}
+              isMinimal={isMinimal}
+            />
           </Link>
         ) : (
           <Box gap="6px">
-            <Typography variant="body2" className="stream-description-views">
-              {formatViews(vodInformation.viewCount)}{' '}
-              {texts.VIEWS.toLowerCase()}
-            </Typography>
-            <Typography variant="body2" className="stream-description-date">
-              {formatDate(vodInformation.date, locale)}
-            </Typography>
+            <ViewAndDate
+              date={vodInformation.date}
+              viewCount={vodInformation.viewCount}
+              locale={locale}
+              translatedViews={texts.VIEWS.toLowerCase()}
+              isMinimal={isMinimal}
+            />
           </Box>
         )}
       </Box>
