@@ -6,7 +6,6 @@ import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = req.query.id[0] as string
-  console.log(id)
   const { data } = await api.get<ITwitchVideo>(
     `/videos/${id.replace('.m3u8', '')}`,
   )
