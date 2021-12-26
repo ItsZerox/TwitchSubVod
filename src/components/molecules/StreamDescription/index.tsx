@@ -6,6 +6,7 @@ import Box from '~/components/atoms/Box'
 import Typography from '~/components/atoms/Typography'
 import { useGlobal } from '~/contexts/GlobalContext'
 import formatDate from '~/utils/formatDate'
+import formatViews from '~/utils/formatViews'
 
 // todo: convert mockedVodInformation.viewCount to string like 111.3k views
 
@@ -29,7 +30,7 @@ const StreamDescription = ({
   lineLimit,
   urlProps,
 }: StreamDescriptionProps) => {
-  const { locale } = useGlobal()
+  const { locale, texts } = useGlobal()
 
   return (
     <Box alignItems="flex-start" justifyContent="space-between" gap="9px">
@@ -89,9 +90,10 @@ const StreamDescription = ({
 
         {urlProps?.href ? (
           <Link href={urlProps.href} as={urlProps.as} passHref>
-            <Box as="a">
+            <Box as="a" gap="6px">
               <Typography variant="body2" className="stream-description-views">
-                {vodInformation.viewCount} views
+                {formatViews(vodInformation.viewCount)}{' '}
+                {texts.VIEWS.toLowerCase()}
               </Typography>
               <Typography variant="body2" className="stream-description-date">
                 {formatDate(vodInformation.date, locale)}
@@ -99,9 +101,10 @@ const StreamDescription = ({
             </Box>
           </Link>
         ) : (
-          <Box>
+          <Box gap="6px">
             <Typography variant="body2" className="stream-description-views">
-              {vodInformation.viewCount} views
+              {formatViews(vodInformation.viewCount)}{' '}
+              {texts.VIEWS.toLowerCase()}
             </Typography>
             <Typography variant="body2" className="stream-description-date">
               {formatDate(vodInformation.date, locale)}
