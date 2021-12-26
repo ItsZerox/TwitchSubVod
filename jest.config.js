@@ -13,5 +13,7 @@ module.exports = {
     '!src/**/types.ts',
     '!src/@types/**',
     '!src/components/screens/**',
+    '!src/services/**',
+    '!src/constants/**',
   ],
 }
