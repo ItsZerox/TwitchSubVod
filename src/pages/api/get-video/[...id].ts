@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const [width, height] = urlInformation.resolution.split('x')
     const widthInt = parseInt(width)
     const heightInt = parseInt(height)
-    const bandwidth = widthInt * heightInt * index + 1
+    const bandwidth = widthInt * heightInt * (index + 1)
 
     return `#EXT-X-STREAM-INF:BANDWIDTH=${bandwidth},RESOLUTION=${urlInformation.resolution}`
   }
@@ -27,12 +27,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 #EXT-X-VERSION:3
 ${urls
   .map(
-    (url, index) => `
-${formatStreamInformation(url, index)}
-${process.env.NEXT_PUBLIC_CORS + url.url}
-`,
+    (url, index) => `${formatStreamInformation(url, index)}
+${process.env.NEXT_PUBLIC_CORS + url.url}`,
   )
-  .join('\n')}
+  .join('\n\n')}
 `)
 
   res.end()
