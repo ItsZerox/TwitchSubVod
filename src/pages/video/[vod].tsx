@@ -31,7 +31,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     getVideo(context.params.vod as string),
     getTopVideos({
       language: context.locale,
-      limit: 16,
+      limit: 32,
     }),
   ])
 

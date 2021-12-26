@@ -28,7 +28,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
               borderRadius: '8px',
             }}
           />
-          <Box gap="16px">
+          <Box gap="16px" justifyContent="space-between">
             <StreamDescription
               streamerInformation={video.streamerInformation}
               vodInformation={video.vodInformation}
@@ -42,8 +42,8 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           </Box>
         </Box>
         <VideoButtonGroup
-          videos={relatedVideos.slice(-4)}
-          minVideoWidth="200px"
+          videos={relatedVideos.slice(-16)}
+          minVideoWidth="300px"
         />
       </Box>
       <Box flexDirection="column">
@@ -59,7 +59,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           }}
         />
         <VideoButtonGroup
-          videos={relatedVideos}
+          videos={relatedVideos.reverse().slice(16)}
           minVideoWidth="300px"
           isMinimal={true}
         />
