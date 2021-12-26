@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { forwardRef } from 'react'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
 import Avatar from '~/components/atoms/Avatar'
 import Box from '~/components/atoms/Box'
 import Typography from '~/components/atoms/Typography'
+import { useGlobal } from '~/contexts/GlobalContext'
+import formatDate from '~/utils/formatDate'
 
-// todo: convert mockedVodInformation.date to string date, either something like: 4 days ago, or dec. 15, 2021, not sure yet
 // todo: convert mockedVodInformation.viewCount to string like 111.3k views
 
 interface StreamDescriptionProps {
@@ -29,6 +29,8 @@ const StreamDescription = ({
   lineLimit,
   urlProps,
 }: StreamDescriptionProps) => {
+  const { locale } = useGlobal()
+
   return (
     <Box alignItems="flex-start" justifyContent="space-between" gap="9px">
       {!noAvatar && (
@@ -92,7 +94,7 @@ const StreamDescription = ({
                 {vodInformation.viewCount} views
               </Typography>
               <Typography variant="body2" className="stream-description-date">
-                {vodInformation.date}
+                {formatDate(vodInformation.date, locale)}
               </Typography>
             </Box>
           </Link>
@@ -102,7 +104,7 @@ const StreamDescription = ({
               {vodInformation.viewCount} views
             </Typography>
             <Typography variant="body2" className="stream-description-date">
-              {vodInformation.date}
+              {formatDate(vodInformation.date, locale)}
             </Typography>
           </Box>
         )}
