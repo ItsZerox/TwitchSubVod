@@ -5,6 +5,10 @@ import api from '~/services/config'
 import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.headers.origin) {
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
+  }
+
   const id = req.query.id[0] as string
   const { data } = await api.get<ITwitchVideo>(
     `/videos/${id.replace('.m3u8', '')}`,
