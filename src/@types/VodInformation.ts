@@ -1,3 +1,5 @@
+import { VideoUrl } from './VideoUrl'
+
 export interface VodInformation {
   id: string
   thumbnail: string
@@ -5,4 +7,5 @@ export interface VodInformation {
   viewCount: number
   duration: number
   date: string
+  urls?: VideoUrl[]
 }

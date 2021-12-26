@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { forwardRef } from 'react'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
 import Avatar from '~/components/atoms/Avatar'
@@ -16,23 +17,22 @@ interface ViewAndDateProps {
   isMinimal?: boolean
 }
 
-const ViewAndDate = ({
-  viewCount,
-  date,
-  locale,
-  translatedViews,
-  isMinimal,
-}: ViewAndDateProps) => (
-  <Box as="a" gap="6px">
-    <Typography variant="body2" className="stream-description-views">
-      {formatViews(viewCount)} {translatedViews}
-    </Typography>
-    {!isMinimal && (
-      <Typography variant="body2" className="stream-description-date">
-        {formatDate(date, locale)}
+const ViewAndDate = forwardRef<HTMLDivElement, ViewAndDateProps>(
+  (
+    { viewCount, date, locale, translatedViews, isMinimal }: ViewAndDateProps,
+    ref,
+  ) => (
+    <Box as="a" gap="6px" ref={ref}>
+      <Typography variant="body2" className="stream-description-views">
+        {formatViews(viewCount)} {translatedViews}
       </Typography>
-    )}
-  </Box>
+      {!isMinimal && (
+        <Typography variant="body2" className="stream-description-date">
+          {formatDate(date, locale)}
+        </Typography>
+      )}
+    </Box>
+  ),
 )
 
 interface StreamDescriptionProps {

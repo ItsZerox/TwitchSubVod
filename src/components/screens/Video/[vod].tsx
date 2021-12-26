@@ -5,6 +5,11 @@ import StreamDescription from '~/components/molecules/StreamDescription'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
 import { useGlobal } from '~/contexts/GlobalContext'
 import * as S from './styles'
+import '@vime/core/themes/default.css'
+import dynamic from 'next/dynamic'
+const Player = dynamic(() => import('~/components/atoms/Player'), {
+  ssr: false,
+})
 
 interface VideoProps {
   video: IVideo
@@ -26,8 +31,25 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
               paddingTop: '56.25%',
               background: '#000',
               borderRadius: '8px',
+              position: 'relative',
+              overflow: 'hidden',
             }}
-          />
+          >
+            <div
+              style={{
+                position: 'absolute',
+                left: '0',
+                top: '0',
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              <Player
+                urls={video.vodInformation.urls}
+                poster={video.vodInformation.thumbnail}
+              />
+            </div>
+          </div>
           <Box gap="16px" justifyContent="space-between">
             <StreamDescription
               streamerInformation={video.streamerInformation}
