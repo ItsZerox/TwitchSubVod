@@ -4,7 +4,7 @@ module.exports = {
     '~/(.*)': '<rootDir>/src/$1',
   },
   testEnvironment: 'jsdom',
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/layout/**',
