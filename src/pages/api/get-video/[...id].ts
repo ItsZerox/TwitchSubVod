@@ -12,6 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const urls = getUrlsFromVideo(data)
 
   res.setHeader('Content-Type', 'binary/octet-stream')
+  res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
 
   const formatStreamInformation = (urlInformation: VideoUrl, index: number) => {
     const [width, height] = urlInformation.resolution.split('x')
