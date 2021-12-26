@@ -1,8 +1,8 @@
+import axios from 'axios'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { IVideo } from '~/@types/IVideo'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
-import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
 
 export const videoAdapter = (video: ITwitchVideo): IVideo => {
   const streamerInformation: StreamerInformation = {
@@ -20,7 +20,6 @@ export const videoAdapter = (video: ITwitchVideo): IVideo => {
     id: video._id.replace('v', ''),
     thumbnail: video.preview.medium,
     viewCount: video.views,
-    urls: getUrlsFromVideo(video),
   }
 
   return {

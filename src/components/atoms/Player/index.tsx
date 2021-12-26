@@ -2,14 +2,13 @@ import * as S from './styles'
 
 import { Player as VimePlayer, Hls, DefaultUi } from '@vime/react'
 import { VideoUrl } from '~/@types/VideoUrl'
-import { useState } from 'react'
 
 interface PlayerProps {
-  urls?: VideoUrl[]
+  url?: string
   poster?: string
 }
 
-const Player = ({ urls, poster }: PlayerProps) => {
+const Player = ({ url, poster }: PlayerProps) => {
   const hlsConfig = {
     enableWorker: true,
     maxBufferLength: 60,
@@ -18,12 +17,10 @@ const Player = ({ urls, poster }: PlayerProps) => {
     },
   }
 
-  if (!urls?.length) return null
-
   return (
     <VimePlayer theme="dark">
       <Hls poster={poster} config={hlsConfig}>
-        <source data-src={process.env.NEXT_PUBLIC_CORS + urls[0].url} />
+        <source data-src={url} />
       </Hls>
 
       <DefaultUi />

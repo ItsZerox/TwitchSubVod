@@ -7,5 +7,4 @@ export interface VodInformation {
   viewCount: number
   duration: number
   date: string
-  urls?: VideoUrl[]
 }

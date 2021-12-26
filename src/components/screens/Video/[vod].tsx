@@ -45,7 +45,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
               }}
             >
               <Player
-                urls={video.vodInformation.urls}
+                url={`/api/get-video/${video.vodInformation.id}.m3u8`}
                 poster={video.vodInformation.thumbnail}
               />
             </div>
