@@ -37,11 +37,12 @@ const VideoButton = ({
         streamerInformation={streamerInformation}
         vodInformation={vodInformation}
         noAvatar={noAvatar}
-        lineLimit={isMinimal ? 2 : 3}
+        lineLimit={3}
         urlProps={{
           href: `/video/${vodInformation.id}`,
           as: `/video/${vodInformation.id}`,
         }}
+        isMinimal={isMinimal}
       />
     </S.VideoButtonContainer>
   )

@@ -6,7 +6,7 @@ export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   padding: ${({ isMinimal }) => (isMinimal ? '2px' : '2px 2px 8px')};
 
   cursor: pointer;
