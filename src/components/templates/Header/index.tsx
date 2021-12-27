@@ -70,7 +70,7 @@ const Header = () => {
             ))}
           </Datalist>
         </S.Form>
-        <S.HeaderArea gap={8}>
+        <S.HeaderArea gap={8} hideInMobile={true}>
           <ButtonPill
             icon={<RiFeedbackFill />}
             iconPosition="right"

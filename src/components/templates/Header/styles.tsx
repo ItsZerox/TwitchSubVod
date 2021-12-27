@@ -20,7 +20,13 @@ export const HeaderContainer = styled.div`
   padding: 0 16px;
 `
 
-export const HeaderArea = styled.div<{ gap?: number; flexGrow?: number }>`
+interface HeaderAreaProps {
+  gap?: number
+  flexGrow?: number
+  hideInMobile?: boolean
+}
+
+export const HeaderArea = styled.div<HeaderAreaProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,6 +37,10 @@ export const HeaderArea = styled.div<{ gap?: number; flexGrow?: number }>`
     width: 24px;
     height: auto;
     color: ${({ theme }) => theme.colors.white};
+  }
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    display: ${({ hideInMobile }) => (hideInMobile ? 'none' : 'flex')};
   }
 `
 
