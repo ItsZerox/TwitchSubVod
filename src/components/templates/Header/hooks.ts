@@ -25,12 +25,14 @@ export const useHeader = () => {
     if (search) {
       fetchOptions()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch])
 
   useEffect(() => {
     if (router.asPath === `/videos/${search}`) {
       setIsLoading(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath])
 
   const handleSearch = useCallback(
