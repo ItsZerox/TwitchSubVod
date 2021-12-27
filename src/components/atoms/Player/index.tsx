@@ -2,6 +2,7 @@ import * as S from './styles'
 
 import { Player as VimePlayer, Hls, DefaultUi } from '@vime/react'
 import { HTMLAttributes } from 'react'
+import { getCors } from '~/utils/getCors'
 
 interface PlayerProps {
   url?: string
@@ -13,7 +14,13 @@ const Player = ({ url, poster }: PlayerProps) => {
     enableWorker: true,
     maxBufferLength: 60,
     xhrSetup: (xhr: XMLHttpRequest, url: string) => {
-      xhr.open('GET', url.replace('unmuted.ts', 'muted.ts'), true)
+      xhr.open(
+        'GET',
+        url
+          .replace('unmuted.ts', 'muted.ts')
+          .replace('https://', `${getCors()}https://`),
+        true,
+      )
     },
   }
 

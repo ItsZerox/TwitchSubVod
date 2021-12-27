@@ -30,14 +30,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return `#EXT-X-STREAM-INF:BANDWIDTH=${bandwidth},RESOLUTION=${urlInformation.resolution}`
   }
 
-  const cors = getCors({ isIOS: false, isEU: false })
-
   res.write(`#EXTM3U
 #EXT-X-VERSION:3
 ${urls
   .map(
     (url, index) => `${formatStreamInformation(url, index)}
-${cors + url.url}`,
+${url.url}`,
   )
   .join('\n\n')}
 `)

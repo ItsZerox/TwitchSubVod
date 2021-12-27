@@ -1,11 +1,12 @@
-interface IGetCors {
-  isIOS: boolean
-  isEU: boolean
-}
-
-export const getCors = ({ isIOS, isEU }: IGetCors) => {
+export const getCors = () => {
   const EU_CORS = process.env.NEXT_PUBLIC_CORS_EU as string
   const GLOBAL_CORS = process.env.NEXT_PUBLIC_CORS as string
+
+  const isIOS = /iPad|iPhone|iPod|Mac/.test(navigator.userAgent)
+
+  const isEU = Intl.DateTimeFormat()
+    .resolvedOptions()
+    .timeZone.includes('Europe')
 
   const getRandomUrl = (url: string[]) => {
     const randomIndex = Math.floor(Math.random() * url.length)
