@@ -62,7 +62,11 @@ const Header = () => {
 
           <Datalist id="search-list">
             {options.map((option) => (
-              <Option key={option} value={option} />
+              <Option
+                key={option.id}
+                value={option.name}
+                label={option.displayName}
+              />
             ))}
           </Datalist>
         </S.Form>

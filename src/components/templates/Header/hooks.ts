@@ -1,18 +1,31 @@
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
+import { ISearchChannel } from '~/@types/ISearchChannel'
+import { searchChannelsAdapter } from '~/adapters/searchChannelsAdapter'
 import useDebounce from '~/hooks/useDebounce'
+import { searchChannels } from '~/services/api/searchChannels'
 
 export const useHeader = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [search, setSearch] = useState('')
-  const [options, setOptions] = useState([])
-  const debouncedOptions = useDebounce(options, 500)
+  const [options, setOptions] = useState<ISearchChannel[]>([])
+  const debouncedSearch = useDebounce(search, 250)
 
   const router = useRouter()
 
   useEffect(() => {
-    // fetch autocomplete data and set it to options
-  }, [debouncedOptions])
+    const fetchOptions = async () => {
+      setIsLoading(true)
+      const response = await searchChannels(search)
+      const autoCompleteData = searchChannelsAdapter(response)
+      setOptions(autoCompleteData)
+      setIsLoading(false)
+    }
+
+    if (search) {
+      fetchOptions()
+    }
+  }, [debouncedSearch])
 
   useEffect(() => {
     if (router.asPath === `/videos/${search}`) {
@@ -46,7 +59,7 @@ export const useHeader = () => {
 
   return {
     search,
-    options: debouncedOptions,
+    options,
     handleSearch,
     handleSubmit,
     isLoading,
