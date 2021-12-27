@@ -22,7 +22,7 @@ const ViewAndDate = forwardRef<HTMLDivElement, ViewAndDateProps>(
     { viewCount, date, locale, translatedViews, isMinimal }: ViewAndDateProps,
     ref,
   ) => (
-    <Box as="a" gap="6px" ref={ref}>
+    <Box as="span" gap="6px" ref={ref}>
       <Typography variant="body2" className="stream-description-views">
         {formatViews(viewCount)} {translatedViews}
       </Typography>
@@ -116,14 +116,16 @@ const StreamDescription = ({
         </Link>
 
         {urlProps?.href ? (
-          <Link href={urlProps.href} as={urlProps.as} passHref>
-            <ViewAndDate
-              date={vodInformation.date}
-              viewCount={vodInformation.viewCount}
-              locale={locale}
-              translatedViews={texts.VIEWS.toLowerCase()}
-              isMinimal={isMinimal}
-            />
+          <Link href={urlProps.href} as={urlProps.as}>
+            <a>
+              <ViewAndDate
+                date={vodInformation.date}
+                viewCount={vodInformation.viewCount}
+                locale={locale}
+                translatedViews={texts.VIEWS.toLowerCase()}
+                isMinimal={isMinimal}
+              />
+            </a>
           </Link>
         ) : (
           <Box gap="6px">
