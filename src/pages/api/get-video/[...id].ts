@@ -10,8 +10,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
   }
 
-  console.log(req.headers)
-
   const id = req.query.id[0] as string
   const { data } = await api.get<ITwitchVideo>(
     `/videos/${id.replace('.m3u8', '')}`,
