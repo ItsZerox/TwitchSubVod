@@ -2,12 +2,15 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { VideoUrl } from '~/@types/VideoUrl'
 import api from '~/services/config'
+import { getCors } from '~/utils/getCors'
 import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.headers.origin) {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
   }
+
+  console.log(req.headers)
 
   const id = req.query.id[0] as string
   const { data } = await api.get<ITwitchVideo>(
@@ -27,12 +30,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return `#EXT-X-STREAM-INF:BANDWIDTH=${bandwidth},RESOLUTION=${urlInformation.resolution}`
   }
 
+  const cors = getCors({ isIOS: false, isEU: false })
+
   res.write(`#EXTM3U
 #EXT-X-VERSION:3
 ${urls
   .map(
     (url, index) => `${formatStreamInformation(url, index)}
-${process.env.NEXT_PUBLIC_CORS + url.url}`,
+${cors + url.url}`,
   )
   .join('\n\n')}
 `)
