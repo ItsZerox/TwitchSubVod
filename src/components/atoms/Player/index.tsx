@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 import { Player as VimePlayer, Hls, DefaultUi } from '@vime/react'
-import { VideoUrl } from '~/@types/VideoUrl'
+import { HTMLAttributes } from 'react'
 
 interface PlayerProps {
   url?: string
@@ -28,4 +28,13 @@ const Player = ({ url, poster }: PlayerProps) => {
   )
 }
 
+const PlayerContainer = ({ children }: HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <S.PlayerContainer>
+      <S.PlayerWrapper>{children}</S.PlayerWrapper>
+    </S.PlayerContainer>
+  )
+}
+
 export default Player
+export { PlayerContainer }

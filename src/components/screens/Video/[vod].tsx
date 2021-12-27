@@ -9,7 +9,19 @@ import '@vime/core/themes/default.css'
 import dynamic from 'next/dynamic'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
+  loading: () => <div>...</div>,
 })
+
+const PlayerContainer = dynamic(
+  // @ts-ignore
+  () =>
+    import('~/components/atoms/Player').then(
+      (player) => player.PlayerContainer,
+    ),
+  {
+    ssr: false,
+  },
+)
 
 interface VideoProps {
   video: IVideo
@@ -23,33 +35,12 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
     <S.Container>
       <Box flexDirection="column" gap="64px">
         <Box flexDirection="column" gap="16px">
-          <div
-            style={{
-              display: 'flex',
-              width: '100%',
-              height: '100%',
-              paddingTop: '56.25%',
-              background: '#000',
-              borderRadius: '8px',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                left: '0',
-                top: '0',
-                width: '100%',
-                height: '100%',
-              }}
-            >
-              <Player
-                url={`/api/get-video/${video.vodInformation.id}.m3u8`}
-                poster={video.vodInformation.thumbnail}
-              />
-            </div>
-          </div>
+          <PlayerContainer>
+            <Player
+              url={`/api/get-video/${video.vodInformation.id}.m3u8`}
+              poster={video.vodInformation.thumbnail}
+            />
+          </PlayerContainer>
           <Box gap="16px" justifyContent="space-between">
             <StreamDescription
               streamerInformation={video.streamerInformation}
