@@ -2,7 +2,7 @@ export const getCors = () => {
   const EU_CORS = process.env.NEXT_PUBLIC_CORS_EU as string
   const GLOBAL_CORS = process.env.NEXT_PUBLIC_CORS as string
 
-  const isIOS = /iPad|iPhone|iPod|Mac/.test(navigator.userAgent)
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   const isEU = Intl.DateTimeFormat()
     .resolvedOptions()
