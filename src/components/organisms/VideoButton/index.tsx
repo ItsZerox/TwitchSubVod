@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
-import Box from '~/components/atoms/Box'
 import VideoThumbnail from '~/components/atoms/VideoThumbnail'
 import StreamDescription from '~/components/molecules/StreamDescription'
 import * as S from './styles'

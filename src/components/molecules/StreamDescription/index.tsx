@@ -70,7 +70,7 @@ const StreamDescription = ({
           <Box as="a" tabIndex={avatarWidth ? 0 : -1}>
             <Avatar
               title={streamerInformation.displayName}
-              src={streamerInformation.logo}
+              src={streamerInformation.logo.replace('300x300', '50x50')}
               width={avatarWidth || '32px'}
             />
           </Box>

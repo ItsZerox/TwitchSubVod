@@ -27,17 +27,18 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
           description={streamerInformation.description}
         />
         <Button text={texts.FOLLOW} buttonWidth="100%" />
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            maxWidth: '160px',
-            height: '600px',
-            background: '#000',
-            borderRadius: '8px',
-            marginBottom: '8px',
-          }}
-        />
+        <Box flexDirection="column" hideInMobile>
+          <div
+            style={{
+              display: 'flex',
+              width: '160px',
+              height: '600px',
+              background: '#000',
+              borderRadius: '8px',
+              marginBottom: '8px',
+            }}
+          />
+        </Box>
       </Box>
 
       <Box
