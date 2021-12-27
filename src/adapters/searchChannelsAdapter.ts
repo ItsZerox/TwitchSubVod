@@ -6,7 +6,7 @@ export const searchChannelsAdapter = (
 ): ISearchChannel[] => {
   return twitchSearchChannelData.data.map((channel) => ({
     id: channel.id,
-    name: channel.display_name,
+    name: channel.broadcaster_login,
     displayName: channel.display_name,
   }))
 }
