@@ -4,13 +4,16 @@ import { FiMenu } from 'react-icons/fi'
 import { IoNotificationsSharp, IoPersonSharp, IoSearch } from 'react-icons/io5'
 import { RiFeedbackFill } from 'react-icons/ri'
 import ButtonPill from '~/components/atoms/ButtonPill'
-import Input from '~/components/atoms/Input'
+import Input, { Datalist, Option } from '~/components/atoms/Input'
 import { useGlobal } from '~/contexts/GlobalContext'
 import Icon from '../../atoms/Icon'
+import { useHeader } from './hooks'
 import * as S from './styles'
 
 const Header = () => {
   const { texts } = useGlobal()
+
+  const { search, options, handleSearch, handleSubmit, isLoading } = useHeader()
 
   return (
     <S.HeaderWrapper>
@@ -40,15 +43,29 @@ const Header = () => {
             />
           </Link>
         </S.HeaderArea>
-        <S.HeaderArea flexGrow={1}>
+
+        {/* @ts-ignore */}
+        <S.Form flexGrow={1} onSubmit={handleSubmit}>
           <Input
             icon={<IoSearch />}
             iconPosition="left"
             placeholder={`${texts.SEARCH}...`}
             id="search-bar"
             aria-label={texts.SEARCH}
+            list="search-list"
+            autoComplete="off"
+            name="search"
+            value={search}
+            onChange={handleSearch}
+            isLoading={isLoading}
           />
-        </S.HeaderArea>
+
+          <Datalist id="search-list">
+            {options.map((option) => (
+              <Option key={option} value={option} />
+            ))}
+          </Datalist>
+        </S.Form>
         <S.HeaderArea gap={8}>
           <ButtonPill
             icon={<RiFeedbackFill />}

@@ -1,17 +1,11 @@
 import styled from 'styled-components'
 
-export const InputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 80%;
-  max-width: 480px;
-`
-
 export const InputLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
+  max-width: 480px;
   background-color: ${({ theme }) => theme.colors.grey800};
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.colors.grey800};
@@ -29,6 +23,19 @@ export const InputLabel = styled.label`
 
     svg {
       fill: ${({ theme }) => theme.colors.pink700};
+    }
+  }
+
+  .loading-icon {
+    animation: rotation 1s linear infinite;
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
   }
 `
@@ -55,3 +62,7 @@ export const InputText = styled.input`
   line-height: 1.5;
   padding: 0 8px;
 `
+
+export const Datalist = styled.datalist``
+
+export const Option = styled.option``

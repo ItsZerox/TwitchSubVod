@@ -33,3 +33,10 @@ export const HeaderArea = styled.div<{ gap?: number; flexGrow?: number }>`
     color: ${({ theme }) => theme.colors.white};
   }
 `
+
+// @ts-ignore
+export const Form = styled(HeaderArea).attrs(({ as = 'form' }) => ({ as }))`
+  [list]::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+`
