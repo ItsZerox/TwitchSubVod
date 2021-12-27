@@ -38,6 +38,21 @@ export const InputLabel = styled.label`
       }
     }
   }
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    position: absolute;
+    width: 48px;
+    right: 16px;
+
+    transition: all 0.2s ease-in-out;
+
+    :focus,
+    :focus-within {
+      width: 100%;
+      max-width: calc(100vw - 16px - 16px);
+      left: 16px;
+    }
+  }
 `
 
 export const InputIcon = styled.div<{ iconPosition: 'left' | 'right' }>`
