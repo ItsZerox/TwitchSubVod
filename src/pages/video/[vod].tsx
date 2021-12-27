@@ -3,6 +3,7 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next'
+import { IVideo } from '~/@types/IVideo'
 import { videoAdapter } from '~/adapters/videoAdapter'
 import Video from '~/components/screens/Video/[vod]'
 import revalidate from '~/constants/revalidate'
@@ -19,12 +20,8 @@ export async function getStaticPaths() {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   if (!context.params?.vod) {
     return {
-      props: {
-        video: null,
-        relatedVideos: [],
-      },
       notFound: true,
-    }
+    } as const
   }
 
   const [videoData, relatedVideosData] = await Promise.all([
@@ -33,11 +30,17 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       language: context.locale,
       limit: 32,
     }),
-  ])
+  ]).catch(() => [null, null])
 
-  const video = videoAdapter(videoData)
+  if (!videoData || !relatedVideosData) {
+    return {
+      notFound: true,
+    } as const
+  }
 
-  const relatedVideos = relatedVideosData.vods.map(videoAdapter)
+  const video: IVideo = videoAdapter(videoData)
+
+  const relatedVideos: IVideo[] = relatedVideosData.vods.map(videoAdapter)
 
   return {
     props: {

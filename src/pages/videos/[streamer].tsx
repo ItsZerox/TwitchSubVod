@@ -19,8 +19,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     limit: 32,
   })
 
-  if (!streamerVideos) {
-    return { props: { videos: [] }, notFound: true }
+  if (!streamerVideos?._total) {
+    return { notFound: true } as const
   }
 
   const videos = streamerVideos?.videos.map(videoAdapter)
