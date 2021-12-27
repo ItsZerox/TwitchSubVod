@@ -6,4 +6,5 @@ const DAY = HOUR * 24
 export default {
   home: DAY,
   video: DAY * 30,
+  videos: HOUR,
 }

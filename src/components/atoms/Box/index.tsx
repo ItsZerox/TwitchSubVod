@@ -6,6 +6,7 @@ interface BoxPropsComponent extends BoxProps {
   children: React.ReactNode
   as?: any
   tabIndex?: number
+  boxSize?: string
 }
 
 const Box = forwardRef<HTMLDivElement, BoxPropsComponent>(
@@ -16,6 +17,7 @@ const Box = forwardRef<HTMLDivElement, BoxPropsComponent>(
       flexDirection,
       gap,
       children,
+      boxSize,
       ...props
     }: BoxPropsComponent,
     ref,
@@ -26,6 +28,7 @@ const Box = forwardRef<HTMLDivElement, BoxPropsComponent>(
         justifyContent={justifyContent}
         flexDirection={flexDirection}
         gap={gap}
+        boxSize={boxSize}
         ref={ref}
         {...props}
       >

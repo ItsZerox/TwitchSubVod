@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { IVideo } from '~/@types/IVideo'
 import { StreamerInformation } from '~/@types/StreamerInformation'

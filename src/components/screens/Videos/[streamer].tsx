@@ -1,30 +1,18 @@
-import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import { IVideo } from '~/@types/IVideo'
 import Box from '~/components/atoms/Box'
 import ProfilePage from '~/components/templates/ProfilePage'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
-import { mockedStreamerInformation, videos } from './_mockedData'
 
-const Videos: NextPage = () => {
-  const router = useRouter()
+interface VideoProps {
+  videos: IVideo[]
+}
 
-  console.log(router)
+const Videos = ({ videos }: VideoProps) => {
+  const streamerInformation = videos[0].streamerInformation
 
   return (
-    <ProfilePage streamerInformation={mockedStreamerInformation}>
+    <ProfilePage streamerInformation={streamerInformation}>
       <Box flexDirection="column" gap="20px" alignItems="center">
-        <VideoButtonGroup videos={videos} />
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            maxWidth: '728px',
-            height: '90px',
-            background: '#000',
-            borderRadius: '8px',
-            marginBottom: '8px',
-          }}
-        />
         <VideoButtonGroup videos={videos} />
       </Box>
     </ProfilePage>

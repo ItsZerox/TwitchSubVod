@@ -40,7 +40,12 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
         />
       </Box>
 
-      <Box flexDirection="column" gap="20px" alignItems="center">
+      <Box
+        flexDirection="column"
+        gap="20px"
+        alignItems="center"
+        justifyContent="flex-start"
+      >
         <div
           style={{
             display: 'flex',
