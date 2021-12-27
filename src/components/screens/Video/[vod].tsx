@@ -40,6 +40,17 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           gap: '32px',
         }}
       >
+        <Box hideInMobile={false} hideInDesktop={true}>
+          <div
+            style={{
+              width: '100%',
+              height: '120px',
+              background: '#000',
+              borderRadius: '8px',
+            }}
+          />
+        </Box>
+
         <Box flexDirection="column" gap="16px">
           <PlayerContainer>
             <Player

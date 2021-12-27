@@ -8,28 +8,9 @@ interface BoxPropsComponent extends BoxProps {
 }
 
 const Box = forwardRef<HTMLDivElement, BoxPropsComponent>(
-  (
-    {
-      alignItems,
-      justifyContent,
-      flexDirection,
-      gap,
-      children,
-      boxSize,
-      ...props
-    }: BoxPropsComponent,
-    ref,
-  ) => {
+  ({ children, as, ...props }: BoxPropsComponent, ref) => {
     return (
-      <S.BoxContainer
-        alignItems={alignItems}
-        justifyContent={justifyContent}
-        flexDirection={flexDirection}
-        gap={gap}
-        boxSize={boxSize}
-        ref={ref}
-        {...props}
-      >
+      <S.BoxContainer as={as} ref={ref} {...props}>
         {children}
       </S.BoxContainer>
     )

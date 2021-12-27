@@ -27,6 +27,7 @@ export interface BoxProps {
   tabIndex?: number
   boxSize?: string
   hideInMobile?: boolean
+  hideInDesktop?: boolean
   _mobileProps?: {
     alignItems?: BoxProps['alignItems']
     justifyContent?: BoxProps['justifyContent']
