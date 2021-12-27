@@ -5,7 +5,7 @@ export const Container = styled.div`
   grid-template-columns: 1fr 300px;
   grid-gap: 1rem;
 
-  padding: 1rem 3rem;
+  padding: 1rem 1rem;
 
   ${({ theme }) => theme.breakpoints.down('md')} {
     grid-template-columns: 1fr;

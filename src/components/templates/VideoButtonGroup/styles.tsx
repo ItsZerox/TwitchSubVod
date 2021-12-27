@@ -14,7 +14,8 @@ export const VideoButtonGroupContainer = styled.div<VideoButtonGroupContainerPro
   grid-gap: ${({ isMinimal }) => (isMinimal ? '16px' : '32px 16px')};
   margin-bottom: 16px;
   align-items: flex-start;
-  min-width: calc(100vw - 800px);
+  min-width: ${({ minVideoWidth }) =>
+    minVideoWidth ? 'unset' : 'calc(100vw - 800px)'};
 
   animation: all 1s ease-in-out;
 

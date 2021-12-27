@@ -8,6 +8,7 @@ export const BoxContainer = styled.div<BoxProps>`
   flex-direction: ${({ flexDirection }) => flexDirection};
   gap: ${({ gap }) => gap};
   max-width: 100%;
+  width: ${({ boxSize }) => boxSize};
 
   ${({ theme }) => theme.breakpoints.down('md')} {
     display: ${({ hideInMobile }) => (hideInMobile ? 'none' : 'flex')};

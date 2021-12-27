@@ -33,7 +33,13 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
 
   return (
     <S.Container>
-      <Box flexDirection="column" gap="64px">
+      <Box
+        flexDirection="column"
+        gap="64px"
+        _mobileProps={{
+          gap: '32px',
+        }}
+      >
         <Box flexDirection="column" gap="16px">
           <PlayerContainer>
             <Player
@@ -46,7 +52,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
             justifyContent="space-between"
             _mobileProps={{
               flexDirection: 'column',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               justifyContent: 'center',
               boxSize: '100%',
             }}
