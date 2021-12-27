@@ -5,8 +5,6 @@ import { BoxProps } from './types'
 interface BoxPropsComponent extends BoxProps {
   children: React.ReactNode
   as?: any
-  tabIndex?: number
-  boxSize?: string
 }
 
 const Box = forwardRef<HTMLDivElement, BoxPropsComponent>(

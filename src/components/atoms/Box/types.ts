@@ -24,5 +24,14 @@ export interface BoxProps {
     | 'initial'
     | 'inherit'
   gap?: string
-  children?: React.ReactNode
+  tabIndex?: number
+  boxSize?: string
+  hideInMobile?: boolean
+  _mobileProps?: {
+    alignItems?: BoxProps['alignItems']
+    justifyContent?: BoxProps['justifyContent']
+    flexDirection?: BoxProps['flexDirection']
+    gap?: BoxProps['gap']
+    boxSize?: BoxProps['boxSize']
+  }
 }
