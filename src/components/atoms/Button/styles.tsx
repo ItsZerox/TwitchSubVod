@@ -1,11 +1,7 @@
 import styled from 'styled-components'
+import { ButtonProps } from './types'
 
-interface ButtonContainerProps {
-  variant: 'primary' | 'secondary'
-  buttonWidth?: string
-}
-
-export const ButtonContainer = styled.button<ButtonContainerProps>`
+export const ButtonContainer = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,6 +25,10 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
 
   :active {
     filter: brightness(0.9);
+  }
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    width: ${({ _mobileProps }) => _mobileProps?.buttonWidth};
   }
 `
 
