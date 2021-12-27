@@ -2,6 +2,7 @@ import Avatar from '~/components/atoms/Avatar'
 import Box from '~/components/atoms/Box'
 import Typography from '~/components/atoms/Typography'
 import { useGlobal } from '~/contexts/GlobalContext'
+import formatViews from '~/utils/formatViews'
 
 interface StreamerDescriptionProps {
   name: string
@@ -28,9 +29,9 @@ const StreamerDescription = ({
         </Typography>
         <Typography
           variant="body1"
-          title={`${followers} ${texts.FOLLOWERS.toLowerCase()}`}
+          title={`${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`}
         >
-          {`${followers} ${texts.FOLLOWERS.toLowerCase()}`}
+          {`${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`}
         </Typography>
         <Typography variant="body2" title={description}>
           {description}
