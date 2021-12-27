@@ -41,16 +41,45 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
               poster={video.vodInformation.thumbnail}
             />
           </PlayerContainer>
-          <Box gap="16px" justifyContent="space-between">
+          <Box
+            gap="16px"
+            justifyContent="space-between"
+            _mobileProps={{
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxSize: '100%',
+            }}
+          >
             <StreamDescription
               streamerInformation={video.streamerInformation}
               vodInformation={video.vodInformation}
               lineLimit={1}
               avatarWidth="64px"
             />
-            <Box gap="8px">
-              <Button variant="secondary" text={texts.FOLLOW} />
-              <Button variant="primary" text={texts.DOWNLOAD} />
+            <Box
+              gap="8px"
+              _mobileProps={{
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxSize: '100%',
+              }}
+            >
+              <Button
+                variant="secondary"
+                text={texts.FOLLOW}
+                _mobileProps={{
+                  buttonWidth: '100%',
+                }}
+              />
+              <Button
+                variant="primary"
+                text={texts.DOWNLOAD}
+                _mobileProps={{
+                  buttonWidth: '100%',
+                }}
+              />
             </Box>
           </Box>
         </Box>

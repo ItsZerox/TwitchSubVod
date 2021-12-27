@@ -6,4 +6,9 @@ export const Container = styled.div`
   grid-gap: 1rem;
 
   padding: 1rem 3rem;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    grid-template-columns: 1fr;
+    padding: 1rem 0.5rem;
+  }
 `
