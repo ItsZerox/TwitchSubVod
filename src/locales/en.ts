@@ -12,6 +12,8 @@ const en = {
   SEARCH: 'Search',
   FOLLOWERS: 'Followers',
   VIEWS: 'Views',
+  SHARE_THIS_VIDEO: 'Share this video',
+  SHARE_TEXT: 'Watch this video of {{streamerName}} on pogu.live',
 }
 
 export default en

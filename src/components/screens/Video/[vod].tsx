@@ -7,6 +7,7 @@ import { useGlobal } from '~/contexts/GlobalContext'
 import * as S from './styles'
 import '@vime/core/themes/default.css'
 import dynamic from 'next/dynamic'
+import ShareButtons from '~/components/atoms/ShareButtons'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
@@ -99,6 +100,12 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
               />
             </Box>
           </Box>
+          <ShareButtons
+            titleText={texts.SHARE_TEXT.replace(
+              '{{streamerName}}',
+              video.streamerInformation.displayName,
+            )}
+          />
         </Box>
         <VideoButtonGroup
           videos={relatedVideos.slice(-16)}

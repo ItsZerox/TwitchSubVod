@@ -14,6 +14,8 @@ const pt: Locale = {
   SEARCH: 'Buscar',
   FOLLOWERS: 'Seguidores',
   VIEWS: 'Visualizações',
+  SHARE_THIS_VIDEO: 'Compartilhar este video',
+  SHARE_TEXT: 'Assista esse vídeo de {{streamerName}} no pogu.live',
 }
 
 export default pt
