@@ -1,5 +1,7 @@
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  as?: React.ElementType
+  href?: string
   icon?: React.ReactNode
   iconPosition?: 'left' | 'right'
   text: string
