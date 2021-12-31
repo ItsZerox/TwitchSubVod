@@ -35,8 +35,8 @@ export const getDeletedVodUrls = async ({
 
   const promises = fullLinks.map(async (link) => {
     try {
-      const { data } = await axios.head(link)
-      if ([200, 304].includes(data.status)) {
+      const response = await axios.head(link)
+      if ([200, 304].includes(response.status)) {
         return link
       }
     } catch (error) {}
