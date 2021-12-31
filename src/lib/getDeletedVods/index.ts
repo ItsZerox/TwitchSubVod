@@ -4,7 +4,7 @@ import { deletedVodsApiAdapter } from '~/adapters/deletedVodsApiAdapter'
 import { getDeletedVodUrls } from '~/lib/getDeletedVodUrls'
 import { getStreamerId } from './getStreamerId'
 
-export const getDeletedVods = async (username: string) => {
+export const getDeletedVods = async (username: string, range?: number) => {
   const { data } = await axios.get(
     `${process.env.DELETED_VODS_HOST}${username}`,
   )
@@ -12,7 +12,9 @@ export const getDeletedVods = async (username: string) => {
   const streamerId = getStreamerId(data)
 
   const allVodsResponse = await axios.get(
-    `${process.env.DELETED_VODS}1/${streamerId}${process.env.DELETED_VODS_PARAMS}`,
+    `${process.env.DELETED_VODS}${range || 1}/${streamerId}${
+      process.env.DELETED_VODS_PARAMS
+    }`,
   )
 
   const allVods: IExternalDeletedVodsApi[] = allVodsResponse.data.data
