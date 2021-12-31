@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
+    "postinstall": "npx prisma generate",
     "test": "jest --passWithNoTests",
     "test:dev": "yarn test --watch",
     "test:coverage": "jest --coverage"

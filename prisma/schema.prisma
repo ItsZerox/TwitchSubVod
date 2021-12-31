@@ -1,6 +1,17 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Since we're using planetscale, here's the workflow to apply migrations:
+// 1. Create a new branch in planetscale
+// 2. Open two terminals and keep them open:
+//    - Run `pscale connect pogu-live NEW_BRANCH_NAME_HERE --port 3309`
+//    - Run `pscale connect pogu-live shadow --port 3310`
+// 3. Run `npx prisma db push`
+// 4. Go to planetscale and open a deploy request for the new branch
+// 5. Deploy the new branch then delete it
+// You can now close the terminals
+
+
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
@@ -26,6 +37,7 @@ model Streamer {
 
 model DeletedVod {
   id                       Int                        @id @default(autoincrement())
+  streamId                 Int                        
   streamerId               Int
   streamer                 Streamer                   @relation(fields: [streamerId], references: [id])
   url                      String
