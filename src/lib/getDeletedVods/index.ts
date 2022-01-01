@@ -1,10 +1,15 @@
 import axios from 'axios'
+import { IDeletedVods } from '~/@types/IDeletedVods'
 import { IExternalDeletedVodsApi } from '~/@types/IExternalDeletedVodsApi'
 import { deletedVodsApiAdapter } from '~/adapters/deletedVodsApiAdapter'
 import { getDeletedVodUrls } from '~/lib/getDeletedVodUrls'
 import { getStreamerId } from './getStreamerId'
+import { uploadToDatabase } from './uploadToDatabase'
 
-export const getDeletedVods = async (username: string, range?: number) => {
+export const getDeletedVods = async (
+  username: string,
+  range?: number,
+): Promise<IDeletedVods[]> => {
   const { data } = await axios.get(
     `${process.env.DELETED_VODS_HOST}${username}`,
   )
@@ -12,7 +17,7 @@ export const getDeletedVods = async (username: string, range?: number) => {
   const streamerId = getStreamerId(data)
 
   const allVodsResponse = await axios.get(
-    `${process.env.DELETED_VODS}${range || 1}/${streamerId}${
+    `${process.env.DELETED_VODS}${range || 2}/${streamerId}${
       process.env.DELETED_VODS_PARAMS
     }`,
   )
@@ -40,5 +45,7 @@ export const getDeletedVods = async (username: string, range?: number) => {
 
   const streams = await Promise.all(streamsPromise)
 
-  return streams
+  const databaseData = await uploadToDatabase(streams)
+
+  return databaseData
 }
