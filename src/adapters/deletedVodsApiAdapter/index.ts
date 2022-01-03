@@ -1,9 +1,10 @@
+import { IDeletedVodObject } from '~/@types/IDeletedVodObject'
 import { IExternalDeletedVodsApi } from '~/@types/IExternalDeletedVodsApi'
 import { directoriesAdapter } from '../directoriesAdapter'
 
 export const deletedVodsApiAdapter = async (
   data: IExternalDeletedVodsApi[],
-) => {
+): Promise<IDeletedVodObject[]> => {
   return data.map((stream) => {
     const directories = directoriesAdapter(stream.gamesplayed)
 
