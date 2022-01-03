@@ -1,25 +1,18 @@
 import { Schema, model, models } from 'mongoose'
+import { IDeletedVodSchema } from '~/@types/DeletedVodSchema'
 
-interface DeletedVod {
-  streamId: number
-  streamerName: string
-  streamerDisplayName: string
-  logo: string
-  createdAt: Date
-}
-
-const deletedVodsV2Schema = new Schema<DeletedVod>(
+const deletedVodsV2Schema = new Schema<IDeletedVodSchema>(
   {
     streamId: {
       type: Number,
       required: true,
       unique: true,
     },
-    streamerName: {
+    name: {
       type: String,
       required: true,
     },
-    streamerDisplayName: {
+    displayName: {
       type: String,
       required: true,
     },
@@ -27,14 +20,14 @@ const deletedVodsV2Schema = new Schema<DeletedVod>(
       type: String,
       required: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now as any,
+    streamDate: {
+      type: String,
+      default: Date.now().toString(),
       required: true,
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
     versionKey: false,
   },
 )
