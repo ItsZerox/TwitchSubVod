@@ -4,6 +4,7 @@ interface DeletedVod {
   streamId: number
   streamerName: string
   streamerDisplayName: string
+  logo: string
   createdAt: Date
 }
 
@@ -19,6 +20,10 @@ const deletedVodsV2Schema = new Schema<DeletedVod>(
       required: true,
     },
     streamerDisplayName: {
+      type: String,
+      required: true,
+    },
+    logo: {
       type: String,
       required: true,
     },
