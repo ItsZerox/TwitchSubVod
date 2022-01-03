@@ -1,102 +1,23 @@
 import { useMemo } from 'react'
 import { Cell, useSortBy, useTable } from 'react-table'
+import { IDeletedVods } from '~/@types/IDeletedVods'
 import Button from '~/components/atoms/Button'
 import formatDate from '~/utils/formatDate'
 
-export const useDeletedVodsTable = () => {
+export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
   const data = useMemo(
-    () => [
-      {
-        date: formatDate('2021-10-22T23:15:14.000+00:00'),
-        length: '179',
-        playedGames: [
-          {
-            name: 'Just Chatting',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Jump King',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Jump%20King-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'RISK: The Game of Global Domination',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/./RISK:%20The%20Game%20of%20Global%20Domination-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-        ],
-        link: '40127400539',
-      },
-      {
-        date: formatDate('2021-10-18T19:33:56.000+00:00'),
-        length: '26',
-        playedGames: [
-          {
-            name: 'Just Chatting',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-        ],
-        link: '40127400539',
-      },
-      {
-        date: formatDate('2021-10-20T19:44:11.000+00:00'),
-        length: '120',
-        playedGames: [
-          {
-            name: 'Just Chatting',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Jump King',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Jump%20King-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-        ],
-        link: '40127400539',
-      },
-      {
-        date: formatDate('2021-10-20T19:44:11.000+00:00'),
-        length: '120',
-        playedGames: [
-          {
-            name: 'Just Chatting',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Jump King',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Jump%20King-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Just Chatting',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Jump King',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Jump%20King-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Just Chatting',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Just%20Chatting-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-          {
-            name: 'Jump King',
-            image:
-              'https://static-cdn.jtvnw.net/ttv-boxart/Jump%20King-136x190.jpg?imenable=1&impolicy=user-profile-picture&imwidth=100',
-          },
-        ],
-        link: '40127400539',
-      },
-    ],
+    () =>
+      videos.map((video) => {
+        return {
+          date: formatDate(video.streamDate),
+          length: video.length,
+          playedGames: video.directories,
+          link: video.streamId,
+        }
+      }),
     [],
   )
+  console.log(videos[0])
 
   const columns = useMemo(() => {
     // todo: add locales texts

@@ -1,8 +1,13 @@
+import { IDeletedVods } from '~/@types/IDeletedVods'
 import { useDeletedVodsTable } from './hooks'
 import * as S from './styles'
 
-export const DeletedVodsTable = () => {
-  const { tableInstance } = useDeletedVodsTable()
+interface DeletedVodsTable {
+  videos: IDeletedVods[]
+}
+
+export const DeletedVodsTable = ({ videos }: DeletedVodsTable) => {
+  const { tableInstance } = useDeletedVodsTable(videos)
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance

@@ -29,12 +29,19 @@ const StreamerDescription = ({
         </Typography>
         <Typography
           variant="body1"
-          title={`${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`}
+          title={
+            followers > 0
+              ? `${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`
+              : ''
+          }
         >
-          {`${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`}
+          {followers > 0
+            ? `${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`
+            : ''}
         </Typography>
         <Typography variant="body2" title={description}>
-          {description}
+          {description ||
+            'We couldn’t find a description for this streamer at this time. :('}
         </Typography>
       </Box>
     </Box>
