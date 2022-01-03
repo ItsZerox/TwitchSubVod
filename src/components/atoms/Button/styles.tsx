@@ -32,4 +32,6 @@ export const ButtonContainer = styled.button<ButtonProps>`
   }
 `
 
-export const ButtonText = styled.span``
+export const ButtonText = styled.span`
+  text-align: center;
+`
