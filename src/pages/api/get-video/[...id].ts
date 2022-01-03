@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { VideoUrl } from '~/@types/VideoUrl'
 import api from '~/services/config'
-import { getCors } from '~/utils/getCors'
 import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
