@@ -17,7 +17,6 @@ export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
       }),
     [],
   )
-  console.log(videos[0])
 
   const columns = useMemo(() => {
     // todo: add locales texts

@@ -4,6 +4,7 @@ import { deletedVodsApiAdapter } from '~/adapters/deletedVodsApiAdapter'
 import { getDeletedVodUrls } from '~/lib/getDeletedVodUrls'
 import { scraper } from '~/services/config'
 import { getStreamerId } from './getStreamerId'
+import { uploadToDatabase } from './uploadToDatabase'
 
 export const getDeletedVods = async (
   username: string,
@@ -42,7 +43,12 @@ export const getDeletedVods = async (
     }
   })
 
-  const streams = await Promise.all(streamsPromise)
+  const uploadedVodsPromise = uploadToDatabase(streamsObject)
+
+  const [streams] = await Promise.all([
+    Promise.all(streamsPromise),
+    uploadedVodsPromise,
+  ])
 
   return streams
 }
