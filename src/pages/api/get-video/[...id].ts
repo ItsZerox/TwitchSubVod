@@ -44,6 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.write(createHLSResponse(urlsObject[0]))
 
     res.end()
+    return
   }
 
   res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
