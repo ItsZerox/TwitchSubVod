@@ -17,6 +17,10 @@ export async function getStaticPaths() {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const streamer = context.params?.streamer as string
 
+  if (!streamer) {
+    return { notFound: true } as const
+  }
+
   const range = 30
 
   const streamerVideos = await getDeletedVods(streamer, range)
@@ -37,6 +41,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 const DeletedVodsPage: NextPage = ({
   videos,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  if (!videos) {
+    // todo: add better error handling
+    return <div>Not found</div>
+  }
+
   return <DeletedVods videos={videos} />
 }
 

@@ -4,6 +4,8 @@
     "jest": true
   },
   "rules": {
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "react/jsx-key": "off",
+    "@next/next/no-img-element": "off"
   }
 }

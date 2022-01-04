@@ -15,7 +15,7 @@ export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
           link: video.streamId,
         }
       }),
-    [],
+    [videos],
   )
 
   const columns = useMemo(() => {
