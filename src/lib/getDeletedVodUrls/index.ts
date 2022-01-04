@@ -4,7 +4,7 @@ import { stringToEpoch } from '~/utils/stringToEpoch'
 
 export interface IGetDeletedVodUrls {
   streamerName: string
-  vodId: number
+  vodId: number | string
   vodDate: string
 }
 

@@ -1,7 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { IDeletedVodSchema } from '~/@types/DeletedVodSchema'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { VideoUrl } from '~/@types/VideoUrl'
+import { getDeletedVodUrls } from '~/lib/getDeletedVodUrls'
+import deletedVodsV2 from '~/lib/mongodb/models/deletedVodsV2'
+import dbConnect from '~/lib/mongodb/mongodbConnect'
 import api from '~/services/config'
+import { createHLSResponse } from '~/utils/createHLSResponse'
+import { getQualitiesFromUrl } from '~/utils/getQualitiesFromUrl'
 import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -9,33 +15,43 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
   }
 
-  const id = req.query.id[0] as string
-  const { data } = await api.get<ITwitchVideo>(
-    `/videos/${id.replace('.m3u8', '')}`,
-  )
-  const urls = getUrlsFromVideo(data)
+  const dirtyId = req.query.id[0] as string
+  const id = dirtyId.replace('.m3u8', '')
 
   res.setHeader('Content-Type', 'binary/octet-stream')
-  res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
 
-  const formatStreamInformation = (urlInformation: VideoUrl, index: number) => {
-    const [width, height] = urlInformation.resolution.split('x')
-    const widthInt = parseInt(width)
-    const heightInt = parseInt(height)
-    const bandwidth = widthInt * heightInt * (index + 1)
+  if (id.length > 10) {
+    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate')
 
-    return `#EXT-X-STREAM-INF:BANDWIDTH=${bandwidth},RESOLUTION=${urlInformation.resolution}`
+    await dbConnect()
+
+    const deletedVod: IDeletedVodSchema = await deletedVodsV2.findOne({
+      streamId: id,
+    })
+
+    const foundUrls = await getDeletedVodUrls({
+      streamerName: deletedVod.name,
+      vodDate: deletedVod.streamDate,
+      vodId: id,
+    })
+
+    const urlsObjectPromise = foundUrls.map(async (url) => {
+      return getQualitiesFromUrl(url)
+    })
+
+    const urlsObject = await Promise.all(urlsObjectPromise)
+
+    res.write(createHLSResponse(urlsObject[0]))
+
+    res.end()
   }
 
-  res.write(`#EXTM3U
-#EXT-X-VERSION:3
-${urls
-  .map(
-    (url, index) => `${formatStreamInformation(url, index)}
-${url.url}`,
-  )
-  .join('\n\n')}
-`)
+  res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
+
+  const { data } = await api.get<ITwitchVideo>(`/videos/${id}`)
+  const urls = getUrlsFromVideo(data)
+
+  res.write(createHLSResponse(urls))
 
   res.end()
 }
