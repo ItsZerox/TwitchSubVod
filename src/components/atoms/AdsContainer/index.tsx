@@ -17,7 +17,12 @@ export const AdsContainer = ({ adslot }: AdsContainerProps) => {
   return (
     <ins
       className="adsbygoogle"
-      style={{ display: 'block', width: '100%', height: '100%' }}
+      style={{
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        margin: '0 auto',
+      }}
       data-ad-client="ca-pub-8414071548156466"
       data-adtest={process.env.NODE_ENV === 'development' ? 'on' : 'off'}
       data-ad-slot={adslot}
