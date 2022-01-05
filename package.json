@@ -1,5 +1,6 @@
 {
   "name": "pogu.live",
+  "version": "alpha2.1",
   "private": false,
   "scripts": {
     "dev": "next dev",
