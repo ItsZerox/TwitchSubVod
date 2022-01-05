@@ -9,6 +9,7 @@ import '@vime/core/themes/default.css'
 import dynamic from 'next/dynamic'
 import ShareButtons from '~/components/atoms/ShareButtons'
 import AdsContainer from '~/components/atoms/AdsContainer'
+import { toast } from 'react-toastify'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
@@ -92,6 +93,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
                 _mobileProps={{
                   buttonWidth: '100%',
                 }}
+                onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
               />
               <Button
                 variant="primary"
@@ -99,6 +101,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
                 _mobileProps={{
                   buttonWidth: '100%',
                 }}
+                onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
               />
             </Box>
           </Box>

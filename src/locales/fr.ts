@@ -16,6 +16,7 @@ const fr: Locale = {
   VIEWS: 'Vues',
   SHARE_THIS_VIDEO: 'Partager ce vidéo',
   SHARE_TEXT: 'Regarder ce vidéo de {{streamerName}} sur pogu.live',
+  IN_DEVELOPMENT_MESSAGE: '👀 Cette fonctionnalité est encore en développement',
 }
 
 export default fr

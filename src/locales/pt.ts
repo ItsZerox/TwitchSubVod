@@ -16,6 +16,8 @@ const pt: Locale = {
   VIEWS: 'Visualizações',
   SHARE_THIS_VIDEO: 'Compartilhar este video',
   SHARE_TEXT: 'Assista esse vídeo de {{streamerName}} no pogu.live',
+  IN_DEVELOPMENT_MESSAGE:
+    '👀 Esta funcionalidade ainda está em desenvolvimento',
 }
 
 export default pt

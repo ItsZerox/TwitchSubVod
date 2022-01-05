@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import AdsContainer from '~/components/atoms/AdsContainer'
 import Box from '~/components/atoms/Box'
@@ -38,7 +39,11 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
           followers={streamerInformation.followers}
           description={streamerInformation.description}
         />
-        <Button text={texts.FOLLOW} buttonWidth="100%" />
+        <Button
+          text={texts.FOLLOW}
+          buttonWidth="100%"
+          onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
+        />
         <Box flexDirection="column" hideInMobile>
           <div
             style={{
