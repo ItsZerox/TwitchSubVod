@@ -83,6 +83,28 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script async src="https://tally.so/widgets/embed.js"></script>
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.TallyConfig = {
+                "formId": "3XQxgw",
+                "popup": {
+                  "emoji": {
+                    "text": "👋",
+                    "animation": "wave"
+                  },
+                  "open": {
+                    "trigger": "exit"
+                  },
+                  "overlay": true,
+                  "autoClose": 2000
+                }
+              };
+        `,
+            }}
+          />
         </body>
       </Html>
     )
