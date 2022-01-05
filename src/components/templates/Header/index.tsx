@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FiMenu } from 'react-icons/fi'
 import { IoNotificationsSharp, IoPersonSharp, IoSearch } from 'react-icons/io5'
 import { RiFeedbackFill } from 'react-icons/ri'
+import { toast } from 'react-toastify'
 import ButtonPill from '~/components/atoms/ButtonPill'
 import Input, { Datalist, Option } from '~/components/atoms/Input'
 import { useGlobal } from '~/contexts/GlobalContext'
@@ -23,9 +24,7 @@ const Header = () => {
             icon={<FiMenu />}
             title={texts.OPEN_MENU}
             isButton
-            onClick={() => {
-              alert(texts.OPEN_MENU)
-            }}
+            onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
           />
           <Link href="/" as={`/`} passHref>
             <Icon
@@ -77,24 +76,21 @@ const Header = () => {
             text={texts.FEEDBACK}
             title={texts.SEND_FEEDBACK}
             onClick={() => {
-              alert('Send feedback')
+              // @ts-ignore
+              Tally.openPopup('3XQxgw')
             }}
           />
           <Icon
             icon={<IoPersonSharp />}
             title={texts.PROFILE}
             isButton
-            onClick={() => {
-              alert('redirect to /profile')
-            }}
+            onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
           />
           <Icon
             icon={<IoNotificationsSharp />}
             title={texts.NOTIFICATIONS}
             isButton
-            onClick={() => {
-              alert('Open notification')
-            }}
+            onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
           />
         </S.HeaderArea>
       </S.HeaderContainer>

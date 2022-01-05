@@ -2,7 +2,7 @@ interface AdsContainerProps {
   adslot: string
 }
 
-export const AdsContainer = ({ adslot }: AdsContainerProps) => {
+const AdsContainer = ({ adslot }: AdsContainerProps) => {
   if (typeof window !== 'undefined') {
     setTimeout(() => {
       try {
@@ -31,3 +31,5 @@ export const AdsContainer = ({ adslot }: AdsContainerProps) => {
     ></ins>
   )
 }
+
+export default AdsContainer

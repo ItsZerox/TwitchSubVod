@@ -2,6 +2,10 @@ import { createGlobalStyle, css } from 'styled-components'
 import Header from '~/components/templates/Header'
 
 export const GlobalStyles = createGlobalStyle`
+  :root {
+    --toastify-color-progress-dark: ${({ theme }) => theme.colors.pink900};
+  }
+
   html {
     box-sizing: border-box;
     font-size: 16px;
