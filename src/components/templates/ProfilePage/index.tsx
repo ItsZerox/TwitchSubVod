@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { StreamerInformation } from '~/@types/StreamerInformation'
-import { AdsContainer } from '~/components/atoms/AdsContainer'
+import AdsContainer from '~/components/atoms/AdsContainer'
 import Box from '~/components/atoms/Box'
 import Button from '~/components/atoms/Button'
 import NamedToggle from '~/components/atoms/NamedToggle'

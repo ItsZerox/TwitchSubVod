@@ -8,7 +8,7 @@ import * as S from './styles'
 import '@vime/core/themes/default.css'
 import dynamic from 'next/dynamic'
 import ShareButtons from '~/components/atoms/ShareButtons'
-import { AdsContainer } from '~/components/atoms/AdsContainer'
+import AdsContainer from '~/components/atoms/AdsContainer'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
