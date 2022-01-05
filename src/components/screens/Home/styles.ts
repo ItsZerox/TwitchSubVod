@@ -11,6 +11,11 @@ export const Container = styled.div`
   min-height: 100vh;
   gap: 16px;
 
+  ins {
+    text-align: center;
+    margin: 0 auto;
+  }
+
   ${({ theme }) => theme.breakpoints.down('md')} {
     padding: 8px;
   }
