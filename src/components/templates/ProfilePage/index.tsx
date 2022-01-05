@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { StreamerInformation } from '~/@types/StreamerInformation'
+import { AdsContainer } from '~/components/atoms/AdsContainer'
 import Box from '~/components/atoms/Box'
 import Button from '~/components/atoms/Button'
 import NamedToggle from '~/components/atoms/NamedToggle'
@@ -17,6 +18,17 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
   const router = useRouter()
   const { texts } = useGlobal()
 
+  if (typeof window !== 'undefined') {
+    setTimeout(() => {
+      try {
+        // @ts-ignore
+        ;(adsbygoogle = window.adsbygoogle || []).push({})
+      } catch (e) {
+        console.log(e)
+      }
+    }, 1000)
+  }
+
   return (
     <S.Container>
       <Box flexDirection="column" gap="16px" alignItems="center">
@@ -33,11 +45,12 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
               display: 'flex',
               width: '160px',
               height: '600px',
-              background: '#000',
               borderRadius: '8px',
               marginBottom: '8px',
             }}
-          />
+          >
+            <AdsContainer adslot="3227332986" />
+          </div>
         </Box>
       </Box>
 
@@ -53,11 +66,12 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
             width: '100%',
             maxWidth: '728px',
             height: '90px',
-            background: '#000',
             borderRadius: '8px',
             marginBottom: '8px',
           }}
-        />
+        >
+          <AdsContainer adslot="3176713160" />
+        </div>
         <Typography variant="h3">
           {texts.ALL_STREAMER_VODS.replace(
             '{{streamer}}',

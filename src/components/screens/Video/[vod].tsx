@@ -8,6 +8,7 @@ import * as S from './styles'
 import '@vime/core/themes/default.css'
 import dynamic from 'next/dynamic'
 import ShareButtons from '~/components/atoms/ShareButtons'
+import { AdsContainer } from '~/components/atoms/AdsContainer'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
@@ -46,10 +47,11 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
             style={{
               width: '100%',
               height: '120px',
-              background: '#000',
               borderRadius: '8px',
             }}
-          />
+          >
+            <AdsContainer adslot="5906818280" />
+          </div>
         </Box>
 
         <Box flexDirection="column" gap="16px">
@@ -118,12 +120,12 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
             display: 'flex',
             width: '100%',
             height: '250px',
-            paddingTop: '56.25%',
-            background: '#000',
             borderRadius: '8px',
             marginBottom: '8px',
           }}
-        />
+        >
+          <AdsContainer adslot="8461022959" />
+        </div>
         <VideoButtonGroup
           videos={relatedVideos.reverse().slice(16)}
           minVideoWidth="300px"

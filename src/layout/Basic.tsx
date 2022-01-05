@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 import Header from '~/components/templates/Header'
 
 export const GlobalStyles = createGlobalStyle`
@@ -27,6 +27,15 @@ export const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     cursor: pointer;
+  }
+
+  ${
+    process.env.NODE_ENV === 'development' &&
+    css`
+      ins {
+        border: 1px solid red !important;
+      }
+    `
   }
 
   ::selection {
