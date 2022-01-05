@@ -1,0 +1,36 @@
+{
+  "name": "pogu.live",
+  "short_name": "pogu.live",
+  "start_url": "/",
+  "id": "/",
+  "description": "Watch any sub-only or deleted Twitch VOD for free. Here you can find the best VODs from your favorite streamers and channels.",
+  "icons": [
+    {
+      "src": "icons/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#A70050",
+  "background_color": "#1D1D1D",
+  "display": "fullscreen"
+}
