@@ -9,6 +9,7 @@ export const Container = styled.div`
   background: ${({ theme }) => theme.colors.grey900};
   width: 100%;
   min-height: 100vh;
+  gap: 16px;
 
   ${({ theme }) => theme.breakpoints.down('md')} {
     padding: 8px;

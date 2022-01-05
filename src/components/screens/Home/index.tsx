@@ -11,7 +11,7 @@ interface HomeProps {
 const Home = ({ videos }: HomeProps) => {
   return (
     <S.Container>
-      <Box>
+      <Box boxSize="100vw" alignItems="center">
         <div
           style={{
             width: '100%',
