@@ -19,17 +19,6 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
   const router = useRouter()
   const { texts } = useGlobal()
 
-  if (typeof window !== 'undefined') {
-    setTimeout(() => {
-      try {
-        // @ts-ignore
-        ;(adsbygoogle = window.adsbygoogle || []).push({})
-      } catch (e) {
-        console.log(e)
-      }
-    }, 1000)
-  }
-
   return (
     <S.Container>
       <Box flexDirection="column" gap="16px" alignItems="center">

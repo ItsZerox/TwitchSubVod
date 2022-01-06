@@ -24,7 +24,6 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const range = 30
 
   const streamerVideos = await getDeletedVods(streamer, range)
-  console.log('scraped')
 
   if (!streamerVideos.length) {
     return { notFound: true } as const

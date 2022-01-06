@@ -9,7 +9,7 @@ const AdsContainer = ({ adslot }: AdsContainerProps) => {
         // @ts-ignore
         ;(adsbygoogle = window.adsbygoogle || []).push({})
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
     }, 1000)
   }

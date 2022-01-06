@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 import { DefaultSeo } from 'next-seo'
+import NextNProgress from 'nextjs-progressbar'
 import type { AppProps } from 'next/app'
 import BasicLayout from '~/layout/Basic'
 import { darkTheme, lightTheme } from '~/layout/theme'
@@ -31,6 +32,16 @@ function MyApp({ Component, pageProps }: AppProps) {
               handle: '@pogulive',
               site: '@pogulive',
               cardType: 'summary_large_image',
+            }}
+          />
+          <NextNProgress
+            color="#D70070"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={2}
+            showOnShallow={true}
+            options={{
+              showSpinner: false,
             }}
           />
           <Component {...pageProps} />
