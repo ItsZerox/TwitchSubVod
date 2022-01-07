@@ -3,9 +3,11 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next'
+import { NextSeo } from 'next-seo'
 import DeletedVods from '~/components/screens/DeletedVods/[streamer]'
 import revalidate from '~/constants/revalidate'
 import { getDeletedVods } from '~/lib/getDeletedVods'
+import { IDeletedVods } from '~/@types/IDeletedVods'
 
 export async function getStaticPaths() {
   return {
@@ -45,7 +47,33 @@ const DeletedVodsPage: NextPage = ({
     return <div>Not found</div>
   }
 
-  return <DeletedVods videos={videos} />
+  const video: IDeletedVods = videos[0]
+
+  const seoTitle = video?.displayName || video?.name || ''
+
+  const seoImage = video?.logo || ''
+
+  const seoDescription = `Watch ${seoTitle}'s deleted VODs on pogu.live`
+
+  return (
+    <>
+      <NextSeo
+        title={`${seoTitle} | pogu.live`}
+        description={`Watch this vod of ${seoTitle} on pogu.live`}
+        openGraph={{
+          title: `${seoTitle} | pogu.live`,
+          description: seoDescription,
+          images: [
+            {
+              url: seoImage,
+              alt: `${seoTitle} | pogu.live`,
+            },
+          ],
+        }}
+      />
+      <DeletedVods videos={videos} />
+    </>
+  )
 }
 
 export default DeletedVodsPage
