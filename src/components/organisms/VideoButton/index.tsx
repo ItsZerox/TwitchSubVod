@@ -23,14 +23,12 @@ const VideoButton = ({
       isMinimal={isMinimal}
       data-testid={vodInformation.id}
     >
-      <Link href="/video/[vod]" as={`/video/${vodInformation.id}`} passHref>
-        <S.BoxLink as="a" tabIndex={0}>
-          <VideoThumbnail
-            src={vodInformation.thumbnail}
-            title={vodInformation.title}
-          />
-        </S.BoxLink>
-      </Link>
+      <S.BoxLink as="a" tabIndex={0} href={`/video/${vodInformation.id}`}>
+        <VideoThumbnail
+          src={vodInformation.thumbnail}
+          title={vodInformation.title}
+        />
+      </S.BoxLink>
 
       <StreamDescription
         streamerInformation={streamerInformation}
@@ -39,7 +37,6 @@ const VideoButton = ({
         lineLimit={3}
         urlProps={{
           href: `/video/${vodInformation.id}`,
-          as: `/video/${vodInformation.id}`,
         }}
         isMinimal={isMinimal}
       />

@@ -44,7 +44,6 @@ interface StreamDescriptionProps {
   isMinimal?: boolean
   urlProps?: {
     href: string
-    as: string
   }
 }
 
@@ -79,7 +78,7 @@ const StreamDescription = ({
 
       <Box flexDirection="column" gap={'4px'}>
         {urlProps?.href ? (
-          <Link href={urlProps.href} as={urlProps.as} passHref>
+          <a href={urlProps.href}>
             <Typography
               variant="h6"
               lineLimit={lineLimit || 3}
@@ -89,7 +88,7 @@ const StreamDescription = ({
             >
               {vodInformation.title}
             </Typography>
-          </Link>
+          </a>
         ) : (
           <Typography
             variant="h6"
@@ -116,7 +115,7 @@ const StreamDescription = ({
         </Link>
 
         {urlProps?.href ? (
-          <Link href={urlProps.href} as={urlProps.as}>
+          <Link href={urlProps.href}>
             <a>
               <ViewAndDate
                 date={vodInformation.date}
