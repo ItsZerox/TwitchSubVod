@@ -27,6 +27,14 @@ function MyApp({ Component, pageProps }: AppProps) {
               locale: locale,
               url: 'https://pogu.live',
               site_name: 'pogu.live',
+              images: [
+                {
+                  url: '/logo.jpg',
+                  alt: `pogu.live`,
+                  width: 1136,
+                  height: 640,
+                },
+              ],
             }}
             twitter={{
               handle: '@pogulive',
