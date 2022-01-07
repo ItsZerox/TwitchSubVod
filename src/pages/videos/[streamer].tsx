@@ -1,4 +1,6 @@
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import { NextSeo } from 'next-seo'
+import { IVideo } from '~/@types/IVideo'
 import { videoAdapter } from '~/adapters/videoAdapter'
 import Videos from '~/components/screens/Videos/[streamer]'
 import revalidate from '~/constants/revalidate'
@@ -40,7 +42,36 @@ const VideosPage = ({
     return <div>No videos found</div>
   }
 
-  return <Videos videos={videos} />
+  const video: IVideo = videos[0]
+
+  const seoTitle =
+    video?.streamerInformation?.displayName ||
+    video?.streamerInformation?.name ||
+    ''
+
+  const seoImage = video?.streamerInformation?.logo || ''
+
+  const seoDescription = `Watch ${seoTitle}'s sub-only VODs on pogu.live for free`
+
+  return (
+    <>
+      <NextSeo
+        title={`${seoTitle} | pogu.live`}
+        description={`Watch this vod of ${seoTitle} on pogu.live`}
+        openGraph={{
+          title: `${seoTitle} | pogu.live`,
+          description: seoDescription,
+          images: [
+            {
+              url: seoImage,
+              alt: `${seoTitle} | pogu.live`,
+            },
+          ],
+        }}
+      />
+      <Videos videos={videos} />
+    </>
+  )
 }
 
 export default VideosPage
