@@ -3,6 +3,7 @@ import { Cell, useSortBy, useTable } from 'react-table'
 import { IDeletedVods } from '~/@types/IDeletedVods'
 import Button from '~/components/atoms/Button'
 import formatDate from '~/utils/formatDate'
+import { secondsToHM } from '~/utils/secondsToHM'
 
 export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
   const data = useMemo(
@@ -10,7 +11,7 @@ export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
       videos.map((video) => {
         return {
           date: formatDate(video.streamDate),
-          length: video.length,
+          length: secondsToHM(video.length * 60),
           playedGames: video.directories,
           link: video.streamId,
         }
