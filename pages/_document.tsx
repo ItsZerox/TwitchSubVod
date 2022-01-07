@@ -132,19 +132,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-              kofiWidgetOverlay.draw('pogulive', {
-                'type': 'floating-chat',
-                'floating-chat.donateButton.text': 'Support me',
-                'floating-chat.donateButton.background-color': '#9147ff',
-                'floating-chat.donateButton.text-color': '#f1f1f1'
-              });
-  `,
-            }}
-          />
+
           <script
             async
             src="https://platform.twitter.com/widgets.js"

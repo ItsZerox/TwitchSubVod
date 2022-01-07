@@ -69,6 +69,32 @@ function MyApp({ Component, pageProps }: AppProps) {
         </button>
         <GlobalStyle />
         <GlobalProvider>
+          <a
+            href="https://beta.pogu.live?ref=pogu.live"
+            style={{
+              backgroundColor: '#A70050',
+              height: 'fit-content',
+              width: '100vw',
+              position: 'fixed',
+              bottom: 0,
+              left: -18,
+              right: 0,
+              padding: '16px 8px',
+              textAlign: 'center',
+              margin: '0 20px',
+              zIndex: 999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.5rem',
+              color: '#FFF',
+              gap: '16px',
+            }}
+          >
+            <img src="https://beta.pogu.live/favicon-white.png" width="48px" />
+            Join the open beta now <br />
+            (beta.pogu.live)
+          </a>
           <Component {...pageProps} />
         </GlobalProvider>
       </ThemeProvider>
