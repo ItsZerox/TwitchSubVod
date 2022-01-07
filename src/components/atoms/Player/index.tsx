@@ -9,18 +9,23 @@ interface PlayerProps {
   poster?: string
 }
 
+const getRealHLSUrl = (url: string) => {
+  const cleanUrl = url.replace('unmuted.ts', 'muted.ts')
+
+  if (cleanUrl.includes(getCors())) {
+    // return cleanUrl if cors has already been added
+    return cleanUrl
+  }
+
+  return cleanUrl.replace('https://', `${getCors()}https://`)
+}
+
 const Player = ({ url, poster }: PlayerProps) => {
   const hlsConfig = {
     enableWorker: true,
     maxBufferLength: 60,
     xhrSetup: (xhr: XMLHttpRequest, url: string) => {
-      xhr.open(
-        'GET',
-        url
-          .replace('unmuted.ts', 'muted.ts')
-          .replace('https://', `${getCors()}https://`),
-        true,
-      )
+      xhr.open('GET', getRealHLSUrl(url), true)
     },
   }
 
