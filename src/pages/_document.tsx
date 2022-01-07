@@ -240,21 +240,20 @@ class MyDocument extends Document {
                 type="text/javascript"
                 dangerouslySetInnerHTML={{
                   __html: `
-                window.TallyConfig = {
-                  "formId": "3XQxgw",
-                  "popup": {
-                    "emoji": {
-                      "text": "👋",
-                      "animation": "wave"
-                    },
-                    "open": {
-                      "trigger": "exit"
-                    },
-                    "overlay": true,
-                    "autoClose": 2000
-                  }
-                };
-          `,
+                  window.TallyConfig = {
+                    "formId": "3XQxgw",
+                    "popup": {
+                      "emoji": {
+                        "text": "👋",
+                        "animation": "wave"
+                      },
+                      "open": {
+                        "trigger": "time",
+                        "ms": 60000
+                      },
+                      "autoClose": 2000
+                    }
+                  };`,
                 }}
               />
             </>
