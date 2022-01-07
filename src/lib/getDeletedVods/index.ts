@@ -50,5 +50,5 @@ export const getDeletedVods = async (
     uploadedVodsPromise,
   ])
 
-  return streams
+  return streams.filter((stream) => stream.streamUrls.length)
 }

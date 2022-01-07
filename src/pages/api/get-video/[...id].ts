@@ -18,8 +18,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const dirtyId = req.query.id[0] as string
   const id = dirtyId.replace('.m3u8', '')
 
-  res.setHeader('Content-Type', 'binary/octet-stream')
-
   if (id.length > 10) {
     res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate')
 
@@ -41,6 +39,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const urlsObject = await Promise.all(urlsObjectPromise)
 
+    if (!urlsObject.length) {
+      res.status(404).json({ error: true, message: 'Not found' })
+      return
+    }
+
+    res.setHeader('Content-Type', 'binary/octet-stream')
+
     res.write(createHLSResponse(urlsObject[0]))
 
     res.end()
@@ -48,6 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
+  res.setHeader('Content-Type', 'binary/octet-stream')
 
   const { data } = await api.get<ITwitchVideo>(`/videos/${id}`)
   const urls = getUrlsFromVideo(data)
