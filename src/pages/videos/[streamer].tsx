@@ -21,10 +21,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     limit: 32,
   })
 
-  if (!streamerVideos?._total) {
+  if (!streamerVideos) {
     return {
       redirect: {
         destination: `/deletedvods/${streamer}`,
+        permanent: false,
       },
     }
   }
