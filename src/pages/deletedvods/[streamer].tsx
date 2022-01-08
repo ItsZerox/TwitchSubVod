@@ -27,9 +27,14 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     return { notFound: true } as const
   }
 
-  const range = 30
+  const limit = 30
+  const offset = 0
 
-  const streamerVideos = await getDeletedVods(streamer, range)
+  const streamerVideos = await getDeletedVods({
+    username: streamer,
+    limit,
+    offset,
+  })
 
   if (!streamerVideos.length) {
     return { notFound: true } as const

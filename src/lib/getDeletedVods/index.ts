@@ -6,20 +6,31 @@ import { scraper } from '~/services/config'
 import { getStreamerId } from './getStreamerId'
 import { uploadToDatabase } from './uploadToDatabase'
 
-export const getDeletedVods = async (
-  username: string,
-  range?: number,
-): Promise<IDeletedVods[]> => {
+interface IGetDeletedVods {
+  username: string
+  limit?: number
+  offset?: number
+}
+
+export const getDeletedVods = async ({
+  username,
+  limit,
+  offset,
+}: IGetDeletedVods): Promise<IDeletedVods[]> => {
+  limit = limit || 30
+  offset = offset || 0
+
   const { data } = await scraper.get(
     `${process.env.DELETED_VODS_HOST}${username}`,
   )
 
-  const streamerId = getStreamerId(data)
+  const streamerId = getStreamerId(data).toString()
 
   const allVodsResponse = await scraper.get(
-    `${process.env.DELETED_VODS}${range || 2}/${streamerId}${
-      process.env.DELETED_VODS_PARAMS
-    }`,
+    (process.env.DELETED_VODS as string)
+      .replace('{{streamerId}}', streamerId)
+      .replace('{{offset}}', offset.toString())
+      .replace('{{limit}}', limit.toString()),
   )
 
   const allVods: IExternalDeletedVodsApi[] = allVodsResponse.data.data
