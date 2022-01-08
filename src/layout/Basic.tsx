@@ -65,7 +65,15 @@ const BasicLayout = ({ children }: { children: any }) => {
       >
         <DrawerContent />
       </Drawer>
-      {children}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1920px',
+          margin: '0 auto',
+        }}
+      >
+        {children}
+      </div>
     </>
   )
 }
