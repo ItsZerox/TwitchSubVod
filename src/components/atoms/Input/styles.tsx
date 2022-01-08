@@ -4,12 +4,14 @@ export const InputLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 48px;
   width: 80%;
   max-width: 480px;
   background-color: ${({ theme }) => theme.colors.grey800};
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.colors.grey800};
-  padding: 10px;
+  transition: all 0.1s ease-in-out;
+  overflow: hidden;
 
   svg {
     width: 24px;
@@ -17,16 +19,37 @@ export const InputLabel = styled.label`
     fill: ${({ theme }) => theme.colors.grey400};
   }
 
+  .left-icon {
+    padding-left: 8px;
+  }
+
+  .search-button {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+
   :focus,
   :focus-within {
     border: 1px solid ${({ theme }) => theme.colors.pink600};
 
-    svg {
+    .left-icon {
+      transform: translateY(48px);
+    }
+
+    .loading-icon {
       fill: ${({ theme }) => theme.colors.pink700};
+    }
+
+    .search-button {
+      /* display: flex; */
+      opacity: 1;
+      fill: ${({ theme }) => theme.colors.white};
+      transform: translateX(0);
     }
   }
 
   .loading-icon {
+    margin-right: 8px;
     animation: rotation 1s linear infinite;
 
     @keyframes rotation {
@@ -75,9 +98,26 @@ export const InputText = styled.input`
   color: ${({ theme }) => theme.colors.white};
   font-size: 1rem;
   line-height: 1.5;
-  padding: 0 8px;
+  padding: 10px 8px;
+  transition: all 0.1s ease-in-out;
+
+  :focus {
+    transform: translateX(-24px);
+  }
 `
 
 export const Datalist = styled.datalist``
 
 export const Option = styled.option``
+
+export const InputButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 48px;
+  background-color: ${({ theme }) => theme.colors.pink600};
+  border: none;
+  cursor: pointer;
+`
