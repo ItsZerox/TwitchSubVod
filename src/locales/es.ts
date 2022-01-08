@@ -20,6 +20,7 @@ const es: Locale = {
   FOLLOW_OUR_TWITTER: 'Seguir nuestro Twitter',
   SUPPORT_US_ON_KOFI: 'Apoyanos en Ko-fi',
   STAR_US_ON_GITHUB: 'Deja tu estrella en GitHub',
+  FETCHING_STREAMER_VIDEOS: 'Buscando VODs de {{streamerName}}',
 }
 
 export default es

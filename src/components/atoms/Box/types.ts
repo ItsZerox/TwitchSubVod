@@ -26,6 +26,7 @@ export interface BoxProps {
   gap?: string
   tabIndex?: number
   boxSize?: string
+  boxHeight?: string
   hideInMobile?: boolean
   hideInDesktop?: boolean
   _mobileProps?: {

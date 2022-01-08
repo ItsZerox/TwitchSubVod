@@ -45,6 +45,20 @@ export const GlobalStyles = createGlobalStyle`
     `
   }
 
+.loading-icon {
+    margin-right: 8px;
+    animation: rotation 1s linear infinite;
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
   ::selection {
     background: ${({ theme }) => theme.colors.pink900};
     color: ${({ theme }) => theme.colors.white};

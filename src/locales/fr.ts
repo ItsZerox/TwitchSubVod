@@ -20,6 +20,7 @@ const fr: Locale = {
   FOLLOW_OUR_TWITTER: 'Suivez notre Twitter',
   SUPPORT_US_ON_KOFI: 'Soutenez-nous sur Ko-fi',
   STAR_US_ON_GITHUB: 'Évaluez-nous sur GitHub',
+  FETCHING_STREAMER_VIDEOS: 'Récupération des VODs de {{streamerName}}',
 }
 
 export default fr

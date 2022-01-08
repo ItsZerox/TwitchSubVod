@@ -18,6 +18,7 @@ const en = {
   FOLLOW_OUR_TWITTER: 'Follow our Twitter',
   SUPPORT_US_ON_KOFI: 'Support us on Ko-fi',
   STAR_US_ON_GITHUB: 'Star us on GitHub',
+  FETCHING_STREAMER_VIDEOS: 'Fetching {{streamerName}} videos',
 }
 
 export default en

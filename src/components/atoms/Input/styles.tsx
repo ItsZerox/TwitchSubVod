@@ -48,20 +48,6 @@ export const InputLabel = styled.label`
     }
   }
 
-  .loading-icon {
-    margin-right: 8px;
-    animation: rotation 1s linear infinite;
-
-    @keyframes rotation {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  }
-
   ${({ theme }) => theme.breakpoints.down('md')} {
     position: absolute;
     width: 48px;

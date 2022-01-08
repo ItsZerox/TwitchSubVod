@@ -22,7 +22,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   })
 
   if (!streamerVideos?._total) {
-    return { notFound: true } as const
+    return {
+      redirect: {
+        destination: `/deletedvods/${streamer}`,
+      },
+    }
   }
 
   const videos = streamerVideos?.videos.map(videoAdapter)

@@ -9,6 +9,7 @@ export const BoxContainer = styled.div<BoxProps>`
   gap: ${({ gap }) => gap};
   max-width: 100%;
   width: ${({ boxSize }) => boxSize};
+  height: ${({ boxHeight }) => (boxHeight ? boxHeight : 'unset')};
 
   ${({ theme }) => theme.breakpoints.down('md')} {
     display: ${({ hideInMobile }) => (hideInMobile ? 'none' : 'flex')};
