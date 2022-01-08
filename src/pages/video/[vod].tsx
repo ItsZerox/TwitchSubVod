@@ -8,6 +8,7 @@ import connectDB from '~/lib/mongodb/mongodbConnect'
 import deletedVodsV2 from '~/lib/mongodb/models/deletedVodsV2'
 import { getTopVideos } from '~/services/api/getTopVideos'
 import { getVideo } from '~/services/api/getVideo'
+import { getStreamerVideos } from '~/services/api/getStreamerVideos'
 import { IDeletedVodSchema } from '~/@types/DeletedVodSchema'
 
 export async function getStaticPaths() {
@@ -25,14 +26,14 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   }
 
   const [videoData, relatedVideosData] = await Promise.all([
-    getVideo(context.params.vod as string),
+    getVideo(context.params.vod as string).catch(() => null),
     getTopVideos({
       language: context.locale,
       limit: 32,
-    }),
-  ]).catch(() => [null, null])
+    }).catch(() => null),
+  ])
 
-  if (!videoData || !relatedVideosData) {
+  if (!videoData) {
     await connectDB()
     const deletedVodData: IDeletedVodSchema = await deletedVodsV2.findOne({
       streamId: context.params.vod as string,
@@ -63,12 +64,26 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     }
 
     // todo: have better error handling than requesting data again https://youtu.be/d77uAqi2Ij0?t=18
-    const newRelatedVideosData = await getTopVideos({
+    const relatedStreamerVideosPromise = getStreamerVideos({
+      streamerName: deletedVodData.name,
+      limit: 32,
+    }).catch(() => null)
+
+    const relatedTopVideosPromise = getTopVideos({
       language: context.locale,
       limit: 32,
-    })
+    }).catch(() => null)
 
-    const relatedVideos: IVideo[] = newRelatedVideosData.vods.map(videoAdapter)
+    const [relatedStreamerVideos, relatedTopVideos] = await Promise.all([
+      relatedStreamerVideosPromise,
+      relatedTopVideosPromise,
+    ])
+
+    console.log(relatedStreamerVideos)
+
+    const relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
+      ? relatedStreamerVideos.videos.map(videoAdapter)
+      : relatedTopVideos?.vods.map(videoAdapter) || []
 
     return {
       props: {
@@ -80,7 +95,14 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
   const video: IVideo = videoAdapter(videoData)
 
-  const relatedVideos: IVideo[] = relatedVideosData.vods.map(videoAdapter)
+  const relatedStreamerVideos = await getStreamerVideos({
+    streamerName: video.streamerInformation.name,
+    limit: 32,
+  }).catch(() => null)
+
+  const relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
+    ? relatedStreamerVideos.videos.map(videoAdapter)
+    : relatedVideosData?.vods.map(videoAdapter) || []
 
   return {
     props: {

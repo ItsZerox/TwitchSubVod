@@ -103,7 +103,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           />
         </Box>
         <VideoButtonGroup
-          videos={relatedVideos.slice(-16)}
+          videos={relatedVideos.slice(-16).reverse()}
           minVideoWidth="300px"
         />
       </Box>
