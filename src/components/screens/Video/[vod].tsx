@@ -10,21 +10,11 @@ import dynamic from 'next/dynamic'
 import ShareButtons from '~/components/atoms/ShareButtons'
 import AdsContainer from '~/components/atoms/AdsContainer'
 import { toast } from 'react-toastify'
+import { PlayerContainer } from '~/components/atoms/Player'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
 })
-
-const PlayerContainer = dynamic(
-  // @ts-ignore
-  () =>
-    import('~/components/atoms/Player').then(
-      (player) => player.PlayerContainer,
-    ),
-  {
-    ssr: false,
-  },
-)
 
 interface VideoProps {
   video: IVideo

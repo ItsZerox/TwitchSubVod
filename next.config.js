@@ -1,5 +1,7 @@
+const withTM = require('next-transpile-modules')(['@vime/core', '@vime/react'])
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withTM({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -9,4 +11,4 @@ module.exports = {
     locales: ['en', 'es', 'fr', 'pt'],
     defaultLocale: 'en',
   },
-}
+})
