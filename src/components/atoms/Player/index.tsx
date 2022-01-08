@@ -11,6 +11,7 @@ import TapSidesToSeek from './lib/TabSidesToSeek'
 import HandleKeyboard from './lib/HandleKeyboard'
 import * as S from './styles'
 import { useVideo } from './lib/hooks'
+import '@vime/core/themes/default.css'
 
 interface PlayerProps {
   url?: string
@@ -29,10 +30,10 @@ const getRealHLSUrl = (url: string) => {
 }
 
 const Player = ({ url, poster }: PlayerProps) => {
+  const player = useRef<HTMLVmPlayerElement>(null)
+
   const { animation, triggerAnimation, setAnimation, handleTrigger } =
     useVideo()
-
-  const player = useRef<HTMLVmPlayerElement>(null)
 
   const hlsConfig = {
     enableWorker: true,
@@ -58,6 +59,7 @@ const Player = ({ url, poster }: PlayerProps) => {
         <HandleKeyboard
           setAnimation={setAnimation}
           handleTrigger={handleTrigger}
+          player={player}
         />
         <DefaultControls hideOnMouseLeave={true} activeDuration={1000} />
         <DefaultSettings />

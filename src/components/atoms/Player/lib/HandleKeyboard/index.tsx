@@ -1,12 +1,17 @@
 import { usePlayerContext } from '@vime/react'
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
+import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from 'react'
 
 interface IHandleKeyboard {
   setAnimation: Dispatch<SetStateAction<string | null>>
   handleTrigger: () => void
+  player: RefObject<HTMLVmPlayerElement>
 }
 
-const HandleKeyboard = ({ setAnimation, handleTrigger }: IHandleKeyboard) => {
+const HandleKeyboard = ({
+  setAnimation,
+  handleTrigger,
+  player,
+}: IHandleKeyboard) => {
   if (typeof window !== 'undefined') {
     document.addEventListener('keydown', (e) => {
       if (e.key === ' ') {
@@ -50,14 +55,14 @@ const HandleKeyboard = ({ setAnimation, handleTrigger }: IHandleKeyboard) => {
   const onVolumeUp = () => {
     if (volume >= 100) return
     setVolume(volume + 10)
-    setAnimation('🔊')
+    setAnimation(`🔊 ${volume + 10}%`)
     handleTrigger()
   }
 
   const onVolumeDown = () => {
     if (volume <= 0) return
     setVolume(volume - 10)
-    setAnimation('🔉')
+    setAnimation(`🔉 ${volume - 10}%`)
     handleTrigger()
   }
 
@@ -67,31 +72,40 @@ const HandleKeyboard = ({ setAnimation, handleTrigger }: IHandleKeyboard) => {
     handleTrigger()
   }
 
+  const onToggleFullscreen = () => {
+    setAnimation('🔍')
+    handleTrigger()
+
+    player.current?.isFullscreenActive
+      ? player.current?.exitFullscreen()
+      : player.current?.enterFullscreen()
+  }
+
+  const onToggleMiniplayer = () => {
+    setAnimation('💻')
+    handleTrigger()
+
+    player.current?.isPiPActive
+      ? player.current?.exitPiP()
+      : player.current?.enterPiP()
+  }
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log(e.key)
-      if (e.key === 'ArrowLeft') {
-        onSeekBackward()
+      const keyActions = {
+        ArrowLeft: onSeekBackward,
+        ArrowRight: onSeekForward,
+        ArrowUp: onVolumeUp,
+        ArrowDown: onVolumeDown,
+        ' ': onTogglePlay,
+        k: onTogglePlay,
+        m: onToggleMute,
+        f: onToggleFullscreen,
+        p: onToggleMiniplayer,
       }
 
-      if (e.key === 'ArrowRight') {
-        onSeekForward()
-      }
-
-      if (e.key === ' ') {
-        onTogglePlay()
-      }
-
-      if (e.key === 'ArrowUp') {
-        onVolumeUp()
-      }
-
-      if (e.key === 'ArrowDown') {
-        onVolumeDown()
-      }
-
-      if (e.key === 'm') {
-        onToggleMute()
+      if (keyActions[e.key as keyof typeof keyActions]) {
+        keyActions[e.key as keyof typeof keyActions]()
       }
     }
 
@@ -100,6 +114,7 @@ const HandleKeyboard = ({ setAnimation, handleTrigger }: IHandleKeyboard) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime, duration])
 
   return (
