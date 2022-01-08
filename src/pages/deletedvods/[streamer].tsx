@@ -27,30 +27,36 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const limit = 30
   const offset = 0
 
-  const streamerVideos = await getDeletedVods({
-    username: streamer,
-    limit,
-    offset,
-  })
+  try {
+    const streamerVideos = await getDeletedVods({
+      username: streamer,
+      limit,
+      offset,
+    })
 
-  if (!streamerVideos.length) {
+    return {
+      props: {
+        videos: streamerVideos,
+      },
+      revalidate: revalidate.deletedVideos,
+    }
+  } catch {
     return { notFound: true } as const
-  }
-
-  return {
-    props: {
-      videos: streamerVideos,
-    },
-    revalidate: revalidate.deletedVideos,
   }
 }
 
 const DeletedVodsPage: NextPage = ({
   videos,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  if (!videos && typeof window.console !== 'undefined') {
+  if (!videos) {
     return (
-      <SearchIndicator streamerName={window.location.pathname.split('/')[2]} />
+      <SearchIndicator
+        streamerName={
+          typeof window !== 'undefined'
+            ? window.location.pathname.split('/')[2]
+            : ''
+        }
+      />
     )
   }
 
