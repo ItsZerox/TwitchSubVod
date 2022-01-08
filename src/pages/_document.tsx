@@ -249,7 +249,7 @@ class MyDocument extends Document {
                       },
                       "open": {
                         "trigger": "time",
-                        "ms": 60000
+                        "ms": 300000
                       },
                       "autoClose": 2000
                     }
