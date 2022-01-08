@@ -53,9 +53,7 @@ export const useHeader = () => {
     const search = elements.search.value
 
     if (!!search.length) {
-      router.push({
-        pathname: `/videos/${search}`,
-      })
+      window.location.href = `/videos/${search}`
 
       elements.search.blur()
     }
