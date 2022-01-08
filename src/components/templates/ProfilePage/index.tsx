@@ -12,12 +12,27 @@ import * as S from './styles'
 
 interface ProfileProps {
   children: JSX.Element | JSX.Element[] | string
-  streamerInformation: StreamerInformation
+  streamerInformation: StreamerInformation | null
 }
 
 const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
   const router = useRouter()
   const { texts } = useGlobal()
+
+  if (!streamerInformation) {
+    return (
+      <Box
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        boxHeight="100vh"
+      >
+        <Typography variant="h4" as="h1">
+          {texts.STREAMER_NOT_FOUND}
+        </Typography>
+      </Box>
+    )
+  }
 
   return (
     <S.Container>

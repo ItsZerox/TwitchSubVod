@@ -20,7 +20,8 @@ const fr: Locale = {
   FOLLOW_OUR_TWITTER: 'Suivez notre Twitter',
   SUPPORT_US_ON_KOFI: 'Soutenez-nous sur Ko-fi',
   STAR_US_ON_GITHUB: 'Évaluez-nous sur GitHub',
-  FETCHING_STREAMER_VIDEOS: 'Récupération des VODs de {{streamerName}}',
+  FETCHING_STREAMER_VIDEOS: 'Récupération des VODs - {{streamerName}}',
+  STREAMER_NOT_FOUND: "Nous n'avons pas pu trouver de vidéo de ce streamer",
 }
 
 export default fr

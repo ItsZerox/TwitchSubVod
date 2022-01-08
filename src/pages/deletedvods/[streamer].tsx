@@ -8,10 +8,7 @@ import DeletedVods from '~/components/screens/DeletedVods/[streamer]'
 import revalidate from '~/constants/revalidate'
 import { getDeletedVods } from '~/lib/getDeletedVods'
 import { IDeletedVods } from '~/@types/IDeletedVods'
-import { AiOutlineLoading } from 'react-icons/ai'
-import Box from '~/components/atoms/Box'
-import Typography from '~/components/atoms/Typography'
-import { useGlobal } from '~/contexts/GlobalContext'
+import SearchIndicator from '~/components/molecules/SearchIndicator'
 
 export async function getStaticPaths() {
   return {
@@ -51,28 +48,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 const DeletedVodsPage: NextPage = ({
   videos,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { texts } = useGlobal()
-
-  if (!videos) {
+  if (!videos && typeof window.console !== 'undefined') {
     return (
-      <Box
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        boxSize="100%"
-        boxHeight="calc(100vh - 64px)"
-        gap="32px"
-      >
-        <AiOutlineLoading className="loading-icon" color="#FFF" size={80} />
-        {typeof window !== 'undefined' && (
-          <Typography variant="h4" as="h1" color="white">
-            {texts.FETCHING_STREAMER_VIDEOS.replace(
-              '{{streamerName}}',
-              window.location.pathname.split('/')[2],
-            )}
-          </Typography>
-        )}
-      </Box>
+      <SearchIndicator streamerName={window.location.pathname.split('/')[2]} />
     )
   }
 

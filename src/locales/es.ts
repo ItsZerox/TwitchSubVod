@@ -20,7 +20,8 @@ const es: Locale = {
   FOLLOW_OUR_TWITTER: 'Seguir nuestro Twitter',
   SUPPORT_US_ON_KOFI: 'Apoyanos en Ko-fi',
   STAR_US_ON_GITHUB: 'Deja tu estrella en GitHub',
-  FETCHING_STREAMER_VIDEOS: 'Buscando VODs de {{streamerName}}',
+  FETCHING_STREAMER_VIDEOS: 'Buscando VODs - {{streamerName}}',
+  STREAMER_NOT_FOUND: 'No se pudo encontrar ningún VOD de este streamer',
 }
 
 export default es

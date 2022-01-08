@@ -20,7 +20,7 @@ export const useVideos = (data: IVideo[]) => {
     }
   }
 
-  const streamerInformation = data[0].streamerInformation
+  const streamerInformation = data.length ? data[0].streamerInformation : null
 
   return { videosData, getNewVideos, streamerInformation }
 }

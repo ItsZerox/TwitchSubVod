@@ -21,7 +21,8 @@ const pt: Locale = {
   FOLLOW_OUR_TWITTER: 'Siga nosso Twitter',
   SUPPORT_US_ON_KOFI: 'Apoie-nos no Ko-fi',
   STAR_US_ON_GITHUB: 'Deixe sua estrela no GitHub',
-  FETCHING_STREAMER_VIDEOS: 'Buscando VODs de {{streamerName}}',
+  FETCHING_STREAMER_VIDEOS: 'Buscando VODs - {{streamerName}}',
+  STREAMER_NOT_FOUND: 'Não foi possível encontrar nenhum VOD deste streamer',
 }
 
 export default pt

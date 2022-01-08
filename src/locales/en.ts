@@ -19,6 +19,7 @@ const en = {
   SUPPORT_US_ON_KOFI: 'Support us on Ko-fi',
   STAR_US_ON_GITHUB: 'Star us on GitHub',
   FETCHING_STREAMER_VIDEOS: 'Fetching {{streamerName}} videos',
+  STREAMER_NOT_FOUND: "We couldn't find any video of this streamer",
 }
 
 export default en

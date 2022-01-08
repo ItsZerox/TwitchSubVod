@@ -2,6 +2,7 @@ import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { NextSeo } from 'next-seo'
 import { IVideo } from '~/@types/IVideo'
 import { videoAdapter } from '~/adapters/videoAdapter'
+import SearchIndicator from '~/components/molecules/SearchIndicator'
 import Videos from '~/components/screens/Videos/[streamer]'
 import revalidate from '~/constants/revalidate'
 import { getStreamerVideos } from '~/services/api/getStreamerVideos'
@@ -44,7 +45,15 @@ const VideosPage = ({
   videos,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!videos) {
-    return <div>No videos found</div>
+    return (
+      <SearchIndicator
+        streamerName={
+          typeof window !== 'undefined'
+            ? window.location.pathname.split('/')[2]
+            : ''
+        }
+      />
+    )
   }
 
   const video: IVideo = videos[0]
