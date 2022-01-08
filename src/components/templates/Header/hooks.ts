@@ -56,6 +56,8 @@ export const useHeader = () => {
       router.push({
         pathname: `/videos/${search}`,
       })
+
+      elements.search.blur()
     }
   }
 
