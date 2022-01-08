@@ -1,7 +1,9 @@
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { IVideo } from '~/@types/IVideo'
 import AdsContainer from '~/components/atoms/AdsContainer'
 import Box from '~/components/atoms/Box'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
+import { useHome } from './hooks'
 import * as S from './styles'
 
 interface HomeProps {
@@ -9,6 +11,8 @@ interface HomeProps {
 }
 
 const Home = ({ videos }: HomeProps) => {
+  const { videosData, getNewVideos } = useHome(videos)
+
   return (
     <S.Container>
       <Box boxSize="100vw" alignItems="center">
@@ -23,7 +27,15 @@ const Home = ({ videos }: HomeProps) => {
           <AdsContainer adslot="4593736619" />
         </div>
       </Box>
-      <VideoButtonGroup videos={videos} />
+      <InfiniteScroll
+        dataLength={videosData.length}
+        next={getNewVideos}
+        hasMore={videosData.length <= 500}
+        loader={<h3> Loading...</h3>}
+        endMessage={<h4>Nothing more to show</h4>}
+      >
+        <VideoButtonGroup videos={videosData} />
+      </InfiniteScroll>
     </S.Container>
   )
 }
