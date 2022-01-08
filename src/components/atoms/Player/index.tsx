@@ -1,8 +1,15 @@
 import * as S from './styles'
 
-import { Player as VimePlayer, Hls, DefaultUi } from '@vime/react'
+import {
+  Player as VimePlayer,
+  Hls,
+  DefaultUi,
+  DefaultControls,
+  DefaultSettings,
+} from '@vime/react'
 import { HTMLAttributes } from 'react'
 import { getCors } from '~/utils/getCors'
+import TapSidesToSeek from './lib/TabSidesToSeek'
 
 interface PlayerProps {
   url?: string
@@ -35,7 +42,11 @@ const Player = ({ url, poster }: PlayerProps) => {
         <source data-src={url} />
       </Hls>
 
-      <DefaultUi />
+      <DefaultUi noControls>
+        <TapSidesToSeek />
+        <DefaultControls hideOnMouseLeave={true} activeDuration={1000} />
+        <DefaultSettings />
+      </DefaultUi>
     </VimePlayer>
   )
 }
