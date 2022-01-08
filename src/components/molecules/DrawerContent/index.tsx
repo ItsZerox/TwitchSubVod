@@ -38,9 +38,8 @@ const DrawerContent = () => {
           title={texts.SEND_FEEDBACK}
           variant="secondary"
           buttonWidth="100%"
-          onClick={() => {
-            window.location.href = 'https://old.pogu.live?ref=pogu.live'
-          }}
+          as="a"
+          href="https://old.pogu.live?ref=pogu.live"
         />
       </Box>
 

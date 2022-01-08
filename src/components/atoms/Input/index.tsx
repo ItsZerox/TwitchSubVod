@@ -25,7 +25,7 @@ const Input = (props: InputProps) => {
       <S.InputText {...rest} tabIndex={0} />
 
       {props.isLoading && <AiOutlineLoading className="loading-icon" />}
-      <InputButton className="search-button" />
+      <InputButton className="search-button" type="submit" />
     </S.InputLabel>
   )
 }

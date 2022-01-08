@@ -6,7 +6,7 @@ import { IoNotificationsSharp, IoPersonSharp, IoSearch } from 'react-icons/io5'
 import { RiFeedbackFill } from 'react-icons/ri'
 import { toast } from 'react-toastify'
 import ButtonPill from '~/components/atoms/ButtonPill'
-import Input, { Datalist, Option } from '~/components/atoms/Input'
+import Input from '~/components/atoms/Input'
 import { useGlobal } from '~/contexts/GlobalContext'
 import Icon from '../../atoms/Icon'
 import { useHeader } from './hooks'
@@ -19,7 +19,7 @@ interface HeaderProps {
 const Header = ({ setIsDrawerOpen }: HeaderProps) => {
   const { texts } = useGlobal()
 
-  const { search, options, handleSearch, handleSubmit, isLoading } = useHeader()
+  const { search, handleSearch, handleSubmit } = useHeader()
 
   return (
     <S.HeaderWrapper>
@@ -55,24 +55,14 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
             iconPosition="left"
             placeholder={`${texts.SEARCH}...`}
             id="search-bar"
+            type="text"
             aria-label={texts.SEARCH}
-            list="search-list"
             autoComplete="off"
             name="search"
             value={search}
             onChange={handleSearch}
-            isLoading={isLoading}
+            isLoading={false}
           />
-
-          <Datalist id="search-list">
-            {options.map((option) => (
-              <Option
-                key={option.id}
-                value={option.name}
-                label={option.displayName}
-              />
-            ))}
-          </Datalist>
         </S.Form>
         <S.HeaderArea gap={8} hideInMobile={true}>
           <ButtonPill
