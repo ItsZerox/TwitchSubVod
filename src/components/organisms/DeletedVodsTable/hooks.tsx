@@ -66,15 +66,6 @@ export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
       // @ts-ignore
       columns,
       data,
-      initialState: {
-        // @ts-ignore
-        sortBy: [
-          {
-            id: 'date',
-            desc: true,
-          },
-        ],
-      },
     },
     useSortBy,
   )

@@ -27,7 +27,7 @@ export const getDeletedVods = async ({
   const streamerId = getStreamerId(data).toString()
 
   const allVodsResponse = await scraper.get(
-    (process.env.DELETED_VODS as string)
+    (process.env.DELETED_VODS_WITH_PARAMS as string)
       .replace('{{streamerId}}', streamerId)
       .replace('{{offset}}', offset.toString())
       .replace('{{limit}}', limit.toString()),
