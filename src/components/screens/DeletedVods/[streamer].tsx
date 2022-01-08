@@ -1,8 +1,6 @@
-import type { NextPage } from 'next'
 import { IDeletedVods } from '~/@types/IDeletedVods'
 import { DeletedVodsTable } from '~/components/organisms/DeletedVodsTable'
 import ProfilePage from '~/components/templates/ProfilePage'
-import { mockedStreamerInformation, videos } from './_mockedData'
 
 interface DeletedVodsProps {
   videos: IDeletedVods[]
