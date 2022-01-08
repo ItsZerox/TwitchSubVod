@@ -48,8 +48,20 @@ export const BoxLink = styled(Box)`
   height: 0;
   padding-bottom: 56.25%;
   width: 100%;
+  position: relative;
 
   :focus {
     outline: none;
   }
+`
+
+export const VideoLength = styled.div`
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  padding: 2px 4px;
+
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 2px;
 `

@@ -1,8 +1,9 @@
-import Link from 'next/link'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
+import Typography from '~/components/atoms/Typography'
 import VideoThumbnail from '~/components/atoms/VideoThumbnail'
 import StreamDescription from '~/components/molecules/StreamDescription'
+import { secondsToHM } from '~/utils/secondsToHM'
 import * as S from './styles'
 
 interface VideoButtonProps {
@@ -24,6 +25,11 @@ const VideoButton = ({
       data-testid={vodInformation.id}
     >
       <S.BoxLink as="a" tabIndex={0} href={`/video/${vodInformation.id}`}>
+        <S.VideoLength>
+          <Typography variant="overline">
+            {secondsToHM(vodInformation.duration)}
+          </Typography>
+        </S.VideoLength>
         <VideoThumbnail
           src={vodInformation.thumbnail}
           title={vodInformation.title}
