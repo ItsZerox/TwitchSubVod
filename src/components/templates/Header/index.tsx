@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Dispatch, SetStateAction } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { IoNotificationsSharp, IoPersonSharp, IoSearch } from 'react-icons/io5'
 import { RiFeedbackFill } from 'react-icons/ri'
@@ -11,7 +12,11 @@ import Icon from '../../atoms/Icon'
 import { useHeader } from './hooks'
 import * as S from './styles'
 
-const Header = () => {
+interface HeaderProps {
+  setIsDrawerOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const Header = ({ setIsDrawerOpen }: HeaderProps) => {
   const { texts } = useGlobal()
 
   const { search, options, handleSearch, handleSubmit, isLoading } = useHeader()
@@ -24,7 +29,7 @@ const Header = () => {
             icon={<FiMenu />}
             title={texts.OPEN_MENU}
             isButton
-            onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
+            onClick={() => setIsDrawerOpen((isOpen) => !isOpen)}
           />
           <Link href="/" as={`/`} passHref>
             <Icon

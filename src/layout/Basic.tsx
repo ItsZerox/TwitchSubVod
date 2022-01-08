@@ -1,5 +1,8 @@
 import { createGlobalStyle, css } from 'styled-components'
+import { useState } from 'react'
+import Drawer from '@mui/material/Drawer'
 import Header from '~/components/templates/Header'
+import DrawerContent from '~/components/molecules/DrawerContent'
 
 export const GlobalStyles = createGlobalStyle`
   :root {
@@ -49,10 +52,19 @@ export const GlobalStyles = createGlobalStyle`
 `
 
 const BasicLayout = ({ children }: { children: any }) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
   return (
     <>
       <GlobalStyles />
-      <Header />
+      <Header setIsDrawerOpen={setIsDrawerOpen} />
+      <Drawer
+        anchor="left"
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      >
+        <DrawerContent />
+      </Drawer>
       {children}
     </>
   )

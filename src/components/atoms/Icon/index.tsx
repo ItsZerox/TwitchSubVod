@@ -8,6 +8,9 @@ interface IconProps extends React.HTMLAttributes<HTMLButtonElement> {
   isButton?: boolean
   as?: any
   ref?: any
+  href?: string
+  target?: string
+  rel?: string
 }
 
 const Icon = forwardRef<HTMLButtonElement, IconProps>(

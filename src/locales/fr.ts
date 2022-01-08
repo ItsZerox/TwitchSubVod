@@ -17,6 +17,9 @@ const fr: Locale = {
   SHARE_THIS_VIDEO: 'Partager ce vidéo',
   SHARE_TEXT: 'Regarder ce vidéo de {{streamerName}} sur pogu.live',
   IN_DEVELOPMENT_MESSAGE: '👀 Cette fonctionnalité est encore en développement',
+  FOLLOW_OUR_TWITTER: 'Suivez notre Twitter',
+  SUPPORT_US_ON_KOFI: 'Soutenez-nous sur Ko-fi',
+  STAR_US_ON_GITHUB: 'Évaluez-nous sur GitHub',
 }
 
 export default fr

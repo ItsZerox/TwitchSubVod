@@ -18,6 +18,9 @@ const pt: Locale = {
   SHARE_TEXT: 'Assista esse vídeo de {{streamerName}} no pogu.live',
   IN_DEVELOPMENT_MESSAGE:
     '👀 Esta funcionalidade ainda está em desenvolvimento',
+  FOLLOW_OUR_TWITTER: 'Siga nosso Twitter',
+  SUPPORT_US_ON_KOFI: 'Apoie-nos no Ko-fi',
+  STAR_US_ON_GITHUB: 'Deixe sua estrela no GitHub',
 }
 
 export default pt
