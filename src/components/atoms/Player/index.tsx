@@ -1,5 +1,3 @@
-import * as S from './styles'
-
 import {
   Player as VimePlayer,
   Hls,
@@ -7,9 +5,12 @@ import {
   DefaultControls,
   DefaultSettings,
 } from '@vime/react'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useRef } from 'react'
 import { getCors } from '~/utils/getCors'
 import TapSidesToSeek from './lib/TabSidesToSeek'
+import HandleKeyboard from './lib/HandleKeyboard'
+import * as S from './styles'
+import { useVideo } from './lib/hooks'
 
 interface PlayerProps {
   url?: string
@@ -28,6 +29,11 @@ const getRealHLSUrl = (url: string) => {
 }
 
 const Player = ({ url, poster }: PlayerProps) => {
+  const { animation, triggerAnimation, setAnimation, handleTrigger } =
+    useVideo()
+
+  const player = useRef<HTMLVmPlayerElement>(null)
+
   const hlsConfig = {
     enableWorker: true,
     maxBufferLength: 60,
@@ -37,13 +43,22 @@ const Player = ({ url, poster }: PlayerProps) => {
   }
 
   return (
-    <VimePlayer theme="dark">
+    <VimePlayer theme="dark" ref={player}>
       <Hls poster={poster} config={hlsConfig}>
         <source data-src={url} />
       </Hls>
 
       <DefaultUi noControls>
-        <TapSidesToSeek />
+        <TapSidesToSeek
+          animation={animation}
+          setAnimation={setAnimation}
+          handleTrigger={handleTrigger}
+          triggerAnimation={triggerAnimation}
+        />
+        <HandleKeyboard
+          setAnimation={setAnimation}
+          handleTrigger={handleTrigger}
+        />
         <DefaultControls hideOnMouseLeave={true} activeDuration={1000} />
         <DefaultSettings />
       </DefaultUi>

@@ -1,16 +1,25 @@
-import React, { useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { usePlayerContext } from '@vime/react'
-// @ts-ignore
 import * as S from './styles'
 
-const TapSidesToSeek = () => {
+interface TapSidesToSeekProps {
+  animation: string | null
+  setAnimation: Dispatch<SetStateAction<string | null>>
+  handleTrigger: () => void
+  triggerAnimation: number
+}
+
+const TapSidesToSeek = ({
+  animation,
+  setAnimation,
+  handleTrigger,
+  triggerAnimation,
+}: TapSidesToSeekProps) => {
   const ref = useRef(null)
 
   const [currentTime, setCurrentTime] = usePlayerContext(ref, 'currentTime', 0)
   const [duration] = usePlayerContext(ref, 'duration', -1)
   const [lastClickTime, setLastClickTime] = useState(Date.now())
-  const [animation, setAnimation] = useState<null | 'left' | 'right'>(null)
-  const [triggerAnimation, setTriggerAnimation] = useState(0)
 
   const onSeekBackward = () => {
     const now = Date.now()
@@ -18,10 +27,10 @@ const TapSidesToSeek = () => {
     setLastClickTime(now)
 
     if (timeDiff < 500) {
-      setAnimation('left')
+      setAnimation('-5s')
       if (currentTime < 5) return
       setCurrentTime(currentTime - 5)
-      setTriggerAnimation((old) => old + 1)
+      handleTrigger()
     }
   }
 
@@ -31,10 +40,10 @@ const TapSidesToSeek = () => {
     setLastClickTime(now)
 
     if (timeDiff < 500) {
-      setAnimation('right')
+      setAnimation('+5s')
       if (currentTime > duration - 5) return
       setCurrentTime(currentTime + 5)
-      setTriggerAnimation((old) => old + 1)
+      handleTrigger()
     }
   }
 
@@ -43,9 +52,7 @@ const TapSidesToSeek = () => {
       <S.TapSidesTarget className="tapTarget" onClick={onSeekBackward} />
 
       <div style={{ flex: 1 }}>
-        <S.Animation key={triggerAnimation}>
-          {animation && animation === 'left' ? '-5s' : '+5s'}
-        </S.Animation>
+        <S.Animation key={triggerAnimation}>{animation}</S.Animation>
       </div>
 
       <S.TapSidesTarget className="tapTarget" onClick={onSeekForward} />
