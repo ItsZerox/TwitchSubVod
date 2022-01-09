@@ -41,7 +41,6 @@ export const InputLabel = styled.div`
     }
 
     .search-button {
-      /* display: flex; */
       opacity: 1;
       fill: ${({ theme }) => theme.colors.white};
       transform: translateX(0);
