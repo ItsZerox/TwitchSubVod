@@ -5,6 +5,7 @@ import { getStreamerVideos } from '~/services/api/getStreamerVideos'
 
 export const useVideos = (data: IVideo[]) => {
   const [videosData, setVideosData] = useState(data)
+  const [hasMore, setHasMore] = useState(true)
 
   useEffect(() => {
     setVideosData(data)
@@ -21,10 +22,12 @@ export const useVideos = (data: IVideo[]) => {
 
     if (newVideos?.length) {
       setVideosData([...videosData, ...newVideos])
+    } else {
+      setHasMore(false)
     }
   }
 
   const streamerInformation = data.length ? data[0].streamerInformation : null
 
-  return { videosData, getNewVideos, streamerInformation }
+  return { videosData, getNewVideos, hasMore, streamerInformation }
 }

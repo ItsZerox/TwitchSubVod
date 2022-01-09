@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { IVideo } from '~/@types/IVideo'
 import Box from '~/components/atoms/Box'
@@ -10,7 +11,8 @@ interface VideoProps {
 }
 
 const Videos = ({ videos }: VideoProps) => {
-  const { videosData, getNewVideos, streamerInformation } = useVideos(videos)
+  const { videosData, getNewVideos, streamerInformation, hasMore } =
+    useVideos(videos)
 
   return (
     <ProfilePage streamerInformation={streamerInformation}>
@@ -18,9 +20,16 @@ const Videos = ({ videos }: VideoProps) => {
         <InfiniteScroll
           dataLength={videosData.length}
           next={getNewVideos}
-          hasMore={videosData.length <= 500}
-          loader={<h3> Loading...</h3>}
-          endMessage={<h4>Nothing more to show</h4>}
+          hasMore={hasMore}
+          loader={
+            <Skeleton
+              variant="rectangular"
+              animation="wave"
+              width={'100%'}
+              height={200}
+            />
+          }
+          endMessage={null}
         >
           <VideoButtonGroup videos={videosData} />
         </InfiniteScroll>

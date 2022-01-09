@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { IVideo } from '~/@types/IVideo'
 import AdsContainer from '~/components/atoms/AdsContainer'
@@ -31,8 +32,15 @@ const Home = ({ videos }: HomeProps) => {
         dataLength={videosData.length}
         next={getNewVideos}
         hasMore={videosData.length <= 500}
-        loader={<h3> Loading...</h3>}
-        endMessage={<h4>Nothing more to show</h4>}
+        loader={
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={'100%'}
+            height={170}
+          />
+        }
+        endMessage={null}
       >
         <VideoButtonGroup videos={videosData} />
       </InfiniteScroll>

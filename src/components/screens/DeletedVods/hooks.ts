@@ -4,6 +4,7 @@ import { IDeletedVods } from '~/@types/IDeletedVods'
 
 export const useDeletedVods = (data: IDeletedVods[]) => {
   const [videosData, setVideosData] = useState(data)
+  const [hasMore, setHasMore] = useState(true)
 
   const getNewVideos = async () => {
     const { data: newVideosData } = await axios.get<IDeletedVods[]>(
@@ -19,8 +20,10 @@ export const useDeletedVods = (data: IDeletedVods[]) => {
 
     if (newVideosData?.length) {
       setVideosData([...videosData, ...newVideosData])
+    } else {
+      setHasMore(false)
     }
   }
 
-  return { videosData, getNewVideos }
+  return { videosData, getNewVideos, hasMore }
 }

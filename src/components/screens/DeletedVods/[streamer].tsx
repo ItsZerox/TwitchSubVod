@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { IDeletedVods } from '~/@types/IDeletedVods'
 import { DeletedVodsTable } from '~/components/organisms/DeletedVodsTable'
@@ -9,7 +10,7 @@ interface DeletedVodsProps {
 }
 
 const DeletedVods = ({ videos }: DeletedVodsProps) => {
-  const { videosData, getNewVideos } = useDeletedVods(videos)
+  const { videosData, getNewVideos, hasMore } = useDeletedVods(videos)
 
   const streamerInformation = {
     displayName: videos[0].displayName,
@@ -24,9 +25,16 @@ const DeletedVods = ({ videos }: DeletedVodsProps) => {
       <InfiniteScroll
         dataLength={videosData.length}
         next={getNewVideos}
-        hasMore={videosData.length <= 500}
-        loader={<h3> Loading...</h3>}
-        endMessage={<h4>Nothing more to show</h4>}
+        hasMore={hasMore}
+        loader={
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={'100%'}
+            height={150}
+          />
+        }
+        endMessage={null}
       >
         <DeletedVodsTable videos={videosData} />
       </InfiniteScroll>
