@@ -24,14 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     offset: Number(offset) + 1,
   })
 
-  if (streamerVideos?.length) {
-    res.status(200).json(streamerVideos)
-  } else {
-    res.status(404).json({
-      error: true,
-      message: 'No videos found',
-    })
-  }
+  res.status(200).json(streamerVideos)
 }
 
 export default handler
