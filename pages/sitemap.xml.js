@@ -8,25 +8,25 @@ const createSitemap = (streamers) => {
   return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-      <loc>https://pogu.live/</loc>
+      <loc>https://old.pogu.live/</loc>
       <lastmod>2021-02-06</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1</priority>
     </url>
     <url>
-      <loc>https://pogu.live/deletedclips</loc>
+      <loc>https://old.pogu.live/deletedclips</loc>
       <lastmod>2021-02-06</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1</priority>
     </url>
     <url>
-      <loc>https://pogu.live/deletedvods</loc>
+      <loc>https://old.pogu.live/deletedvods</loc>
       <lastmod>2021-02-06</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1</priority>
     </url>
     <url>
-      <loc>https://pogu.live/downloadclip</loc>
+      <loc>https://old.pogu.live/downloadclip</loc>
       <lastmod>2021-02-06</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1</priority>

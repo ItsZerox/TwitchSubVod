@@ -157,7 +157,7 @@ const DeletedVodsStreamer = ({
   }, [deletedVods]);
 
   const getOGUrl = () => {
-    return `https://og-image.vercel.app/${streamerName}%20%7C%20Sub-only%20vods%20%7C%20**PogU.live**.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-white.svg&images=https%3A%2F%2Fpogu.live%2Fandroid-chrome-192x192.png&images=${encodeURI(
+    return `https://og-image.vercel.app/${streamerName}%20%7C%20Sub-only%20vods%20%7C%20**pogu.live**.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-white.svg&images=https%3A%2F%2Fold.pogu.live%2Fandroid-chrome-192x192.png&images=${encodeURI(
       twitchData.logo,
     )}&images=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fremojansen%2Flogo.ts%40master%2Fts.svg&widths=1&widths=300&widths=300&widths=1&heights=1&heights=300&heights=300&heights=1`;
   };
@@ -253,7 +253,7 @@ const DeletedVodsStreamer = ({
         <meta property="og:title" content={`${streamerName} - Deleted VODS`} />
         <meta
           property="og:url"
-          content={`https://pogu.live/deletedvods/${streamerName}`}
+          content={`https://old.pogu.live/deletedvods/${streamerName}`}
         />
         <meta property="og:image" content={getOGUrl()} />
         <meta property="og:type" content="website" />
@@ -264,7 +264,7 @@ const DeletedVodsStreamer = ({
       </Head>
       <S.DeletedVodsStreamer>
         <span>
-          <img src="/favicon.ico" alt="PogU.live" />
+          <img src="/favicon.ico" alt="pogu.live" />
           <h1>PogU</h1>
         </span>
         <SearchInput isDeleted={true} />

@@ -1,4 +1,4 @@
-Sitemap: https://pogu.live/sitemap.xml
+Sitemap: https://old.pogu.live/sitemap.xml
 
 User-agent: *
 Allow: /*

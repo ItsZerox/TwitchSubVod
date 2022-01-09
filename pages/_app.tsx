@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalStyle />
         <GlobalProvider>
           <a
-            href="https://beta.pogu.live?ref=pogu.live"
+            href="https://pogu.live?ref=old.pogu.live"
             style={{
               backgroundColor: '#A70050',
               height: 'fit-content',
@@ -91,9 +91,9 @@ function MyApp({ Component, pageProps }: AppProps) {
               gap: '16px',
             }}
           >
-            <img src="https://beta.pogu.live/favicon-white.png" width="48px" />
+            <img src="https://pogu.live/favicon-white.png" width="48px" />
             Join the open beta now <br />
-            (beta.pogu.live)
+            (pogu.live)
           </a>
           <Component {...pageProps} />
         </GlobalProvider>

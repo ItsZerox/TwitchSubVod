@@ -53,11 +53,11 @@ export default class MyDocument extends Document {
             name="keywords"
             content="Twitch, Deleted Vod, Deleted Vods, Sub-only, Sub-only Vods, Watch Twitch, Twitch Free Vods, Twitch Deleted Vods, Twitch Deleted Clips, Twitch Download Clips, Twitch Clips"
           />
-          <meta property="og:title" content={`PogU.live - Sub-only VODS`} />
+          <meta property="og:title" content={`old.pogu.live - Sub-only VODS`} />
           <meta property="og:url" content={`https://pogu.live`} />
           <meta
             property="og:image"
-            content="https://pogu.live/android-chrome-192x192.png"
+            content="https://old.pogu.live/android-chrome-192x192.png"
           />
           <meta property="og:type" content="website" />
           <meta

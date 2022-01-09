@@ -39,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         // send discord notification via webhook
         await axios.post(`${process.env.DISCORD_WEBHOOK_URL}`, {
           username: 'pogu.live',
-          avatar_url: 'https://pogu.live/android-chrome-192x192.png',
+          avatar_url: 'https://old.pogu.live/android-chrome-192x192.png',
           embeds: [
             {
               title: 'New ko-fi donation',
@@ -116,7 +116,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
           console.log('POST /webhook/kofi', createOrUpdateSupporter);
           return res.status(200).json({ success: true });
-        } catch (error) {
+        } catch (error: any) {
           console.log('ERROR POST /webhook/kofi', {
             ...error.response.data,
             url: error.response.config.url,
@@ -125,7 +125,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           // send discord error notification via webhook
           await axios.post(`${process.env.DISCORD_WEBHOOK_URL}`, {
             username: 'pogu.live',
-            avatar_url: 'https://pogu.live/android-chrome-192x192.png',
+            avatar_url: 'https://old.pogu.live/android-chrome-192x192.png',
             embeds: [
               {
                 title: 'Something went wrong',

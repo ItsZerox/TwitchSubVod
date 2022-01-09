@@ -2,7 +2,7 @@
   "name": "twitch-sub-vod",
   "version": "1.0.1",
   "private": false,
-  "homepage": "https://PogU.live",
+  "homepage": "https://old.pogu.live",
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "0.3.7",
     "@sentry/nextjs": "6.4.1",
