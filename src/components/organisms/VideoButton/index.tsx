@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { StreamerInformation } from '~/@types/StreamerInformation'
 import { VodInformation } from '~/@types/VodInformation'
 import Typography from '~/components/atoms/Typography'
@@ -24,17 +25,24 @@ const VideoButton = ({
       isMinimal={isMinimal}
       data-testid={vodInformation.id}
     >
-      <S.BoxLink as="a" tabIndex={0} href={`/video/${vodInformation.id}`}>
-        <S.VideoLength>
-          <Typography variant="overline">
-            {secondsToHM(vodInformation.duration)}
-          </Typography>
-        </S.VideoLength>
-        <VideoThumbnail
-          src={vodInformation.thumbnail}
-          title={vodInformation.title}
-        />
-      </S.BoxLink>
+      <Link
+        href="/video/[vod]"
+        as={`/video/${vodInformation.id}`}
+        prefetch={false}
+        passHref
+      >
+        <S.BoxLink as="a" tabIndex={0}>
+          <S.VideoLength>
+            <Typography variant="overline">
+              {secondsToHM(vodInformation.duration)}
+            </Typography>
+          </S.VideoLength>
+          <VideoThumbnail
+            src={vodInformation.thumbnail}
+            title={vodInformation.title}
+          />
+        </S.BoxLink>
+      </Link>
 
       <StreamDescription
         streamerInformation={streamerInformation}

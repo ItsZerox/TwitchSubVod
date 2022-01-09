@@ -58,27 +58,30 @@ const VideosPage = ({
 
   const video: IVideo = videos[0]
 
-  const seoTitle =
+  const streamerName =
     video?.streamerInformation?.displayName ||
     video?.streamerInformation?.name ||
     ''
 
   const seoImage = video?.streamerInformation?.logo || ''
 
-  const seoDescription = `Watch ${seoTitle}'s sub-only VODs on pogu.live for free`
+  const seoTitle = `${streamerName}'s sub-only VODs | pogu.live`
+  const seoDescription = `Watch ${streamerName}'s sub-only VODs on pogu.live for free. ${streamerName} is a Twitch streamer and you can watch their sub only videos here. | ${
+    video?.streamerInformation?.description || ''
+  }`
 
   return (
     <>
       <NextSeo
-        title={`${seoTitle} | pogu.live`}
-        description={`Watch this vod of ${seoTitle} on pogu.live`}
+        title={seoTitle}
+        description={seoDescription}
         openGraph={{
-          title: `${seoTitle} | pogu.live`,
+          title: seoTitle,
           description: seoDescription,
           images: [
             {
               url: seoImage,
-              alt: `${seoTitle} | pogu.live`,
+              alt: `${streamerName} on pogu.live`,
             },
           ],
         }}

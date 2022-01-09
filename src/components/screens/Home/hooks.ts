@@ -5,7 +5,7 @@ import { useGlobal } from '~/contexts/GlobalContext'
 import { getTopVideos } from '~/services/api/getTopVideos'
 
 export const useHome = (data: IVideo[]) => {
-  const { locale } = useGlobal()
+  const { locale, texts } = useGlobal()
 
   const [videosData, setVideosData] = useState(data)
 
@@ -21,5 +21,5 @@ export const useHome = (data: IVideo[]) => {
     setVideosData([...videosData, ...newVideos])
   }
 
-  return { videosData, getNewVideos }
+  return { videosData, getNewVideos, texts }
 }

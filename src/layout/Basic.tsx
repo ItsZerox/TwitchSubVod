@@ -3,6 +3,9 @@ import { useState } from 'react'
 import Drawer from '@mui/material/Drawer'
 import Header from '~/components/templates/Header'
 import DrawerContent from '~/components/molecules/DrawerContent'
+import Box from '~/components/atoms/Box'
+import Typography from '~/components/atoms/Typography'
+import { useGlobal } from '~/contexts/GlobalContext'
 
 export const GlobalStyles = createGlobalStyle`
   :root {
@@ -79,6 +82,8 @@ export const GlobalStyles = createGlobalStyle`
 `
 
 const BasicLayout = ({ children }: { children: any }) => {
+  const { texts } = useGlobal()
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
@@ -100,6 +105,33 @@ const BasicLayout = ({ children }: { children: any }) => {
         }}
       >
         {children}
+
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            width: '100%',
+            maxWidth: '1920px',
+            minHeight: '100vh',
+            margin: '0 auto',
+            padding: '24px',
+          }}
+        >
+          <Box
+            flexDirection="column"
+            gap="8px"
+            boxSize="800px"
+            justifyContent="center"
+          >
+            <Typography variant="body1" as="p">
+              {texts.POGU_LIVE_DESCRIPTION} {':)'}
+            </Typography>
+            <Typography variant="body1" as="p">
+              {texts.POGU_LIVE_BETA_DESCRIPTION}
+            </Typography>
+          </Box>
+        </div>
       </div>
     </>
   )

@@ -39,7 +39,7 @@ const StreamerDescription = ({
             ? `${formatViews(followers)} ${texts.FOLLOWERS.toLowerCase()}`
             : ''}
         </Typography>
-        <Typography variant="body2" title={description}>
+        <Typography variant="body2" as="p" title={description}>
           {description ||
             'We couldn’t find a description for this streamer at this time. :('}
         </Typography>

@@ -62,24 +62,26 @@ const DeletedVodsPage: NextPage = ({
 
   const video: IDeletedVods = videos[0]
 
-  const seoTitle = video?.displayName || video?.name || ''
-
   const seoImage = video?.logo || ''
 
-  const seoDescription = `Watch ${seoTitle}'s deleted VODs on pogu.live`
+  const streamerName = video?.displayName || video?.name || ''
+
+  const seoTitle = `${streamerName}'s deleted VODs | pogu.live`
+
+  const seoDescription = `Watch ${streamerName}'s deleted VODs on pogu.live for free. ${streamerName} is a Twitch streamer and you can watch their deleted videos here.`
 
   return (
     <>
       <NextSeo
-        title={`${seoTitle} | pogu.live`}
-        description={`Watch this vod of ${seoTitle} on pogu.live`}
+        title={seoTitle}
+        description={seoDescription}
         openGraph={{
-          title: `${seoTitle} | pogu.live`,
+          title: seoTitle,
           description: seoDescription,
           images: [
             {
               url: seoImage,
-              alt: `${seoTitle} | pogu.live`,
+              alt: `${streamerName} on pogu.live`,
             },
           ],
         }}

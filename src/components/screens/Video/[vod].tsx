@@ -11,6 +11,7 @@ import ShareButtons from '~/components/atoms/ShareButtons'
 import AdsContainer from '~/components/atoms/AdsContainer'
 import { toast } from 'react-toastify'
 import { PlayerContainer } from '~/components/atoms/Player'
+import Typography from '~/components/atoms/Typography'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
@@ -29,6 +30,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
       <Box
         flexDirection="column"
         gap="64px"
+        as="main"
         _mobileProps={{
           gap: '32px',
         }}
@@ -102,12 +104,21 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
             )}
           />
         </Box>
-        <VideoButtonGroup
-          videos={relatedVideos.slice(-16).reverse()}
-          minVideoWidth="300px"
-        />
+        <Box flexDirection="column" gap="16px">
+          <Typography variant="h5">
+            {texts.OTHER_VIDEOS_OF_STREAMER.replace(
+              '{{streamerName}}',
+              video.streamerInformation.displayName ||
+                video.streamerInformation.name,
+            )}
+          </Typography>
+          <VideoButtonGroup
+            videos={relatedVideos.slice(-16).reverse()}
+            minVideoWidth="300px"
+          />
+        </Box>
       </Box>
-      <Box flexDirection="column">
+      <Box flexDirection="column" as="aside">
         <div
           style={{
             display: 'flex',
@@ -119,6 +130,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
         >
           <AdsContainer adslot="8461022959" />
         </div>
+
         <VideoButtonGroup
           videos={relatedVideos.reverse().slice(16)}
           minVideoWidth="300px"

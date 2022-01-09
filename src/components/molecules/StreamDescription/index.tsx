@@ -64,6 +64,7 @@ const StreamDescription = ({
         <Link
           href="/videos/[streamer]"
           as={`/videos/${streamerInformation.name}`}
+          prefetch={false}
           passHref
         >
           <Box as="a" tabIndex={avatarWidth ? 0 : -1}>
@@ -78,23 +79,26 @@ const StreamDescription = ({
 
       <Box flexDirection="column" gap={'4px'}>
         {urlProps?.href ? (
-          <a href={urlProps.href}>
-            <Typography
-              variant="h6"
-              lineLimit={lineLimit || 3}
-              title={vodInformation.title}
-              className="stream-description-title"
-              as="a"
-            >
-              {vodInformation.title}
-            </Typography>
-          </a>
+          <Link href={urlProps.href} prefetch={false} passHref>
+            <a>
+              <Typography
+                variant="h6"
+                lineLimit={lineLimit || 3}
+                title={vodInformation.title}
+                className="stream-description-title"
+                as="h2"
+              >
+                {vodInformation.title}
+              </Typography>
+            </a>
+          </Link>
         ) : (
           <Typography
             variant="h6"
             lineLimit={lineLimit || 3}
             title={vodInformation.title}
             className="stream-description-title"
+            as="h1"
           >
             {vodInformation.title}
           </Typography>
@@ -102,6 +106,7 @@ const StreamDescription = ({
         <Link
           href="/videos/[streamer]"
           as={`/videos/${streamerInformation.name}`}
+          prefetch={false}
           passHref
         >
           <Typography
@@ -115,7 +120,7 @@ const StreamDescription = ({
         </Link>
 
         {urlProps?.href ? (
-          <Link href={urlProps.href}>
+          <Link href={urlProps.href} prefetch={false} passHref>
             <a>
               <ViewAndDate
                 date={vodInformation.date}

@@ -30,7 +30,7 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
       <S.HeaderContainer>
         <S.HeaderArea gap={30}>
           <Icon
-            icon={<FiMenu />}
+            icon={<FiMenu aria-label={texts.OPEN_MENU} />}
             title={texts.OPEN_MENU}
             isButton
             onClick={() => setIsDrawerOpen((isOpen) => !isOpen)}
@@ -43,6 +43,7 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
                   width={106}
                   height={23}
                   aria-label="pogu.live"
+                  alt="pogu.live"
                 />
               }
               title="pogu.live"
@@ -55,7 +56,7 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
         {/* @ts-ignore */}
         <S.Form flexGrow={1} onSubmit={handleSubmit}>
           <Input
-            icon={<IoSearch />}
+            icon={<IoSearch aria-label={texts.SEARCH} />}
             iconPosition="left"
             placeholder={`${texts.SEARCH}...`}
             id="search-bar"
@@ -71,7 +72,7 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
         </S.Form>
         <S.HeaderArea gap={8} hideInMobile={true}>
           <ButtonPill
-            icon={<RiFeedbackFill />}
+            icon={<RiFeedbackFill aria-label={texts.FEEDBACK} />}
             iconPosition="right"
             text={texts.FEEDBACK}
             title={texts.SEND_FEEDBACK}
@@ -81,13 +82,13 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
             }}
           />
           <Icon
-            icon={<IoPersonSharp />}
+            icon={<IoPersonSharp aria-label={texts.PROFILE} />}
             title={texts.PROFILE}
             isButton
             onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
           />
           <Icon
-            icon={<IoNotificationsSharp />}
+            icon={<IoNotificationsSharp aria-label={texts.NOTIFICATIONS} />}
             title={texts.NOTIFICATIONS}
             isButton
             onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}

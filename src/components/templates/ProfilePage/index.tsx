@@ -36,7 +36,7 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
 
   return (
     <S.Container>
-      <Box flexDirection="column" gap="16px" alignItems="center">
+      <Box flexDirection="column" gap="16px" alignItems="center" as="aside">
         <StreamerDescription
           avatarUrl={streamerInformation.logo}
           name={streamerInformation.displayName}
@@ -68,6 +68,7 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
         gap="20px"
         alignItems="center"
         justifyContent="flex-start"
+        as="main"
       >
         <div
           style={{
@@ -81,7 +82,7 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
         >
           <AdsContainer adslot="3176713160" />
         </div>
-        <Typography variant="h3">
+        <Typography variant="h3" as="h1">
           {texts.ALL_STREAMER_VODS.replace(
             '{{streamer}}',
             streamerInformation.displayName,
