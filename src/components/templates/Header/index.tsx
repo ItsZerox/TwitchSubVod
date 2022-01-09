@@ -62,6 +62,7 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
             value={search}
             onChange={handleSearch}
             isLoading={false}
+            buttonHref={search ? `/videos/${search}` : undefined}
           />
         </S.Form>
         <S.HeaderArea gap={8} hideInMobile={true}>

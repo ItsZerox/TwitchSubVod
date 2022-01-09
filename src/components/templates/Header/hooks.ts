@@ -16,6 +16,7 @@ export const useHeader = () => {
   useEffect(() => {
     if (router.asPath === `/videos/${search}`) {
       setIsLoading(false)
+      setSearch('')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath])

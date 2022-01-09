@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,18 +92,17 @@ export const InputText = styled.input`
   }
 `
 
-export const Datalist = styled.datalist``
-
-export const Option = styled.option``
-
-export const InputButton = styled.button`
+export const InputButton = styled.a<{ isIOS?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
 
   height: 100%;
   width: 48px;
-  background-color: ${({ theme }) => theme.colors.pink600};
+  background-color: ${({ theme, isIOS }) =>
+    isIOS ? 'transparent' : theme.colors.pink700};
   border: none;
   cursor: pointer;
+
+  z-index: 100;
 `
