@@ -52,6 +52,7 @@ export const InputLabel = styled.div`
     position: absolute;
     width: 48px;
     right: 16px;
+    padding-left: 3px;
 
     transition: all 0.2s ease-in-out;
 

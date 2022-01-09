@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
@@ -6,11 +7,14 @@ import { IoNotificationsSharp, IoPersonSharp, IoSearch } from 'react-icons/io5'
 import { RiFeedbackFill } from 'react-icons/ri'
 import { toast } from 'react-toastify'
 import ButtonPill from '~/components/atoms/ButtonPill'
-import Input from '~/components/atoms/Input'
 import { useGlobal } from '~/contexts/GlobalContext'
 import Icon from '../../atoms/Icon'
 import { useHeader } from './hooks'
 import * as S from './styles'
+
+const Input = dynamic(() => import('~/components/atoms/Input'), {
+  ssr: false,
+})
 
 interface HeaderProps {
   setIsDrawerOpen: Dispatch<SetStateAction<boolean>>
