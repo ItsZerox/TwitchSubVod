@@ -59,6 +59,19 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.grey900};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.grey700};
+    border-radius: 8px;
+  }
+
   ::selection {
     background: ${({ theme }) => theme.colors.pink900};
     color: ${({ theme }) => theme.colors.white};
