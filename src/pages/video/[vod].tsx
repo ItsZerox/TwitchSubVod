@@ -79,11 +79,23 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       relatedTopVideosPromise,
     ])
 
-    console.log(relatedStreamerVideos)
-
-    const relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
+    let relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
       ? relatedStreamerVideos.videos.map(videoAdapter)
       : relatedTopVideos?.vods.map(videoAdapter) || []
+
+    if (relatedVideos.length < 32) {
+      const fallbackRelatedTopVideos = relatedVideosData?.vods.splice(
+        0,
+        32 - relatedVideos.length,
+      )
+
+      if (fallbackRelatedTopVideos) {
+        relatedVideos = [
+          ...fallbackRelatedTopVideos.map(videoAdapter),
+          ...relatedVideos,
+        ]
+      }
+    }
 
     return {
       props: {
@@ -100,9 +112,23 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     limit: 32,
   }).catch(() => null)
 
-  const relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
+  let relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
     ? relatedStreamerVideos.videos.map(videoAdapter)
     : relatedVideosData?.vods.map(videoAdapter) || []
+
+  if (relatedVideos.length < 32) {
+    const fallbackRelatedTopVideos = relatedVideosData?.vods.splice(
+      0,
+      32 - relatedVideos.length,
+    )
+
+    if (fallbackRelatedTopVideos) {
+      relatedVideos = [
+        ...fallbackRelatedTopVideos.map(videoAdapter),
+        ...relatedVideos,
+      ]
+    }
+  }
 
   return {
     props: {
