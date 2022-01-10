@@ -35,7 +35,7 @@ const Header = ({ setIsDrawerOpen }: HeaderProps) => {
             isButton
             onClick={() => setIsDrawerOpen((isOpen) => !isOpen)}
           />
-          <Link href="/" as={`/`} passHref>
+          <Link href="/" as={`/`} prefetch={false} passHref>
             <Icon
               icon={
                 <Image

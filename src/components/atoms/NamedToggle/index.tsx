@@ -17,7 +17,13 @@ const NamedToggle = ({ buttons, defaultSelected }: NamedToggleProps) => {
   return (
     <S.NamedToggleContainer>
       {buttons.map((button) => (
-        <Link key={button.value} href={button.url} as={button.as} passHref>
+        <Link
+          key={button.value}
+          href={button.url}
+          as={button.as}
+          prefetch={false}
+          passHref
+        >
           <S.ToggleButton
             key={button.value}
             isActive={button.value === defaultSelected}
