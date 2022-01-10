@@ -20,7 +20,9 @@ export const useDeletedVods = (data: IDeletedVods[]) => {
 
     if (newVideosData?.length) {
       setVideosData([...videosData, ...newVideosData])
-    } else {
+    }
+
+    if (newVideosData?.length < 10) {
       setHasMore(false)
     }
   }
