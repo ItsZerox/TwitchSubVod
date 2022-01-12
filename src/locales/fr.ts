@@ -14,8 +14,8 @@ const fr: Locale = {
   SEARCH: 'Rechercher',
   FOLLOWERS: 'Abonnés',
   VIEWS: 'Vues',
-  SHARE_THIS_VIDEO: 'Partager ce vidéo',
-  SHARE_TEXT: 'Regarder ce vidéo de {{streamerName}} sur pogu.live',
+  SHARE_THIS_VIDEO: 'Partager cette vidéo',
+  SHARE_TEXT: 'Regarder cette vidéo de {{streamerName}} sur pogu.live',
   IN_DEVELOPMENT_MESSAGE: '👀 Cette fonctionnalité est encore en développement',
   FOLLOW_OUR_TWITTER: 'Suivez notre Twitter',
   SUPPORT_US_ON_KOFI: 'Soutenez-nous sur Ko-fi',
@@ -27,7 +27,7 @@ const fr: Locale = {
   POGU_LIVE_DESCRIPTION:
     "pogu.live est un outil gratuit qui vous permet de regarder des vidéos payés ou supprimés gratuitement. Cela fonctionne car quand un streamer supprime une vidéo, elle n'est pas supprimée immédiatement sur les serveurs de Twitch. Elle est marquée comme supprimée et ensuite retirée du site après quelques semaines, ce qui vous permet de regarder et de télécharger la vidéo en attendant.",
   POGU_LIVE_BETA_DESCRIPTION:
-    'Nous sommes encore en phase de bêta, si vous trouvez un bug, merci de le signaler dans le bouton "Feedback" en haut à droite ou dans le menu si vous êtes sur mobile. Merci !',
+    'Nous sommes encore en phase de bêta, si vous trouvez un bug, merci de le signaler avec le bouton "Feedback" en haut à droite ou dans le menu si vous êtes sur mobile. Merci !',
 }
 
 export default fr
