@@ -1,11 +1,34 @@
 // Source: Adapted from https://greasyfork.org/en/scripts/420212-twitch-vod-unblocker/code
 
+import { Resolutions } from '~/@types/ITwitchCommons'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { VideoUrl } from '~/@types/VideoUrl'
 
 const THUMBNAIL_TO_ID_REGEX = /^https?:\/\/(?:[\w\.\/]+)\/(.+)\/storyboards/
 
-const getVideoResolutions = (video: ITwitchVideo) => video.resolutions
+const getVideoResolutions = (video: ITwitchVideo): Resolutions => {
+  const keys = Object.keys(video.resolutions) as Array<keyof Resolutions>
+
+  if (keys.length === 1) {
+    return video.resolutions
+  }
+
+  keys.pop()
+
+  const resolutions: Resolutions = {}
+
+  keys.forEach((key, index: number) => {
+    // @ts-ignore
+    resolutions[key] = video.resolutions[keys[index]]
+  })
+
+  if (resolutions['720p30'] && resolutions['720p60']) {
+    delete resolutions['720p60']
+  }
+
+  console.log(resolutions)
+  return resolutions
+}
 
 const getVideoHostUrl = (video: ITwitchVideo) => {
   const fullUrl = new URL(video.animated_preview_url)

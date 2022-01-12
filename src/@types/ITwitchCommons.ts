@@ -33,19 +33,21 @@ export interface Thumbnails {
 }
 
 export interface Fps {
-  '160p30': number
-  '360p30': number
-  '480p30': number
-  '720p60': number
-  chunked: number
+  '160p30'?: number
+  '360p30'?: number
+  '480p30'?: number
+  '720p30'?: number
+  '720p60'?: number
+  chunked?: number
 }
 
 export interface Resolutions {
-  '160p30': string
-  '360p30': string
-  '480p30': string
-  '720p60': string
-  chunked: string
+  '160p30'?: string
+  '360p30'?: string
+  '480p30'?: string
+  '720p30'?: number
+  '720p60'?: string
+  chunked?: string
 }
 
 export interface Channel {
