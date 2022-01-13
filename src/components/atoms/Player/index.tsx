@@ -7,6 +7,7 @@ import {
 } from '@vime/react'
 import { HTMLAttributes, useRef } from 'react'
 import { getCors } from '~/utils/getCors'
+import { removeCorsFromUrl } from '~/utils/removeCorsFromUrl'
 import TapSidesToSeek from './lib/TabSidesToSeek'
 import HandleKeyboard from './lib/HandleKeyboard'
 import * as S from './styles'
@@ -14,19 +15,16 @@ import { useVideo } from './lib/hooks'
 import '@vime/core/themes/default.css'
 
 interface PlayerProps {
-  url?: string
+  url: string
   poster?: string
 }
 
 const getRealHLSUrl = (url: string) => {
   const cleanUrl = url.replace('unmuted.ts', 'muted.ts')
 
-  if (cleanUrl.includes(getCors())) {
-    // return cleanUrl if cors has already been added
-    return cleanUrl
-  }
+  const urlWithoutCors = removeCorsFromUrl(cleanUrl)
 
-  return cleanUrl.replace('https://', `${getCors()}https://`)
+  return urlWithoutCors.replace('https://', `${getCors()}https://`)
 }
 
 const Player = ({ url, poster }: PlayerProps) => {
