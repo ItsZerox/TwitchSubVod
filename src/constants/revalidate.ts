@@ -4,8 +4,8 @@ const HOUR = MINUTE * 60
 const DAY = HOUR * 24
 
 export default {
-  home: DAY,
+  home: DAY * 7,
   video: DAY * 30,
-  videos: HOUR,
-  deletedVideos: HOUR,
+  videos: HOUR * 8,
+  deletedVideos: HOUR * 8,
 }
