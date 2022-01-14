@@ -29,5 +29,14 @@ export const getQualitiesFromUrl = async (url: string): Promise<VideoUrl[]> => {
 
   urlObjects = urlObjects.filter((urlObjects) => urlObjects !== null)
 
+  if (urlObjects.length === 0) {
+    return [
+      {
+        resolution: '1920x1080',
+        url: url,
+      },
+    ]
+  }
+
   return urlObjects as VideoUrl[]
 }

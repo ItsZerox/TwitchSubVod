@@ -39,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const urlsObject = await Promise.all(urlsObjectPromise)
 
-    if (!urlsObject.length) {
+    if (!urlsObject.flat().length) {
       res.status(404).json({ error: true, message: 'Not found' })
       return
     }
