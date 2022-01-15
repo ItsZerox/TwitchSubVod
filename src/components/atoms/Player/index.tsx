@@ -75,6 +75,7 @@ const Player = ({
           [vodId]: {
             id: vodId,
             time: player.current?.currentTime || 0,
+            totalVodTime: player.current?.duration || 0,
             expireDate,
             title: title || '',
             streamerLogoUrl,

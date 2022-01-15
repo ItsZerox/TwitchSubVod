@@ -6,6 +6,7 @@ export interface IWatchedVod {
   thumbnailUrl?: string
   expireDate: string
   time: number
+  totalVodTime: number
 }
 
 export interface IWatchedVods {
