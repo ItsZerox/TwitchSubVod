@@ -27,7 +27,7 @@ const en = {
   POGU_LIVE_BETA_DESCRIPTION:
     'We\'re still in our beta phase, so if you find any bugs, please report them in the "Feedback" button in the top right corner or in the menu if you\'re on mobile. Thank you!',
   REMOVED_USER_MESSAGE:
-    '{{streamerName}} asked us to remove his videos from here :(',
+    '{{streamerName}} asked us to remove their videos from here :(',
   YOUR_LAST_WATCHED_VODS: 'Your last watched VODs',
 }
 
