@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { IVideo } from '~/@types/IVideo'
 import Box from '~/components/atoms/Box'
 import Button from '~/components/atoms/Button'
@@ -6,7 +7,6 @@ import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
 import { useGlobal } from '~/contexts/GlobalContext'
 import * as S from './styles'
 import '@vime/core/themes/default.css'
-import dynamic from 'next/dynamic'
 import ShareButtons from '~/components/atoms/ShareButtons'
 import AdsContainer from '~/components/atoms/AdsContainer'
 import { toast } from 'react-toastify'
@@ -50,8 +50,18 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
         <Box flexDirection="column" gap="16px">
           <PlayerContainer>
             <Player
+              key={video.vodInformation.id}
               url={`/api/get-video/${video.vodInformation.id}.m3u8`}
               poster={video.vodInformation.thumbnail}
+              title={video.vodInformation.title || ''}
+              streamerLogoUrl={video.streamerInformation.logo || ''}
+              thumbnailUrl={video.vodInformation.thumbnail || ''}
+              vodId={video.vodInformation.id}
+              streamerName={
+                video.streamerInformation.displayName ||
+                video.streamerInformation.name ||
+                ''
+              }
             />
           </PlayerContainer>
           <Box

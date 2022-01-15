@@ -5,7 +5,7 @@ import {
   DefaultControls,
   DefaultSettings,
 } from '@vime/react'
-import { HTMLAttributes, useRef } from 'react'
+import { HTMLAttributes, useEffect, useRef } from 'react'
 import { getCors } from '~/utils/getCors'
 import { removeCorsFromUrl } from '~/utils/removeCorsFromUrl'
 import TapSidesToSeek from './lib/TabSidesToSeek'
@@ -13,10 +13,17 @@ import HandleKeyboard from './lib/HandleKeyboard'
 import * as S from './styles'
 import { useVideo } from './lib/hooks'
 import '@vime/core/themes/default.css'
+import localStorageKeys, { IWatchedVod } from '~/constants/localStorageKeys'
+import timeInSeconds from '~/constants/defaultTime'
 
 interface PlayerProps {
   url: string
   poster?: string
+  title?: string
+  streamerName: string
+  streamerLogoUrl: string
+  thumbnailUrl?: string
+  vodId: string
 }
 
 const getRealHLSUrl = (url: string) => {
@@ -27,8 +34,60 @@ const getRealHLSUrl = (url: string) => {
   return urlWithoutCors.replace('https://', `${getCors()}https://`)
 }
 
-const Player = ({ url, poster }: PlayerProps) => {
+const Player = ({
+  url,
+  poster,
+  title,
+  streamerName,
+  streamerLogoUrl,
+  thumbnailUrl,
+  vodId,
+}: PlayerProps) => {
   const player = useRef<HTMLVmPlayerElement>(null)
+
+  useEffect(() => {
+    // use localStorage to forward user to last timestamp
+    setTimeout(() => {
+      const watchedVods = JSON.parse(
+        localStorage.getItem(localStorageKeys.watchedVods) || '0',
+      )
+      const currentVod = (watchedVods[vodId] as IWatchedVod) || undefined
+      const currentVodTime = currentVod ? currentVod.time : 0
+
+      if (player.current && currentVodTime) {
+        player.current.currentTime = Number(currentVodTime)
+      }
+    }, 2000)
+
+    // save vod timestamp in localStorage
+    const interval = setInterval(() => {
+      const expireDate = new Date().getTime() + timeInSeconds.day * 14 * 1000
+
+      const allWatchedVods = JSON.parse(
+        localStorage.getItem(localStorageKeys.watchedVods) || '0',
+      )
+
+      localStorage.setItem(
+        localStorageKeys.watchedVods,
+        JSON.stringify({
+          ...allWatchedVods,
+          [vodId]: {
+            id: vodId,
+            time: player.current?.currentTime || 0,
+            expireDate,
+            title: title || '',
+            streamerLogoUrl,
+            thumbnailUrl: thumbnailUrl || '',
+            streamerName,
+          },
+        }),
+      )
+    }, 10000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
 
   const { animation, triggerAnimation, setAnimation, handleTrigger } =
     useVideo()
