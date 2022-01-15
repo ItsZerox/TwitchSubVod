@@ -15,6 +15,7 @@ import { useVideo } from './lib/hooks'
 import '@vime/core/themes/default.css'
 import localStorageKeys, { IWatchedVod } from '~/constants/localStorageKeys'
 import timeInSeconds from '~/constants/defaultTime'
+import RemovedUser from '~/components/atoms/RemovedUser'
 
 interface PlayerProps {
   url: string
@@ -98,6 +99,14 @@ const Player = ({
     xhrSetup: (xhr: XMLHttpRequest, url: string) => {
       xhr.open('GET', getRealHLSUrl(url), true)
     },
+  }
+
+  const removedUsers =
+    process.env.NEXT_PUBLIC_REMOVED_STREAMERS?.split(',') || []
+  const isUserRemoved = removedUsers.includes(streamerName?.toLowerCase())
+
+  if (isUserRemoved) {
+    return <RemovedUser streamerName={streamerName} />
   }
 
   return (

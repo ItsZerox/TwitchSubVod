@@ -26,7 +26,6 @@ const getVideoResolutions = (video: ITwitchVideo): Resolutions => {
     delete resolutions['720p60']
   }
 
-  console.log(resolutions)
   return resolutions
 }
 

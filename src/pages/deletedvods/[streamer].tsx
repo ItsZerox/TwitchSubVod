@@ -9,6 +9,7 @@ import revalidate from '~/constants/revalidate'
 import { getDeletedVods } from '~/lib/getDeletedVods'
 import { IDeletedVods } from '~/@types/IDeletedVods'
 import SearchIndicator from '~/components/molecules/SearchIndicator'
+import handleRemovedUser from '~/lib/handleRemovedUser'
 
 export async function getStaticPaths() {
   return {
@@ -19,6 +20,12 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const streamer = context.params?.streamer as string
+
+  const removedUser = handleRemovedUser(streamer)
+
+  if (!removedUser.continue) {
+    return removedUser
+  }
 
   if (!streamer) {
     return { notFound: true } as const
@@ -45,8 +52,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   }
 }
 
-const DeletedVodsPage: NextPage = ({
+const DeletedVodsPage = ({
   videos,
+  isUserRemoved,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!videos) {
     return (
@@ -86,7 +94,7 @@ const DeletedVodsPage: NextPage = ({
           ],
         }}
       />
-      <DeletedVods videos={videos} />
+      <DeletedVods videos={videos} isUserRemoved={isUserRemoved} />
     </>
   )
 }

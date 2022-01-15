@@ -28,6 +28,8 @@ const pt: Locale = {
   POGU_LIVE_DESCRIPTION:
     'pogu.live é um aplicativo gratuito que permite você assistir VODs pagos ou deletados de forma gratuita. Ele funciona porque quando um streamer deleta um vídeo, ele não é deletado do servidor da Twitch imediatamente. Ele é marcado como deletado e depois removido do site após algumas semanas, então você ainda pode assistir e baixá-lo nesse meio tempo.',
   POGU_LIVE_BETA_DESCRIPTION: `Ainda estamos na fase de beta, então é possível que alguns recursos não funcionem como esperado. Se você encontrar algum problema, por favor, reporte-o no botão Feedback no canto superior direito ou no menu.`,
+  REMOVED_USER_MESSAGE:
+    '{{streamerName}} nos pediu para remover os seus videos daqui :(',
 }
 
 export default pt

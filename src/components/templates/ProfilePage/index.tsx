@@ -34,11 +34,15 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
     )
   }
 
+  if (typeof window !== 'undefined' && !streamerInformation.name) {
+    streamerInformation.name = router.query.streamer as string
+  }
+
   return (
     <S.Container>
       <Box flexDirection="column" gap="16px" alignItems="center" as="aside">
         <StreamerDescription
-          avatarUrl={streamerInformation.logo}
+          avatarUrl={streamerInformation.logo || '/logo.jpg'}
           name={streamerInformation.displayName}
           followers={streamerInformation.followers}
           description={streamerInformation.description}
@@ -85,7 +89,7 @@ const ProfilePage = ({ children, streamerInformation }: ProfileProps) => {
         <Typography variant="h3" as="h1">
           {texts.ALL_STREAMER_VODS.replace(
             '{{streamer}}',
-            streamerInformation.displayName,
+            streamerInformation.displayName || '',
           )}
         </Typography>
         <NamedToggle
