@@ -1,11 +1,8 @@
-const SECOND = 1
-const MINUTE = SECOND * 60
-const HOUR = MINUTE * 60
-const DAY = HOUR * 24
+import timeInSeconds from './defaultTime'
 
 export default {
-  home: DAY * 7,
-  video: DAY * 30,
-  videos: HOUR * 8,
-  deletedVideos: HOUR * 8,
+  home: timeInSeconds.day * 7,
+  video: timeInSeconds.day * 30,
+  videos: timeInSeconds.hour * 8,
+  deletedVideos: timeInSeconds.hour * 8,
 }
