@@ -30,6 +30,7 @@ const fr: Locale = {
     'Nous sommes encore en phase de bêta, si vous trouvez un bug, merci de le signaler avec le bouton "Feedback" en haut à droite ou dans le menu si vous êtes sur mobile. Merci !',
   REMOVED_USER_MESSAGE:
     '{{streamerName}} a demandé à nous de supprimer ses vidéos :(',
+  YOUR_LAST_WATCHED_VODS: 'Vos derniers VODs vus',
 }
 
 export default fr

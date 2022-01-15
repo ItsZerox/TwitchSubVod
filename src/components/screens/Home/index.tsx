@@ -5,6 +5,7 @@ import AdsContainer from '~/components/atoms/AdsContainer'
 import Box from '~/components/atoms/Box'
 import Typography from '~/components/atoms/Typography'
 import VideoButtonGroup from '~/components/templates/VideoButtonGroup'
+import WatchedVideoButtonGroup from '~/components/templates/WatchedVideoButtonGroup'
 import { useHome } from './hooks'
 import * as S from './styles'
 
@@ -13,7 +14,7 @@ interface HomeProps {
 }
 
 const Home = ({ videos }: HomeProps) => {
-  const { videosData, getNewVideos, texts } = useHome(videos)
+  const { videosData, getNewVideos, texts, watchedVideosData } = useHome(videos)
 
   return (
     <S.Container>
@@ -29,6 +30,17 @@ const Home = ({ videos }: HomeProps) => {
           <AdsContainer adslot="4593736619" />
         </div>
       </Box>
+
+      {watchedVideosData?.length && (
+        <>
+          <Box alignItems="flex-start" boxSize="100%">
+            <Typography variant="h4" as="h1">
+              {texts.YOUR_LAST_WATCHED_VODS}
+            </Typography>
+          </Box>
+          <WatchedVideoButtonGroup videos={watchedVideosData} />
+        </>
+      )}
 
       <Box alignItems="flex-start" boxSize="100%">
         <Typography variant="h4" as="h1">

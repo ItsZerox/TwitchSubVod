@@ -10,8 +10,8 @@ import formatDate from '~/utils/formatDate'
 import formatViews from '~/utils/formatViews'
 
 interface ViewAndDateProps {
-  viewCount: number
-  date: string
+  viewCount?: number
+  date?: string
   locale?: string
   translatedViews?: string
   isMinimal?: boolean
@@ -21,18 +21,24 @@ const ViewAndDate = forwardRef<HTMLDivElement, ViewAndDateProps>(
   (
     { viewCount, date, locale, translatedViews, isMinimal }: ViewAndDateProps,
     ref,
-  ) => (
-    <Box as="span" gap="6px" ref={ref}>
-      <Typography variant="body2" className="stream-description-views">
-        {formatViews(viewCount)} {translatedViews}
-      </Typography>
-      {!isMinimal && (
-        <Typography variant="body2" className="stream-description-date">
-          {formatDate(date, locale)}
+  ) => {
+    if (!viewCount && !date) {
+      return null
+    }
+
+    return (
+      <Box as="span" gap="6px" ref={ref}>
+        <Typography variant="body2" className="stream-description-views">
+          {formatViews(viewCount, translatedViews)}
         </Typography>
-      )}
-    </Box>
-  ),
+        {!isMinimal && (
+          <Typography variant="body2" className="stream-description-date">
+            {formatDate(date, locale)}
+          </Typography>
+        )}
+      </Box>
+    )
+  },
 )
 
 interface StreamDescriptionProps {

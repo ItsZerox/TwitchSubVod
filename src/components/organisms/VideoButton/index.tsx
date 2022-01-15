@@ -12,6 +12,7 @@ interface VideoButtonProps {
   vodInformation: VodInformation
   noAvatar?: boolean
   isMinimal?: boolean
+  watchedPercentage?: number
 }
 
 const VideoButton = ({
@@ -19,6 +20,7 @@ const VideoButton = ({
   vodInformation,
   noAvatar,
   isMinimal,
+  watchedPercentage,
 }: VideoButtonProps) => {
   return (
     <S.VideoButtonContainer
@@ -40,6 +42,7 @@ const VideoButton = ({
           <VideoThumbnail
             src={vodInformation.thumbnail}
             title={vodInformation.title}
+            watchedPercentage={watchedPercentage}
           />
         </S.BoxLink>
       </Link>

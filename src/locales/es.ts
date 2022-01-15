@@ -29,6 +29,7 @@ const es: Locale = {
   POGU_LIVE_BETA_DESCRIPTION: `Aún estamos en fase de beta, así que es posible que algunos recursos no funcionen como esperado. Si encuentras algún problema, por favor, reporta-lo en el botón Comentarios en la parte superior derecha o en el menú.`,
   REMOVED_USER_MESSAGE:
     '{{streamerName}} nos pidió que elimináramos sus vídeos de aquí :(',
+  YOUR_LAST_WATCHED_VODS: 'Tus últimos VODs vistos',
 }
 
 export default es

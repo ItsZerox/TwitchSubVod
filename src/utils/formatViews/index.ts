@@ -1,4 +1,8 @@
-const formatViews = (views: number, viewText?: string) => {
+const formatViews = (views?: number, viewText?: string) => {
+  if (!views) {
+    return ''
+  }
+
   const viewTextFinal = viewText ? ` ${viewText}` : ''
 
   if (views < 1000) {

@@ -22,6 +22,10 @@ export const VideoButtonContainer = styled.div<{ isMinimal?: boolean }>`
     img {
       filter: brightness(1.2);
     }
+
+    .progress-bar {
+      display: none;
+    }
   }
 
   :focus-within {
