@@ -23,9 +23,7 @@ const Videos = ({ videos, isUserRemoved }: VideoProps) => {
     >
       <Box flexDirection="column" gap="20px" alignItems="center">
         {isUserRemoved ? (
-          <RemovedUser
-            streamerName={videosData[0].streamerInformation.displayName}
-          />
+          <RemovedUser />
         ) : (
           <InfiniteScroll
             dataLength={videosData.length}

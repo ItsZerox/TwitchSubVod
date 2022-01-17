@@ -26,8 +26,7 @@ const en = {
     "pogu.live is a free tool that allows you to watch sub only or deleted VODs for free. It works because when a streamer deletes a video, it is not deleted from Twitch's servers immediately. Instead, it is marked as deleted and then removed from the website after a few weeks, so you can still watch and download it in the meantime.",
   POGU_LIVE_BETA_DESCRIPTION:
     'We\'re still in our beta phase, so if you find any bugs, please report them in the "Feedback" button in the top right corner or in the menu if you\'re on mobile. Thank you!',
-  REMOVED_USER_MESSAGE:
-    '{{streamerName}} asked us to remove their videos from here :(',
+  REMOVED_USER_MESSAGE: 'Removed',
   YOUR_LAST_WATCHED_VODS: 'Your last watched VODs',
 }
 

@@ -107,7 +107,7 @@ const Player = ({
   const isUserRemoved = removedUsers.includes(streamerName?.toLowerCase())
 
   if (isUserRemoved) {
-    return <RemovedUser streamerName={streamerName} />
+    return <RemovedUser />
   }
 
   return (

@@ -31,7 +31,7 @@ const Home = ({ videos }: HomeProps) => {
         </div>
       </Box>
 
-      {watchedVideosData?.length && (
+      {watchedVideosData?.length ? (
         <>
           <Box alignItems="flex-start" boxSize="100%">
             <Typography variant="h4" as="h1">
@@ -40,7 +40,7 @@ const Home = ({ videos }: HomeProps) => {
           </Box>
           <WatchedVideoButtonGroup videos={watchedVideosData} />
         </>
-      )}
+      ) : null}
 
       <Box alignItems="flex-start" boxSize="100%">
         <Typography variant="h4" as="h1">

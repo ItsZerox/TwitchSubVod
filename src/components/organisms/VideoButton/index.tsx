@@ -22,6 +22,14 @@ const VideoButton = ({
   isMinimal,
   watchedPercentage,
 }: VideoButtonProps) => {
+  const removedStreamers = process.env.NEXT_PUBLIC_REMOVED_STREAMERS
+  if (
+    streamerInformation?.name &&
+    removedStreamers?.includes(streamerInformation.name)
+  ) {
+    return null
+  }
+
   return (
     <S.VideoButtonContainer
       isMinimal={isMinimal}

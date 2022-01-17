@@ -25,7 +25,7 @@ const DeletedVods = ({ videos, isUserRemoved }: DeletedVodsProps) => {
   return (
     <ProfilePage streamerInformation={streamerInformation}>
       {isUserRemoved && typeof window !== undefined ? (
-        <RemovedUser streamerName={videosData[0].displayName} />
+        <RemovedUser />
       ) : (
         <InfiniteScroll
           dataLength={videosData.length}
