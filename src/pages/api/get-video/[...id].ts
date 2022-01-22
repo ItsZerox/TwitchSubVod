@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { IDeletedVodSchema } from '~/@types/DeletedVodSchema'
 import { ITwitchVideo } from '~/@types/ITwitchVideo'
-import { VideoUrl } from '~/@types/VideoUrl'
 import { getDeletedVodUrls } from '~/lib/getDeletedVodUrls'
 import deletedVodsV2 from '~/lib/mongodb/models/deletedVodsV2'
 import dbConnect from '~/lib/mongodb/mongodbConnect'
-import api from '~/services/config'
+import { apiGQL } from '~/services/config'
 import { createHLSResponse } from '~/utils/createHLSResponse'
 import { getQualitiesFromUrl } from '~/utils/getQualitiesFromUrl'
 import { getUrlsFromVideo } from '~/utils/getUrlFromVideo/getUrlsFromVideo'
@@ -18,9 +17,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const dirtyId = req.query.id[0] as string
   const id = dirtyId.replace('.m3u8', '')
 
-  if (id.length > 10) {
-    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate')
+  res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
+  res.setHeader('Content-Type', 'binary/octet-stream')
 
+  if (id.length > 10) {
     await dbConnect()
 
     const deletedVod: IDeletedVodSchema = await deletedVodsV2.findOne({
@@ -44,19 +44,46 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
-    res.setHeader('Content-Type', 'binary/octet-stream')
-
     res.write(createHLSResponse(urlsObject[0]))
 
     res.end()
     return
   }
 
-  res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate')
-  res.setHeader('Content-Type', 'binary/octet-stream')
+  const { data } = await apiGQL.post('', {
+    query: `
+      query {
+        video(id: "${id}") {
+          animatedPreviewURL
+          broadcastType
+        }
+      }
+    `,
+  })
 
-  const { data } = await api.get<ITwitchVideo>(`/videos/${id}`)
-  const urls = getUrlsFromVideo(data)
+  if (!data?.data?.video) {
+    res.setHeader('Content-Type', 'application/json')
+
+    res.status(404).json({ error: true, message: 'Not found' })
+    return
+  }
+
+  const { animatedPreviewURL, broadcastType } = data.data.video || {}
+
+  const url = getUrlsFromVideo(
+    animatedPreviewURL,
+    broadcastType === 'HIGHLIGHT',
+    id,
+  )
+
+  const urls = await getQualitiesFromUrl(url)
+
+  if (!urls.flat().length) {
+    res.setHeader('Content-Type', 'application/json')
+
+    res.status(404).json({ error: true, message: 'Not found' })
+    return
+  }
 
   res.write(createHLSResponse(urls))
 

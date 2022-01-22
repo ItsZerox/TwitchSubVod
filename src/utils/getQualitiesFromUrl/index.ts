@@ -15,7 +15,7 @@ export const getQualitiesFromUrl = async (url: string): Promise<VideoUrl[]> => {
   let urlObjects = availableUrls.map((response, index) => {
     if (response.status === 'fulfilled') {
       return {
-        resolution: resolutions[index + 1],
+        resolution: resolutions[index],
         url: url.replace('chunked', qualities[index]),
       }
     }
