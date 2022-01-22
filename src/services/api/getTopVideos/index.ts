@@ -1,26 +1,33 @@
-import api from '~/services/config'
-import { IGetTopVideos, ITwitchTopVideos } from './types'
+import { IGQLTwitchVideo } from '~/@types/Twitch/gql/IGQLTwitchVideo'
+import { twitchVideoQuery } from '~/lib/gql/twitchVideoQuery'
+import { apiGQL } from '~/services/config'
+import { IGetTopVideos } from './types'
 
 export const getTopVideos = async ({
   limit = 10,
-  offset = 0,
-  game = '',
-  period = 'week',
-  language = '',
-  sort = 'views',
-}: IGetTopVideos) => {
-  const query = {
-    limit,
-    offset,
-    game,
-    period,
-    language,
-    sort,
+  language = 'EN',
+}: IGetTopVideos): Promise<IGQLTwitchVideo[] | null> => {
+  try {
+    const response = await apiGQL.post('', {
+      query: `
+      query {
+        videos(first: ${limit}, language: ${language.toUpperCase()}) {
+          edges {
+            node {
+              ${twitchVideoQuery}
+            }
+          }
+        }
+      }
+    `,
+    })
+
+    return (
+      response?.data?.data?.videos?.edges?.map(
+        ({ node }: { node: IGQLTwitchVideo }) => node,
+      ) ?? null
+    )
+  } catch (err) {
+    return null
   }
-
-  const response = await api.get<ITwitchTopVideos>('/videos/top', {
-    params: query,
-  })
-
-  return response.data
 }
