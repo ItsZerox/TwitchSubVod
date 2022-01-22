@@ -25,22 +25,7 @@ const Videos = ({ videos, isUserRemoved }: VideoProps) => {
         {isUserRemoved ? (
           <RemovedUser />
         ) : (
-          <InfiniteScroll
-            dataLength={videosData.length}
-            next={getNewVideos}
-            hasMore={hasMore}
-            loader={
-              <Skeleton
-                variant="rectangular"
-                animation="wave"
-                width={'100%'}
-                height={200}
-              />
-            }
-            endMessage={null}
-          >
-            <VideoButtonGroup videos={videosData} />
-          </InfiniteScroll>
+          <VideoButtonGroup videos={videosData} />
         )}
       </Box>
     </ProfilePage>
