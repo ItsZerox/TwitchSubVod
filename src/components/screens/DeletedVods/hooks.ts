@@ -27,5 +27,5 @@ export const useDeletedVods = (data: IDeletedVods[]) => {
     }
   }
 
-  return { videosData, getNewVideos, hasMore }
+  return { videosData, hasMore }
 }

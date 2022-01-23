@@ -12,7 +12,7 @@ interface HomeProps {
 }
 
 const Home = ({ videos }: HomeProps) => {
-  const { videosData, getNewVideos, texts, watchedVideosData } = useHome(videos)
+  const { videosData, texts, watchedVideosData } = useHome(videos)
 
   return (
     <S.Container>

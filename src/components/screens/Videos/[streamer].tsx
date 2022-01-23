@@ -13,8 +13,7 @@ interface VideoProps {
 }
 
 const Videos = ({ videos, isUserRemoved }: VideoProps) => {
-  const { videosData, getNewVideos, streamerInformation, hasMore } =
-    useVideos(videos)
+  const { videosData, streamerInformation } = useVideos(videos)
 
   return (
     <ProfilePage

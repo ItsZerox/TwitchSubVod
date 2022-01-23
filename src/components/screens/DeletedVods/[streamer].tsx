@@ -10,7 +10,7 @@ interface DeletedVodsProps {
 }
 
 const DeletedVods = ({ videos, isUserRemoved }: DeletedVodsProps) => {
-  const { videosData, getNewVideos, hasMore } = useDeletedVods(videos)
+  const { videosData } = useDeletedVods(videos)
 
   const streamerInformation = {
     displayName: videos[0].displayName,
