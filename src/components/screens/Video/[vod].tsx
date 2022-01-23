@@ -62,6 +62,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
                 video.streamerInformation.name ||
                 ''
               }
+              notFoundText={texts.VIDEO_NOT_FOUND}
             />
           </PlayerContainer>
           <Box

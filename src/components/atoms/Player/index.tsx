@@ -6,6 +6,8 @@ import {
   DefaultSettings,
 } from '@vime/react'
 import { HTMLAttributes, useEffect, useRef } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 import { getCors } from '~/utils/getCors'
 import { removeCorsFromUrl } from '~/utils/removeCorsFromUrl'
 import TapSidesToSeek from './lib/TabSidesToSeek'
@@ -25,14 +27,32 @@ interface PlayerProps {
   streamerLogoUrl: string
   thumbnailUrl?: string
   vodId: string
+  notFoundText?: string
 }
 
-const getRealHLSUrl = (url: string) => {
+const getRealHLSUrl = (url: string, notFoundText?: string) => {
   const cleanUrl = url.replace('unmuted.ts', 'muted.ts')
 
   const urlWithoutCors = removeCorsFromUrl(cleanUrl)
 
-  return urlWithoutCors.replace('https://', `${getCors()}https://`)
+  const urlWithCors = urlWithoutCors.replace('https://', `${getCors()}https://`)
+
+  // sometimes the url is not found and the video is not available anymore so we just show an error toast
+  if (urlWithCors.includes('0.ts') || urlWithCors.includes('.m3u8')) {
+    const fetchFirstVideoChunk = async () => {
+      try {
+        await axios.head(urlWithCors)
+      } catch (err) {
+        toast.error(notFoundText || 'Video not found', {
+          toastId: 'video-not-found',
+        })
+      }
+    }
+
+    fetchFirstVideoChunk()
+  }
+
+  return urlWithCors
 }
 
 const Player = ({
@@ -43,6 +63,7 @@ const Player = ({
   streamerLogoUrl,
   thumbnailUrl,
   vodId,
+  notFoundText,
 }: PlayerProps) => {
   const player = useRef<HTMLVmPlayerElement>(null)
 
@@ -98,7 +119,7 @@ const Player = ({
     enableWorker: true,
     maxBufferLength: 60,
     xhrSetup: (xhr: XMLHttpRequest, url: string) => {
-      xhr.open('GET', getRealHLSUrl(url), true)
+      xhr.open('GET', getRealHLSUrl(url, notFoundText), true)
     },
   }
 
