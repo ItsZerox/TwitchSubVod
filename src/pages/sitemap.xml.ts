@@ -67,8 +67,12 @@ class Sitemap extends React.Component {
     let vods: string[] = []
 
     topVideos.forEach((videos) => {
-      streamers = streamers.concat(videos.vods.map((vod) => vod.channel.name))
-      vods = vods.concat(videos.vods.map((vod) => vod.broadcast_id.toString()))
+      if (!videos) {
+        return
+      }
+
+      streamers = streamers.concat(videos.map((vod) => vod.owner.login))
+      vods = vods.concat(videos.map((vod) => vod.id))
     })
 
     const dedupedStreamers = streamers.filter(

@@ -38,7 +38,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     }
   }
 
-  const videos = streamerVideos?.videos.map(videoAdapter)
+  const videos = streamerVideos?.map(videoAdapter)
 
   return {
     props: {

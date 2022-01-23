@@ -25,13 +25,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     } as const
   }
 
-  const [videoData, relatedVideosData] = await Promise.all([
-    getVideo(context.params.vod as string).catch(() => null),
-    getTopVideos({
-      language: context.locale,
-      limit: 32,
-    }).catch(() => null),
-  ])
+  const videoData = await getVideo(context.params.vod as string)
 
   if (!videoData) {
     await connectDB()
@@ -63,72 +57,29 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       },
     }
 
-    // todo: have better error handling than requesting data again https://youtu.be/d77uAqi2Ij0?t=18
-    const relatedStreamerVideosPromise = getStreamerVideos({
+    const otherStreamerVideos = await getStreamerVideos({
       streamerName: deletedVodData.name,
       limit: 32,
-    }).catch(() => null)
+    })
 
-    const relatedTopVideosPromise = getTopVideos({
-      language: context.locale,
-      limit: 32,
-    }).catch(() => null)
-
-    const [relatedStreamerVideos, relatedTopVideos] = await Promise.all([
-      relatedStreamerVideosPromise,
-      relatedTopVideosPromise,
-    ])
-
-    let relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
-      ? relatedStreamerVideos.videos.map(videoAdapter)
-      : relatedTopVideos?.vods.map(videoAdapter) || []
-
-    if (relatedVideos.length < 32) {
-      const fallbackRelatedTopVideos = relatedVideosData?.vods.splice(
-        0,
-        32 - relatedVideos.length,
-      )
-
-      if (fallbackRelatedTopVideos) {
-        relatedVideos = [
-          ...fallbackRelatedTopVideos.map(videoAdapter),
-          ...relatedVideos,
-        ]
-      }
-    }
+    const relatedVideos = otherStreamerVideos?.map(videoAdapter) || []
 
     return {
       props: {
         video,
-        relatedVideos: relatedVideos,
+        relatedVideos,
       },
     }
   }
 
   const video: IVideo = videoAdapter(videoData)
 
-  const relatedStreamerVideos = await getStreamerVideos({
-    streamerName: video.streamerInformation.name,
+  const otherStreamerVideos = await getStreamerVideos({
+    streamerName: videoData?.owner.login,
     limit: 32,
-  }).catch(() => null)
+  })
 
-  let relatedVideos: IVideo[] = relatedStreamerVideos?.videos.length
-    ? relatedStreamerVideos.videos.map(videoAdapter)
-    : relatedVideosData?.vods.map(videoAdapter) || []
-
-  if (relatedVideos.length < 32) {
-    const fallbackRelatedTopVideos = relatedVideosData?.vods.splice(
-      0,
-      32 - relatedVideos.length,
-    )
-
-    if (fallbackRelatedTopVideos) {
-      relatedVideos = [
-        ...fallbackRelatedTopVideos.map(videoAdapter),
-        ...relatedVideos,
-      ]
-    }
-  }
+  const relatedVideos = otherStreamerVideos?.map(videoAdapter) || []
 
   return {
     props: {
@@ -143,7 +94,7 @@ const VideoPage = ({
   video,
   relatedVideos,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  if (!video || !relatedVideos.length) {
+  if (!video) {
     return null
   }
 

@@ -1,5 +1,3 @@
-import { Skeleton } from '@mui/material'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import { IVideo } from '~/@types/IVideo'
 import AdsContainer from '~/components/atoms/AdsContainer'
 import Box from '~/components/atoms/Box'
@@ -14,7 +12,7 @@ interface HomeProps {
 }
 
 const Home = ({ videos }: HomeProps) => {
-  const { videosData, getNewVideos, texts, watchedVideosData } = useHome(videos)
+  const { videosData, texts, watchedVideosData } = useHome(videos)
 
   return (
     <S.Container>
@@ -47,22 +45,7 @@ const Home = ({ videos }: HomeProps) => {
           {texts.MOST_POPULAR_VODS_TODAY}
         </Typography>
       </Box>
-      <InfiniteScroll
-        dataLength={videosData.length}
-        next={getNewVideos}
-        hasMore={videosData.length <= 500}
-        loader={
-          <Skeleton
-            variant="rectangular"
-            animation="wave"
-            width={'100%'}
-            height={170}
-          />
-        }
-        endMessage={null}
-      >
-        <VideoButtonGroup videos={videosData} />
-      </InfiniteScroll>
+      <VideoButtonGroup videos={videosData} />
     </S.Container>
   )
 }

@@ -13,8 +13,7 @@ interface VideoProps {
 }
 
 const Videos = ({ videos, isUserRemoved }: VideoProps) => {
-  const { videosData, getNewVideos, streamerInformation, hasMore } =
-    useVideos(videos)
+  const { videosData, streamerInformation } = useVideos(videos)
 
   return (
     <ProfilePage
@@ -25,22 +24,7 @@ const Videos = ({ videos, isUserRemoved }: VideoProps) => {
         {isUserRemoved ? (
           <RemovedUser />
         ) : (
-          <InfiniteScroll
-            dataLength={videosData.length}
-            next={getNewVideos}
-            hasMore={hasMore}
-            loader={
-              <Skeleton
-                variant="rectangular"
-                animation="wave"
-                width={'100%'}
-                height={200}
-              />
-            }
-            endMessage={null}
-          >
-            <VideoButtonGroup videos={videosData} />
-          </InfiniteScroll>
+          <VideoButtonGroup videos={videosData} />
         )}
       </Box>
     </ProfilePage>

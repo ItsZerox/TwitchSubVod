@@ -40,10 +40,14 @@ export const useHome = (data: IVideo[]) => {
       offset: videosData.length,
     })
 
-    const newVideos = topVideos.vods.map(videoAdapter)
+    const newVideos = topVideos?.map(videoAdapter)
+
+    if (!newVideos?.length) {
+      return
+    }
 
     setVideosData([...videosData, ...newVideos])
   }
 
-  return { videosData, getNewVideos, texts, watchedVideosData }
+  return { videosData, texts, watchedVideosData }
 }

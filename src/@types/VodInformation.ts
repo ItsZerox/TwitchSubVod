@@ -1,5 +1,3 @@
-import { VideoUrl } from './VideoUrl'
-
 export interface VodInformation {
   id: string
   thumbnail: string

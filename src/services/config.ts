@@ -17,6 +17,14 @@ const apiV6 = axios.create({
   },
 })
 
+const apiGQL = axios.create({
+  baseURL: 'https://gql.twitch.tv/gql',
+  headers: {
+    'Client-Id': process.env.NEXT_PUBLIC_TWITCH_GQL_TOKEN as string,
+    'Content-Type': 'application/json',
+  },
+})
+
 const scraper = axios.create({
   headers: {
     'User-Agent': new UserAgent().toString(),
@@ -24,4 +32,4 @@ const scraper = axios.create({
 })
 
 export default api
-export { apiV6, scraper }
+export { apiV6, scraper, apiGQL }

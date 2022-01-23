@@ -1,24 +1,24 @@
-import { ITwitchVideo } from '~/@types/ITwitchVideo'
 import { IVideo } from '~/@types/IVideo'
 import { StreamerInformation } from '~/@types/StreamerInformation'
+import { IGQLTwitchVideo } from '~/@types/Twitch/gql/IGQLTwitchVideo'
 import { VodInformation } from '~/@types/VodInformation'
 
-export const videoAdapter = (video: ITwitchVideo): IVideo => {
+export const videoAdapter = (video: IGQLTwitchVideo): IVideo => {
   const streamerInformation: StreamerInformation = {
-    name: video.channel.name,
-    logo: video.channel.logo,
-    displayName: video.channel.display_name,
-    followers: video.channel.followers,
-    description: video.channel.description,
+    name: video.owner.login,
+    logo: video.owner.profileImageURL,
+    displayName: video.owner.displayName,
+    followers: video.owner.followers.totalCount,
+    description: video.owner.description,
   }
 
   const vodInformation: VodInformation = {
     title: video.title,
-    date: video.created_at as string,
-    duration: video.length,
-    id: video._id.replace('v', ''),
-    thumbnail: video.preview.medium,
-    viewCount: video.views,
+    date: video.createdAt,
+    duration: video.lengthSeconds,
+    id: video.id,
+    thumbnail: video.previewThumbnailURL,
+    viewCount: video.viewCount,
   }
 
   return {

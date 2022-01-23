@@ -15,10 +15,9 @@ export const useVideos = (data: IVideo[]) => {
     const streamerVideos = await getStreamerVideos({
       streamerName: data[0].streamerInformation.name,
       limit: 8,
-      offset: videosData.length,
     })
 
-    const newVideos = streamerVideos?.videos.map(videoAdapter)
+    const newVideos = streamerVideos?.map(videoAdapter)
 
     if (newVideos?.length) {
       setVideosData([...videosData, ...newVideos])
@@ -29,5 +28,5 @@ export const useVideos = (data: IVideo[]) => {
 
   const streamerInformation = data.length ? data[0].streamerInformation : null
 
-  return { videosData, getNewVideos, hasMore, streamerInformation }
+  return { videosData, streamerInformation }
 }

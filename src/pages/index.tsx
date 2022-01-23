@@ -7,10 +7,10 @@ import { getTopVideos } from '~/services/api/getTopVideos'
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const topVideos = await getTopVideos({
     language: context.locale,
-    limit: 30,
+    limit: 64,
   })
 
-  const videos = topVideos.vods.map(videoAdapter)
+  const videos = topVideos?.map(videoAdapter) ?? []
 
   return {
     props: {
