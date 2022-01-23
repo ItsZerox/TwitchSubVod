@@ -38,7 +38,7 @@ const getRealHLSUrl = (url: string, notFoundText?: string) => {
   const urlWithCors = urlWithoutCors.replace('https://', `${getCors()}https://`)
 
   // sometimes the url is not found and the video is not available anymore so we just show an error toast
-  if (urlWithCors.includes('0.ts') || urlWithCors.includes('.m3u8')) {
+  if (urlWithCors.includes('/0.ts') || urlWithCors.includes('.m3u8')) {
     const fetchFirstVideoChunk = async () => {
       try {
         await axios.head(urlWithCors)
