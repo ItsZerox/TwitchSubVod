@@ -1,5 +1,4 @@
 import axios from 'axios'
-import UserAgent from 'user-agents'
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -27,7 +26,10 @@ const apiGQL = axios.create({
 
 const scraper = axios.create({
   headers: {
-    'User-Agent': new UserAgent().toString(),
+    origin: 'null',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Methods': '*',
   },
 })
 

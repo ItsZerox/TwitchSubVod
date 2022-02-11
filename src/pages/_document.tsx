@@ -256,6 +256,19 @@ class MyDocument extends Document {
                   };`,
                 }}
               />
+              <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                  kofiWidgetOverlay.draw('pogulive', {
+                    'type': 'floating-chat',
+                    'floating-chat.donateButton.text': 'Support me',
+                    'floating-chat.donateButton.background-color': '#D70070',
+                    'floating-chat.donateButton.text-color': '#fff'
+                  });`,
+                }}
+              />
             </>
           )}
         </body>
