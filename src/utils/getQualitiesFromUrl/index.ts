@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { VideoUrl } from '~/@types/VideoUrl'
-import { scraper } from '~/services/config'
 
 export const getQualitiesFromUrl = async (url: string): Promise<VideoUrl[]> => {
   const qualities = ['720p60', '720p30', '480p30', '360p30', '160p30']
@@ -7,7 +7,7 @@ export const getQualitiesFromUrl = async (url: string): Promise<VideoUrl[]> => {
 
   const promises = qualities.map((quality) => {
     const newUrl = url.replace('chunked', quality)
-    return scraper.head(newUrl)
+    return axios.head(newUrl)
   })
 
   const availableUrls = await Promise.allSettled(promises)
