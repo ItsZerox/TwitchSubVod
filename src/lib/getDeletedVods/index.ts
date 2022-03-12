@@ -20,9 +20,8 @@ export const getDeletedVods = async ({
   limit = limit || 30
   offset = offset || 0
 
-  const { data } = await scraper.get(
-    `${process.env.DELETED_VODS_HOST}${username}`,
-  )
+  const { data } =
+    (await scraper.get(`${process.env.DELETED_VODS_HOST}${username}`)) || {}
 
   const streamerId = getStreamerId(data).toString()
 
@@ -33,7 +32,7 @@ export const getDeletedVods = async ({
       .replace('{{limit}}', limit.toString()),
   )
 
-  const allVods: IExternalDeletedVodsApi[] = allVodsResponse.data.data
+  const allVods: IExternalDeletedVodsApi[] = allVodsResponse?.data?.data
 
   if (!allVods.length) {
     throw new Error('No vods found')

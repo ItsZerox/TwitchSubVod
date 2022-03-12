@@ -24,14 +24,26 @@ const apiGQL = axios.create({
   },
 })
 
-const scraper = axios.create({
-  headers: {
-    origin: 'null',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': '*',
-    'Access-Control-Allow-Methods': '*',
+const scraper = {
+  get: async (url: string) => {
+    const config = {
+      method: 'post',
+      url: process.env.SCRAPER_API_URL,
+      data: {
+        token: process.env.SCRAPER_API_TOKEN,
+        url,
+      },
+    }
+
+    return await axios(config as any)
+      .then(function (response) {
+        return response
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   },
-})
+}
 
 export default api
 export { apiV6, scraper, apiGQL }
