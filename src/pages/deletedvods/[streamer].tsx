@@ -47,7 +47,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       },
       revalidate: revalidate.deletedVideos,
     }
-  } catch {
+  } catch (err) {
+    console.log(err)
     return { notFound: true } as const
   }
 }
