@@ -3,6 +3,8 @@ import { IExternalDeletedVodsApi } from '~/@types/IExternalDeletedVodsApi'
 import { deletedVodsApiAdapter } from '~/adapters/deletedVodsApiAdapter'
 import { getDeletedVodUrls } from '~/lib/getDeletedVodUrls'
 import { scraper } from '~/services/config'
+import connectDB from '~/lib/mongodb/mongodbConnect'
+import deletedVodsV2 from '../mongodb/models/deletedVodsV2'
 import { getStreamerId } from './getStreamerId'
 import { uploadToDatabase } from './uploadToDatabase'
 
@@ -19,6 +21,35 @@ export const getDeletedVods = async ({
 }: IGetDeletedVods): Promise<IDeletedVods[]> => {
   limit = limit || 30
   offset = offset || 0
+
+  const disabled = true
+
+  if (disabled) {
+    await connectDB()
+
+    const dbVods = await deletedVodsV2
+      .find({
+        name: username,
+      })
+      .sort({ streamDate: -1 })
+      .skip(offset)
+      .limit(limit)
+
+    const vods: IDeletedVods[] = dbVods.map((vod) => {
+      return {
+        streamId: vod.streamId,
+        name: vod.name,
+        displayName: vod.displayName,
+        logo: vod.logo,
+        streamDate: vod.streamDate,
+        directories: [],
+        length: 0,
+        streamUrls: [],
+      }
+    })
+
+    return vods
+  }
 
   const { data } =
     (await scraper.get(`${process.env.DELETED_VODS_HOST}${username}`)) || {}
