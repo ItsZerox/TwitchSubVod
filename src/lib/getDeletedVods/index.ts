@@ -29,7 +29,7 @@ export const getDeletedVods = async ({
 
     const dbVods = await deletedVodsV2
       .find({
-        name: username,
+        name: username?.toLowerCase(),
       })
       .sort({ streamDate: -1 })
       .skip(offset)
