@@ -35,13 +35,17 @@ export const getDeletedVods = async ({
       .skip(offset)
       .limit(limit)
 
+    if (!dbVods.length) {
+      return []
+    }
+
     const vods: IDeletedVods[] = dbVods.map((vod) => {
       return {
-        streamId: vod.streamId,
-        name: vod.name,
-        displayName: vod.displayName,
-        logo: vod.logo,
-        streamDate: vod.streamDate,
+        streamId: vod?.streamId,
+        name: vod?.name,
+        displayName: vod?.displayName,
+        logo: vod?.logo,
+        streamDate: vod?.streamDate,
         directories: [],
         length: 0,
         streamUrls: [],

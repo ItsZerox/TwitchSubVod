@@ -13,9 +13,9 @@ const DeletedVods = ({ videos, isUserRemoved }: DeletedVodsProps) => {
   const { videosData } = useDeletedVods(videos)
 
   const streamerInformation = {
-    displayName: videos[0].displayName,
-    name: videos[0].name,
-    logo: videos[0].logo,
+    displayName: videos[0]?.displayName,
+    name: videos[0]?.name,
+    logo: videos[0]?.logo,
     description: '',
     followers: 0,
   }

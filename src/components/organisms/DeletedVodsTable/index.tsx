@@ -1,4 +1,5 @@
 import { IDeletedVods } from '~/@types/IDeletedVods'
+import Typography from '~/components/atoms/Typography'
 import { useDeletedVodsTable } from './hooks'
 import * as S from './styles'
 
@@ -7,10 +8,14 @@ interface DeletedVodsTable {
 }
 
 export const DeletedVodsTable = ({ videos }: DeletedVodsTable) => {
-  const { tableInstance } = useDeletedVodsTable(videos)
+  const { tableInstance, texts } = useDeletedVodsTable(videos)
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
+
+  if (!rows.length) {
+    return <Typography variant="h5">{texts.STREAMER_NOT_FOUND}</Typography>
+  }
 
   return (
     <S.Table {...getTableProps()}>

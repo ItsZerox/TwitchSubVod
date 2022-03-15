@@ -2,10 +2,13 @@ import { useMemo } from 'react'
 import { Cell, useSortBy, useTable } from 'react-table'
 import { IDeletedVods } from '~/@types/IDeletedVods'
 import Button from '~/components/atoms/Button'
+import { useGlobal } from '~/contexts/GlobalContext'
 import formatDate from '~/utils/formatDate'
 import { secondsToHM } from '~/utils/secondsToHM'
 
 export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
+  const { texts } = useGlobal()
+
   const data = useMemo(
     () =>
       videos.map((video) => {
@@ -74,5 +77,6 @@ export const useDeletedVodsTable = (videos: IDeletedVods[]) => {
     data,
     columns,
     tableInstance,
+    texts,
   }
 }

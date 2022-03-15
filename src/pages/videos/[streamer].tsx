@@ -58,7 +58,9 @@ const VideosPage = ({
       <SearchIndicator
         streamerName={
           typeof window !== 'undefined'
-            ? window.location.pathname.split('/')[2]
+            ? window.location.pathname.split('/')[
+                window.location.pathname.split('/').length - 1
+              ]
             : ''
         }
       />
