@@ -6,7 +6,6 @@ import Video from '~/components/screens/Video/[vod]'
 import revalidate from '~/constants/revalidate'
 import connectDB from '~/lib/mongodb/mongodbConnect'
 import deletedVodsV2 from '~/lib/mongodb/models/deletedVodsV2'
-import { getTopVideos } from '~/services/api/getTopVideos'
 import { getVideo } from '~/services/api/getVideo'
 import { getStreamerVideos } from '~/services/api/getStreamerVideos'
 import { IDeletedVodSchema } from '~/@types/DeletedVodSchema'
@@ -19,7 +18,9 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  if (!context.params?.vod) {
+  const isNotNumber = Number.isNaN(Number(context?.params?.vod as string))
+
+  if (!context.params?.vod || isNotNumber) {
     return {
       notFound: true,
     } as const
