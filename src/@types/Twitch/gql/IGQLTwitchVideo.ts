@@ -6,6 +6,7 @@ export interface IGQLTwitchVideo {
   title: string
   viewCount: number
   owner: {
+    id: string
     displayName: string
     login: string
     description: string

@@ -6,6 +6,7 @@ export const twitchVideoQuery = `
   title
   viewCount
   owner {
+    id
     displayName
     login
     description
