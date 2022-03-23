@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import { ITwitchVideoComment } from '~/@types/ITwitchVideoComment'
-import { commentsAdapter, IComment } from '~/adapters/commentsAdapter'
-import api from '~/services/config'
+import { IComment } from '~/adapters/commentsAdapter'
+import { getComments } from '~/services/chat/getComments'
 
 interface IUseChatBox {
   currentVideoTime: number
@@ -17,27 +16,12 @@ export const useChatBox = ({ currentVideoTime }: IUseChatBox) => {
 
   const vodId = router.query.vod as string
 
-  const getComments = async () => {
-    const params = {
-      content_offset_seconds: currentVideoTime,
-    }
-
-    const { data } = await api.get<ITwitchVideoComment>(
-      `/videos/${vodId}/comments`,
-      {
-        params,
-      },
-    )
-
-    const adaptedComments = commentsAdapter(data.comments)
-
-    setNewComments((oldNewComments) =>
-      Array.from(new Set([...oldNewComments, ...adaptedComments])),
-    )
-  }
-
   useEffect(() => {
-    getComments()
+    getComments({
+      vodId,
+      currentVideoTime,
+      setNewComments,
+    })
   }, [])
 
   const scrollToLastMessage = () => {
@@ -59,7 +43,11 @@ export const useChatBox = ({ currentVideoTime }: IUseChatBox) => {
     ) {
       setComments([])
       setNewComments([])
-      getComments()
+      getComments({
+        vodId,
+        currentVideoTime,
+        setNewComments,
+      })
 
       if (lastComment.offsetSeconds > currentVideoTime) {
         return
@@ -101,7 +89,11 @@ export const useChatBox = ({ currentVideoTime }: IUseChatBox) => {
       setNewComments(newCommentsToSet)
 
       if (!newCommentsToSet.length) {
-        getComments()
+        getComments({
+          vodId,
+          currentVideoTime,
+          setNewComments,
+        })
       }
     }
   }, [currentVideoTime])
