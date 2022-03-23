@@ -12,6 +12,8 @@ import AdsContainer from '~/components/atoms/AdsContainer'
 import { toast } from 'react-toastify'
 import { PlayerContainer } from '~/components/atoms/Player'
 import Typography from '~/components/atoms/Typography'
+import ChatBox from '~/components/molecules/ChatBox'
+import { useState } from 'react'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
@@ -24,6 +26,7 @@ interface VideoProps {
 
 const Video = ({ video, relatedVideos }: VideoProps) => {
   const { texts } = useGlobal()
+  const [currentVideoTime, setCurrentVideoTime] = useState(0)
 
   return (
     <S.Container>
@@ -63,6 +66,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
                 ''
               }
               notFoundText={texts.VIDEO_NOT_FOUND}
+              setCurrentVideoTime={setCurrentVideoTime}
             />
           </PlayerContainer>
           <Box
@@ -130,7 +134,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
         </Box>
       </Box>
       <Box flexDirection="column" as="aside">
-        <div
+        {/* <div
           style={{
             display: 'flex',
             width: '100%',
@@ -140,7 +144,9 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           }}
         >
           <AdsContainer adslot="8461022959" />
-        </div>
+        </div> */}
+
+        <ChatBox currentVideoTime={currentVideoTime} />
 
         <VideoButtonGroup
           videos={relatedVideos.reverse().slice(16)}
