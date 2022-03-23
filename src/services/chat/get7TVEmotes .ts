@@ -1,11 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { ILoadEmotes } from '~/@types/ILoadEmotes'
 import { SEVENTV_EMOTE_API } from '~/constants/emotes'
-
-interface ILoad7TVEmotes {
-  code: string
-  id: string
-}
 
 export const load7TVEmotes = async (streamerName: string) => {
   try {
@@ -20,7 +16,7 @@ export const load7TVEmotes = async (streamerName: string) => {
       }
     })
 
-    return allEmotes as ILoad7TVEmotes[]
+    return allEmotes as ILoadEmotes[]
   } catch {
     toast.error('Error loading 7TV emotes')
     return []

@@ -1,13 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { ILoadEmotes } from '~/@types/ILoadEmotes'
 import { BTTV_EMOTE_API } from '~/constants/emotes'
-
-interface ILoadBTTVEmotes {
-  code: string
-  id: string
-  imageType: string
-  userId?: string
-}
 
 export const loadBTTVEmotes = async (twitchId: string) => {
   try {
@@ -17,7 +11,7 @@ export const loadBTTVEmotes = async (twitchId: string) => {
 
     const allEmotes = [...data?.sharedEmotes, ...data?.channelEmotes]
 
-    return allEmotes as ILoadBTTVEmotes[]
+    return allEmotes as ILoadEmotes[]
   } catch {
     toast.error('Error loading BTTV emotes')
     return []

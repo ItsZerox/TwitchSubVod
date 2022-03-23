@@ -1,11 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { ILoadEmotes } from '~/@types/ILoadEmotes'
 import { FFZ_EMOTE_API } from '~/constants/emotes'
-
-interface ILoadFFZEmotes {
-  code: string
-  id: string
-}
 
 export const loadFFZEmotes = async (twitchId: string) => {
   try {
@@ -18,7 +14,7 @@ export const loadFFZEmotes = async (twitchId: string) => {
       }
     })
 
-    return allEmotes as ILoadFFZEmotes[]
+    return allEmotes as ILoadEmotes[]
   } catch {
     toast.error('Error loading FFZ emotes')
     return []
