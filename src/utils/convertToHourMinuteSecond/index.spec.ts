@@ -21,8 +21,8 @@ describe('convertToHourMinuteSecond', () => {
     expect(convertToHourMinuteSecond(660)).toBe('11:00')
   })
 
-  it("should return '01:00:01' when seconds is 3601", () => {
-    expect(convertToHourMinuteSecond(3601)).toBe('01:00:01')
+  it("should return '1:00:01' when seconds is 3601", () => {
+    expect(convertToHourMinuteSecond(3601)).toBe('1:00:01')
   })
 
   it("should return '11:00:01' when seconds is 3661", () => {
