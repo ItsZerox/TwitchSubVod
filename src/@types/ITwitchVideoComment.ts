@@ -42,7 +42,7 @@ export interface Message {
   emoticons: Emoticon2[]
 }
 
-export interface Comment {
+export interface ITwitchComment {
   _id: string
   created_at: Date
   updated_at: Date
@@ -57,6 +57,6 @@ export interface Comment {
 }
 
 export interface ITwitchVideoComment {
-  comments: Comment[]
+  comments: ITwitchComment[]
   _next: string
 }
