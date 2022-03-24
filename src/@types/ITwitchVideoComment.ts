@@ -16,7 +16,7 @@ export interface Emoticon {
 
 export interface Fragment {
   text: string
-  emoticon: Emoticon
+  emoticon?: Emoticon
 }
 
 export interface UserBadge {
