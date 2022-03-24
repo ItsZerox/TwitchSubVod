@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { ILoadEmotes } from '~/@types/ILoadEmotes'
 import { IComment } from '~/adapters/commentsAdapter'
+import { useGlobal } from '~/contexts/GlobalContext'
 import { load7TVEmotes } from '~/services/chat/get7TVEmotes '
 import { loadBTTVEmotes } from '~/services/chat/getBTTVEmotes'
 import { getComments } from '~/services/chat/getComments'
@@ -13,27 +14,15 @@ interface IUseChatBox {
   streamerName: string
 }
 
-interface IEmotes {
-  twitchEmotes: ILoadEmotes[]
-  bttvEmotes: ILoadEmotes[]
-  ffzEmotes: ILoadEmotes[]
-  sevenTvEmotes: ILoadEmotes[]
-}
-
 export const useChatBox = ({
   currentVideoTime,
   streamerId,
   streamerName,
 }: IUseChatBox) => {
+  const { setEmotes } = useGlobal()
   const router = useRouter()
   const [comments, setComments] = useState<IComment[]>([])
   const [newComments, setNewComments] = useState<IComment[]>([])
-  const [emotes, setEmotes] = useState<IEmotes>({
-    twitchEmotes: [],
-    bttvEmotes: [],
-    ffzEmotes: [],
-    sevenTvEmotes: [],
-  })
 
   const commentsRef = useRef<HTMLUListElement>(null)
 
@@ -54,7 +43,6 @@ export const useChatBox = ({
 
       // todo: get twitch global and local emotes
       setEmotes({
-        twitchEmotes: [],
         bttvEmotes,
         ffzEmotes,
         sevenTvEmotes,
