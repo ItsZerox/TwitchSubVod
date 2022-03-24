@@ -1,7 +1,7 @@
 // CDNs
 const TWITCH_CDN = 'https://static-cdn.jtvnw.net'
 const FFZ_EMOTE_CDN = 'https://cdn.frankerfacez.com/emote'
-const BTTV_EMOTE_CDN = 'https://archive.overpowered.tv/bttv'
+const BTTV_EMOTE_CDN = 'https://cdn.betterttv.net/emote'
 const SEVENTV_EMOTE_CDN = 'https://cdn.7tv.app/emote'
 
 // APIs
