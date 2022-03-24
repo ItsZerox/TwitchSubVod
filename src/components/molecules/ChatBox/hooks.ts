@@ -7,6 +7,7 @@ import { load7TVEmotes } from '~/services/chat/get7TVEmotes '
 import { loadBTTVEmotes } from '~/services/chat/getBTTVEmotes'
 import { getComments } from '~/services/chat/getComments'
 import { loadFFZEmotes } from '~/services/chat/getFFZEmotes'
+import { loadBadges } from '~/services/chat/loadBadges'
 
 interface IUseChatBox {
   currentVideoTime: number
@@ -19,7 +20,7 @@ export const useChatBox = ({
   streamerId,
   streamerName,
 }: IUseChatBox) => {
-  const { setEmotes } = useGlobal()
+  const { setEmotes, setBadges } = useGlobal()
   const router = useRouter()
   const [comments, setComments] = useState<IComment[]>([])
   const [newComments, setNewComments] = useState<IComment[]>([])
@@ -30,16 +31,18 @@ export const useChatBox = ({
 
   useEffect(() => {
     const fetchCommentsAndEmotes = async () => {
-      const [bttvEmotes, ffzEmotes, sevenTvEmotes] = await Promise.all([
-        loadBTTVEmotes(streamerId),
-        loadFFZEmotes(streamerId),
-        load7TVEmotes(streamerName),
-        getComments({
-          vodId,
-          currentVideoTime,
-          setNewComments,
-        }),
-      ])
+      const [twitchBadges, bttvEmotes, ffzEmotes, sevenTvEmotes] =
+        await Promise.all([
+          loadBadges(streamerId),
+          loadBTTVEmotes(streamerId),
+          loadFFZEmotes(streamerId),
+          load7TVEmotes(streamerName),
+          getComments({
+            vodId,
+            currentVideoTime,
+            setNewComments,
+          }),
+        ])
 
       // todo: get twitch global and local emotes
       setEmotes({
@@ -47,6 +50,7 @@ export const useChatBox = ({
         ffzEmotes,
         sevenTvEmotes,
       })
+      setBadges(twitchBadges)
     }
 
     fetchCommentsAndEmotes()
