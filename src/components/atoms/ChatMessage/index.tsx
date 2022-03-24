@@ -13,7 +13,13 @@ const ChatMessage = (comment: IComment) => {
         {convertToHourMinuteSecond(comment.offsetSeconds)}
       </S.ChatMessageTimestamp>
       {/* todo: add badges */}
-      <S.ChatMessageChatter textColor={comment.userColor || colors.pink700}>
+      <S.ChatMessageChatter
+        style={{
+          color: comment.userColor || colors.pink700,
+          width: '100%',
+          fontWeight: 700,
+        }}
+      >
         {comment.displayName}:{' '}
       </S.ChatMessageChatter>
       <S.ChatMessageBody>{formattedMessage}</S.ChatMessageBody>

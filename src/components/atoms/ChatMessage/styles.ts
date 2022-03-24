@@ -13,11 +13,7 @@ export const ChatMessageTimestamp = styled.span`
   margin-right: 5px;
 `
 
-export const ChatMessageChatter = styled.span<{ textColor?: string }>`
-  color: ${({ textColor }) => textColor || 'white'};
-  width: 100%;
-  font-weight: 700;
-`
+export const ChatMessageChatter = styled.span``
 
 export const ChatMessageBody = styled.span`
   width: 100%;
