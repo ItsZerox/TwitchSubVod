@@ -64,8 +64,6 @@ export const useChatBox = ({
     fetchCommentsAndEmotes()
   }, [])
 
-  console.log(emotes)
-
   const scrollToLastMessage = () => {
     const lastChild = commentsRef.current?.lastElementChild
 
