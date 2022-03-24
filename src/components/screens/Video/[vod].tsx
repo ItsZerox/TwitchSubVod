@@ -29,140 +29,160 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
   const [currentVideoTime, setCurrentVideoTime] = useState(0)
 
   return (
-    <S.Container>
+    <>
       <Box
-        flexDirection="column"
-        gap="64px"
-        as="main"
-        _mobileProps={{
-          gap: '32px',
-        }}
+        boxSize="100vw"
+        alignItems="center"
+        hideInMobile={true}
+        hideInDesktop={false}
       >
-        <Box hideInMobile={false} hideInDesktop={true}>
-          <div
-            style={{
-              width: '100%',
-              height: '120px',
-              borderRadius: '8px',
-            }}
-          >
-            <AdsContainer adslot="5906818280" />
-          </div>
-        </Box>
+        <div
+          style={{
+            width: '100%',
+            height: '280px',
+            borderRadius: '8px',
+            margin: '0 auto',
+          }}
+        >
+          <AdsContainer adslot="5175833696" />
+        </div>
+      </Box>
 
-        <Box flexDirection="column" gap="16px">
-          <PlayerContainer>
-            <Player
-              key={video.vodInformation.id}
-              url={`/api/get-video/${video.vodInformation.id}.m3u8`}
-              poster={video.vodInformation.thumbnail}
-              title={video.vodInformation.title || ''}
-              streamerLogoUrl={video.streamerInformation.logo || ''}
-              thumbnailUrl={video.vodInformation.thumbnail || ''}
-              vodId={video.vodInformation.id}
-              streamerName={
-                video.streamerInformation.displayName ||
-                video.streamerInformation.name ||
-                ''
-              }
-              notFoundText={texts.VIDEO_NOT_FOUND}
-              setCurrentVideoTime={setCurrentVideoTime}
-            />
-          </PlayerContainer>
-          <Box
-            gap="16px"
-            justifyContent="space-between"
-            _mobileProps={{
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              justifyContent: 'center',
-              boxSize: '100%',
-            }}
-          >
-            <StreamDescription
-              streamerInformation={video.streamerInformation}
-              vodInformation={video.vodInformation}
-              lineLimit={1}
-              avatarWidth="64px"
-            />
+      <S.Container>
+        <Box
+          flexDirection="column"
+          gap="64px"
+          as="main"
+          _mobileProps={{
+            gap: '32px',
+          }}
+        >
+          <Box hideInMobile={false} hideInDesktop={true}>
+            <div
+              style={{
+                width: '100%',
+                height: '120px',
+                borderRadius: '8px',
+              }}
+            >
+              <AdsContainer adslot="5906818280" />
+            </div>
+          </Box>
+
+          <Box flexDirection="column" gap="16px">
+            <PlayerContainer>
+              <Player
+                key={video.vodInformation.id}
+                url={`/api/get-video/${video.vodInformation.id}.m3u8`}
+                poster={video.vodInformation.thumbnail}
+                title={video.vodInformation.title || ''}
+                streamerLogoUrl={video.streamerInformation.logo || ''}
+                thumbnailUrl={video.vodInformation.thumbnail || ''}
+                vodId={video.vodInformation.id}
+                streamerName={
+                  video.streamerInformation.displayName ||
+                  video.streamerInformation.name ||
+                  ''
+                }
+                notFoundText={texts.VIDEO_NOT_FOUND}
+                setCurrentVideoTime={setCurrentVideoTime}
+              />
+            </PlayerContainer>
             <Box
-              gap="8px"
-              hideInMobile={true}
+              gap="16px"
+              justifyContent="space-between"
               _mobileProps={{
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 justifyContent: 'center',
                 boxSize: '100%',
               }}
             >
-              <Button
-                variant="secondary"
-                text={texts.FOLLOW}
-                _mobileProps={{
-                  buttonWidth: '100%',
-                }}
-                onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
+              <StreamDescription
+                streamerInformation={video.streamerInformation}
+                vodInformation={video.vodInformation}
+                lineLimit={1}
+                avatarWidth="64px"
               />
-              <Button
-                variant="primary"
-                text={texts.DOWNLOAD}
+              <Box
+                gap="8px"
+                hideInMobile={true}
                 _mobileProps={{
-                  buttonWidth: '100%',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxSize: '100%',
                 }}
-                onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
+              >
+                <Button
+                  variant="secondary"
+                  text={texts.FOLLOW}
+                  _mobileProps={{
+                    buttonWidth: '100%',
+                  }}
+                  onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
+                />
+                <Button
+                  variant="primary"
+                  text={texts.DOWNLOAD}
+                  _mobileProps={{
+                    buttonWidth: '100%',
+                  }}
+                  onClick={() => toast(texts.IN_DEVELOPMENT_MESSAGE)}
+                />
+              </Box>
+            </Box>
+            <Box hideInMobile={true}>
+              <ShareButtons
+                titleText={texts.SHARE_TEXT.replace(
+                  '{{streamerName}}',
+                  video.streamerInformation.displayName,
+                )}
               />
             </Box>
           </Box>
-          <Box hideInMobile={true}>
-            <ShareButtons
-              titleText={texts.SHARE_TEXT.replace(
+
+          <Box flexDirection="column" gap="16px" hideInMobile={true}>
+            <Typography variant="h5">
+              {texts.OTHER_VIDEOS_OF_STREAMER.replace(
                 '{{streamerName}}',
-                video.streamerInformation.displayName,
+                video.streamerInformation.displayName ||
+                  video.streamerInformation.name,
               )}
+            </Typography>
+            <VideoButtonGroup
+              videos={relatedVideos.slice(-16).reverse()}
+              minVideoWidth="300px"
             />
           </Box>
         </Box>
+        <Box flexDirection="column" as="aside" gap="8px">
+          <ChatBox
+            currentVideoTime={currentVideoTime}
+            streamerId={video.streamerInformation.id}
+            streamerName={video.streamerInformation.name}
+          />
 
-        <Box flexDirection="column" gap="16px" hideInMobile={true}>
-          <Typography variant="h5">
-            {texts.OTHER_VIDEOS_OF_STREAMER.replace(
-              '{{streamerName}}',
-              video.streamerInformation.displayName ||
-                video.streamerInformation.name,
-            )}
-          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              height: '250px',
+              borderRadius: '8px',
+              marginBottom: '8px',
+            }}
+          >
+            <AdsContainer adslot="8461022959" />
+          </div>
+
           <VideoButtonGroup
-            videos={relatedVideos.slice(-16).reverse()}
+            videos={relatedVideos.reverse().slice(16)}
             minVideoWidth="300px"
+            isMinimal={true}
           />
         </Box>
-      </Box>
-      <Box flexDirection="column" as="aside" gap="8px">
-        <ChatBox
-          currentVideoTime={currentVideoTime}
-          streamerId={video.streamerInformation.id}
-          streamerName={video.streamerInformation.name}
-        />
-
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            height: '250px',
-            borderRadius: '8px',
-            marginBottom: '8px',
-          }}
-        >
-          <AdsContainer adslot="8461022959" />
-        </div>
-
-        <VideoButtonGroup
-          videos={relatedVideos.reverse().slice(16)}
-          minVideoWidth="300px"
-          isMinimal={true}
-        />
-      </Box>
-    </S.Container>
+      </S.Container>
+    </>
   )
 }
 
