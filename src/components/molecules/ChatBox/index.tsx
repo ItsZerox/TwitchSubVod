@@ -4,10 +4,16 @@ import * as S from './styles'
 
 interface IChatBox {
   currentVideoTime: number
+  streamerId: string
+  streamerName: string
 }
 
-const ChatBox = ({ currentVideoTime }: IChatBox) => {
-  const { comments, commentsRef } = useChatBox({ currentVideoTime })
+const ChatBox = ({ currentVideoTime, streamerId, streamerName }: IChatBox) => {
+  const { comments, commentsRef } = useChatBox({
+    currentVideoTime,
+    streamerId,
+    streamerName,
+  })
 
   return (
     <S.ChatBoxContainer ref={commentsRef}>

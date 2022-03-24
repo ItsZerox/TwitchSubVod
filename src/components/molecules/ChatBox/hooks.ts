@@ -1,28 +1,70 @@
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
+import { ILoadEmotes } from '~/@types/ILoadEmotes'
 import { IComment } from '~/adapters/commentsAdapter'
+import { load7TVEmotes } from '~/services/chat/get7TVEmotes '
+import { loadBTTVEmotes } from '~/services/chat/getBTTVEmotes'
 import { getComments } from '~/services/chat/getComments'
+import { loadFFZEmotes } from '~/services/chat/getFFZEmotes'
 
 interface IUseChatBox {
   currentVideoTime: number
+  streamerId: string
+  streamerName: string
 }
 
-export const useChatBox = ({ currentVideoTime }: IUseChatBox) => {
+interface IEmotes {
+  twitchEmotes: ILoadEmotes[]
+  bttvEmotes: ILoadEmotes[]
+  ffzEmotes: ILoadEmotes[]
+  sevenTvEmotes: ILoadEmotes[]
+}
+
+export const useChatBox = ({
+  currentVideoTime,
+  streamerId,
+  streamerName,
+}: IUseChatBox) => {
   const router = useRouter()
   const [comments, setComments] = useState<IComment[]>([])
   const [newComments, setNewComments] = useState<IComment[]>([])
+  const [emotes, setEmotes] = useState<IEmotes>({
+    twitchEmotes: [],
+    bttvEmotes: [],
+    ffzEmotes: [],
+    sevenTvEmotes: [],
+  })
 
   const commentsRef = useRef<HTMLUListElement>(null)
 
   const vodId = router.query.vod as string
 
   useEffect(() => {
-    getComments({
-      vodId,
-      currentVideoTime,
-      setNewComments,
-    })
+    const fetchCommentsAndEmotes = async () => {
+      const [bttvEmotes, ffzEmotes, sevenTvEmotes] = await Promise.all([
+        loadBTTVEmotes(streamerId),
+        loadFFZEmotes(streamerId),
+        load7TVEmotes(streamerName),
+        getComments({
+          vodId,
+          currentVideoTime,
+          setNewComments,
+        }),
+      ])
+
+      // todo: get twitch global and local emotes
+      setEmotes({
+        twitchEmotes: [],
+        bttvEmotes,
+        ffzEmotes,
+        sevenTvEmotes,
+      })
+    }
+
+    fetchCommentsAndEmotes()
   }, [])
+
+  console.log(emotes)
 
   const scrollToLastMessage = () => {
     const lastChild = commentsRef.current?.lastElementChild

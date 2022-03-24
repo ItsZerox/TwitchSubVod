@@ -146,7 +146,11 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           <AdsContainer adslot="8461022959" />
         </div> */}
 
-        <ChatBox currentVideoTime={currentVideoTime} />
+        <ChatBox
+          currentVideoTime={currentVideoTime}
+          streamerId={video.streamerInformation.id}
+          streamerName={video.streamerInformation.name}
+        />
 
         <VideoButtonGroup
           videos={relatedVideos.reverse().slice(16)}
