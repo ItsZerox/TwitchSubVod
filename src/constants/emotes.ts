@@ -5,8 +5,7 @@ const BTTV_EMOTE_CDN = 'https://cdn.betterttv.net/emote'
 const SEVENTV_EMOTE_CDN = 'https://cdn.7tv.app/emote'
 
 // APIs
-const TWITCH_BADGES_API =
-  'https://badges.twitch.tv/v1/badges/global/display?language=en'
+const TWITCH_BADGES_API = 'https://badges.twitch.tv/v1/badges'
 const FFZ_EMOTE_API = 'https://api.frankerfacez.com/v1'
 const BTTV_EMOTE_API = 'https://api.betterttv.net/3'
 const SEVENTV_EMOTE_API = 'https://api.7tv.app/v2'
