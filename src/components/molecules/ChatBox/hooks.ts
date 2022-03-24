@@ -134,6 +134,15 @@ export const useChatBox = ({
     }
   }, [currentVideoTimeState])
 
+  // update chat every quarter second (less blocky and more fluid)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVideoTimeState((oldTime) => oldTime + 1 / 100000000000)
+    }, 250)
+
+    return () => clearInterval(interval)
+  }, [currentVideoTimeState])
+
   useEffect(() => {
     scrollToLastMessage()
   }, [comments])
