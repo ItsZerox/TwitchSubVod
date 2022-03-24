@@ -84,12 +84,12 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
 
       return fullMessage
     },
-    [comment._id, TWITCH_CDN],
+    [comment._id, emotes.bttvEmotes, emotes.ffzEmotes, emotes.sevenTvEmotes],
   )
 
   const formattedMessage = useMemo(
     () => formatMessage(comment.fragments),
-    [comment.fragments],
+    [comment.fragments, formatMessage],
   )
 
   const formattedBadges = useMemo(
@@ -108,7 +108,7 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
           )
         }
       }),
-    [comment.badges],
+    [comment.badges, badges],
   )
 
   return {
