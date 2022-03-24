@@ -87,6 +87,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
             />
             <Box
               gap="8px"
+              hideInMobile={true}
               _mobileProps={{
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -112,14 +113,17 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
               />
             </Box>
           </Box>
-          <ShareButtons
-            titleText={texts.SHARE_TEXT.replace(
-              '{{streamerName}}',
-              video.streamerInformation.displayName,
-            )}
-          />
+          <Box hideInMobile={true}>
+            <ShareButtons
+              titleText={texts.SHARE_TEXT.replace(
+                '{{streamerName}}',
+                video.streamerInformation.displayName,
+              )}
+            />
+          </Box>
         </Box>
-        <Box flexDirection="column" gap="16px">
+
+        <Box flexDirection="column" gap="16px" hideInMobile={true}>
           <Typography variant="h5">
             {texts.OTHER_VIDEOS_OF_STREAMER.replace(
               '{{streamerName}}',
@@ -133,8 +137,14 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           />
         </Box>
       </Box>
-      <Box flexDirection="column" as="aside">
-        {/* <div
+      <Box flexDirection="column" as="aside" gap="8px">
+        <ChatBox
+          currentVideoTime={currentVideoTime}
+          streamerId={video.streamerInformation.id}
+          streamerName={video.streamerInformation.name}
+        />
+
+        <div
           style={{
             display: 'flex',
             width: '100%',
@@ -144,13 +154,7 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           }}
         >
           <AdsContainer adslot="8461022959" />
-        </div> */}
-
-        <ChatBox
-          currentVideoTime={currentVideoTime}
-          streamerId={video.streamerInformation.id}
-          streamerName={video.streamerInformation.name}
-        />
+        </div>
 
         <VideoButtonGroup
           videos={relatedVideos.reverse().slice(16)}
