@@ -25,6 +25,7 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
             <S.Emote
               key={comment._id + index}
               src={`${TWITCH_CDN}/emoticons/v2/${fragment.emoticon.emoticon_id}/default/dark/1.0`}
+              title={fragment.text}
             />
           )
         }
@@ -41,6 +42,7 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
                 <S.Emote
                   key={ffzEmote.id + textIndex}
                   src={`${FFZ_EMOTE_CDN}/${ffzEmote.id}/1`}
+                  title={ffzEmote.code}
                 />
               )
             }
@@ -54,6 +56,7 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
                 <S.Emote
                   key={bttvEmote.id + textIndex}
                   src={`${BTTV_EMOTE_CDN}/${bttvEmote.id}/1x`}
+                  title={bttvEmote.code}
                 />
               )
             }
@@ -67,6 +70,7 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
                 <S.Emote
                   key={sevenTvEmote.id + textIndex}
                   src={`${SEVENTV_EMOTE_CDN}/${sevenTvEmote.id}/1x`}
+                  title={sevenTvEmote.code}
                 />
               )
             }
