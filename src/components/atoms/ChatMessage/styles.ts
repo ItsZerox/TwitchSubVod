@@ -24,5 +24,5 @@ export const ChatMessageBody = styled.span`
 `
 export const Emote = styled.img`
   vertical-align: middle;
-  margin: -5rem 0;
+  margin: -5px 0;
 `
