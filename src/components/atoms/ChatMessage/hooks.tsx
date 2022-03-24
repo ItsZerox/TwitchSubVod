@@ -15,7 +15,7 @@ interface IUseChatMessage {
 }
 
 export const useChatMessage = ({ comment }: IUseChatMessage) => {
-  const { emotes } = useGlobal()
+  const { emotes, badges } = useGlobal()
 
   const formatMessage = useCallback(
     (fragments: Fragment[]) => {
@@ -92,7 +92,27 @@ export const useChatMessage = ({ comment }: IUseChatMessage) => {
     [comment.fragments],
   )
 
+  const formattedBadges = useMemo(
+    () =>
+      comment?.badges?.map((badge) => {
+        const localBadgeImage =
+          badges?.[badge._id].versions[Number(badge.version) || 0 || 1]
+
+        if (localBadgeImage?.image_url_1x) {
+          return (
+            <S.Badge
+              key={badge._id}
+              src={localBadgeImage?.image_url_1x}
+              title={localBadgeImage?.title}
+            />
+          )
+        }
+      }),
+    [comment.badges],
+  )
+
   return {
     formattedMessage,
+    formattedBadges,
   }
 }

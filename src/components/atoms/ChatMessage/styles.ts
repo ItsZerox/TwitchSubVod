@@ -22,3 +22,12 @@ export const Emote = styled.img`
   vertical-align: middle;
   margin: -5px 0;
 `
+
+export const ChatMessageBadges = styled.span``
+
+export const Badge = styled.img`
+  vertical-align: middle;
+  margin-right: 3px;
+  width: 18px;
+  height: 18px;
+`

@@ -5,14 +5,14 @@ import { useChatMessage } from './hooks'
 import * as S from './styles'
 
 const ChatMessage = (comment: IComment) => {
-  const { formattedMessage } = useChatMessage({ comment })
+  const { formattedMessage, formattedBadges } = useChatMessage({ comment })
 
   return (
     <S.ChatMessageContainer>
       <S.ChatMessageTimestamp>
         {convertToHourMinuteSecond(comment.offsetSeconds)}
       </S.ChatMessageTimestamp>
-      {/* todo: add badges */}
+      <S.ChatMessageBadges>{formattedBadges}</S.ChatMessageBadges>
       <S.ChatMessageChatter
         style={{
           color: comment.userColor || colors.pink700,
