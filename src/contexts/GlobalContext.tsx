@@ -6,6 +6,7 @@ import {
   SetStateAction,
 } from 'react'
 import { ILoadEmotes } from '~/@types/ILoadEmotes'
+import { BadgeSets } from '~/@types/ITwitchBadges'
 import en from '~/locales/en'
 import es from '~/locales/es'
 import fr from '~/locales/fr'
@@ -23,6 +24,8 @@ interface GlobalContextProps {
   texts: typeof en
   emotes: IEmotes
   setEmotes: Dispatch<SetStateAction<IEmotes>>
+  badges: BadgeSets | null
+  setBadges: Dispatch<SetStateAction<BadgeSets | null>>
 }
 
 const GlobalContext = createContext({} as GlobalContextProps)
@@ -36,6 +39,7 @@ const GlobalProvider = ({ locale, children }: GlobalProviderProps) => {
   const locales = { en, es, fr, pt }
   const texts = locales[locale as keyof typeof locales] || en
   const availableLocales = Object.keys(locales)
+  const [badges, setBadges] = useState<BadgeSets | null>(null)
   const [emotes, setEmotes] = useState<IEmotes>({
     bttvEmotes: [],
     ffzEmotes: [],
@@ -48,6 +52,8 @@ const GlobalProvider = ({ locale, children }: GlobalProviderProps) => {
     texts,
     emotes,
     setEmotes,
+    badges,
+    setBadges,
   }
 
   return (
