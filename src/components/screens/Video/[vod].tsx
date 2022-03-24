@@ -22,9 +22,10 @@ const Player = dynamic(() => import('~/components/atoms/Player'), {
 interface VideoProps {
   video: IVideo
   relatedVideos: IVideo[]
+  isDeleted: boolean
 }
 
-const Video = ({ video, relatedVideos }: VideoProps) => {
+const Video = ({ video, relatedVideos, isDeleted }: VideoProps) => {
   const { texts } = useGlobal()
   const [currentVideoTime, setCurrentVideoTime] = useState(0)
 
@@ -157,11 +158,13 @@ const Video = ({ video, relatedVideos }: VideoProps) => {
           </Box>
         </Box>
         <Box flexDirection="column" as="aside" gap="8px">
-          <ChatBox
-            currentVideoTime={currentVideoTime}
-            streamerId={video.streamerInformation.id}
-            streamerName={video.streamerInformation.name}
-          />
+          {!isDeleted && (
+            <ChatBox
+              currentVideoTime={currentVideoTime}
+              streamerId={video.streamerInformation.id}
+              streamerName={video.streamerInformation.name}
+            />
+          )}
 
           <div
             style={{

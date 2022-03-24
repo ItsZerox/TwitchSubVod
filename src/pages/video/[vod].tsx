@@ -42,6 +42,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
     const video: IVideo = {
       streamerInformation: {
+        id: deletedVodData.name,
         name: deletedVodData.name,
         displayName: deletedVodData.displayName,
         logo: deletedVodData.logo,
@@ -69,6 +70,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       props: {
         video,
         relatedVideos,
+        isDeleted: true,
       },
     }
   }
@@ -86,6 +88,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     props: {
       video,
       relatedVideos,
+      isDeleted: false,
     },
     revalidate: revalidate.video,
   }
@@ -94,6 +97,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 const VideoPage = ({
   video,
   relatedVideos,
+  isDeleted,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!video) {
     return null
@@ -131,7 +135,11 @@ const VideoPage = ({
           ],
         }}
       />
-      <Video video={video} relatedVideos={relatedVideos} />
+      <Video
+        video={video}
+        relatedVideos={relatedVideos}
+        isDeleted={isDeleted}
+      />
     </>
   )
 }
