@@ -5,11 +5,16 @@ import { BTTV_EMOTE_API } from '~/constants/emotes'
 
 export const loadBTTVEmotes = async (twitchId: string) => {
   try {
-    const { data } = await axios.get(
-      `${BTTV_EMOTE_API}/cached/users/twitch/${twitchId}`,
-    )
+    const [{ data: streamerData }, { data: globalData }] = await Promise.all([
+      axios.get(`${BTTV_EMOTE_API}/cached/users/twitch/${twitchId}`),
+      axios.get(`${BTTV_EMOTE_API}/cached/emotes/global`),
+    ])
 
-    const allEmotes = [...data?.sharedEmotes, ...data?.channelEmotes]
+    const allEmotes = [
+      ...streamerData?.sharedEmotes,
+      ...streamerData?.channelEmotes,
+      ...globalData,
+    ]
 
     return allEmotes as ILoadEmotes[]
   } catch {
