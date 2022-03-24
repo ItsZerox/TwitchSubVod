@@ -44,7 +44,6 @@ export const useChatBox = ({
           }),
         ])
 
-      // todo: get twitch global and local emotes
       setEmotes({
         bttvEmotes,
         ffzEmotes,
