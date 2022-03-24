@@ -16,7 +16,6 @@ const ChatMessage = (comment: IComment) => {
       <S.ChatMessageChatter textColor={comment.userColor || colors.pink700}>
         {comment.displayName}:{' '}
       </S.ChatMessageChatter>
-      {/* todo: add twitch/bttv/ffz/7tv emotes */}
       <S.ChatMessageBody>{formattedMessage}</S.ChatMessageBody>
     </S.ChatMessageContainer>
   )
