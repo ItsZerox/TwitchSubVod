@@ -56,9 +56,8 @@ export const useChatBox = ({
     const lastChild = commentsRef.current?.lastElementChild
 
     if (lastChild) {
-      lastChild.scrollIntoView({
-        block: 'end',
-        inline: 'nearest',
+      commentsRef.current?.scrollTo({
+        top: commentsRef.current?.scrollHeight,
       })
     }
   }
