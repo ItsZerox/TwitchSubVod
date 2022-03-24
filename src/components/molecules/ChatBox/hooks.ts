@@ -24,6 +24,12 @@ export const useChatBox = ({
   const router = useRouter()
   const [comments, setComments] = useState<IComment[]>([])
   const [newComments, setNewComments] = useState<IComment[]>([])
+  const [currentVideoTimeState, setCurrentVideoTimeState] = useState(0)
+  const [delay, setDelay] = useState(0)
+
+  useEffect(() => {
+    setCurrentVideoTimeState(currentVideoTime + delay)
+  }, [currentVideoTime, delay])
 
   const commentsRef = useRef<HTMLUListElement>(null)
 
@@ -39,7 +45,7 @@ export const useChatBox = ({
           load7TVEmotes(streamerName),
           getComments({
             vodId,
-            currentVideoTime,
+            currentVideoTime: currentVideoTimeState,
             setNewComments,
           }),
         ])
@@ -68,24 +74,24 @@ export const useChatBox = ({
   useEffect(() => {
     const lastComment = comments?.[comments.length - 1] || {}
     if (
-      lastComment.offsetSeconds > currentVideoTime ||
+      lastComment.offsetSeconds > currentVideoTimeState ||
       (!comments.length && newComments.length)
     ) {
       setComments([])
       setNewComments([])
       getComments({
         vodId,
-        currentVideoTime,
+        currentVideoTime: currentVideoTimeState,
         setNewComments,
       })
 
-      if (lastComment.offsetSeconds > currentVideoTime) {
+      if (lastComment.offsetSeconds > currentVideoTimeState) {
         return
       }
     }
 
     const commentsToPush = newComments.filter(
-      (newComment) => newComment.offsetSeconds <= currentVideoTime,
+      (newComment) => newComment.offsetSeconds <= currentVideoTimeState,
     )
 
     const shouldAddComment =
@@ -112,7 +118,7 @@ export const useChatBox = ({
       }, [])
 
       const newCommentsToSet = newComments.filter(
-        (comment) => comment.offsetSeconds > currentVideoTime,
+        (comment) => comment.offsetSeconds > currentVideoTimeState,
       )
 
       setComments(dedupedComments)
@@ -121,12 +127,12 @@ export const useChatBox = ({
       if (!newCommentsToSet.length) {
         getComments({
           vodId,
-          currentVideoTime,
+          currentVideoTime: currentVideoTimeState,
           setNewComments,
         })
       }
     }
-  }, [currentVideoTime])
+  }, [currentVideoTimeState])
 
   useEffect(() => {
     scrollToLastMessage()
@@ -135,5 +141,7 @@ export const useChatBox = ({
   return {
     comments,
     commentsRef,
+    delay,
+    setDelay,
   }
 }

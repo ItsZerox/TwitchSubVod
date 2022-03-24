@@ -9,7 +9,7 @@ interface IChatBox {
 }
 
 const ChatBox = ({ currentVideoTime, streamerId, streamerName }: IChatBox) => {
-  const { comments, commentsRef } = useChatBox({
+  const { comments, commentsRef, delay } = useChatBox({
     currentVideoTime,
     streamerId,
     streamerName,
@@ -18,8 +18,9 @@ const ChatBox = ({ currentVideoTime, streamerId, streamerName }: IChatBox) => {
   return (
     <S.ChatBoxContainer ref={commentsRef}>
       {comments.map((comment) => (
-        <ChatMessage key={comment._id} {...comment} />
+        <ChatMessage key={comment._id} {...comment} delay={delay} />
       ))}
+      {/* todo: add delay settings */}
     </S.ChatBoxContainer>
   )
 }

@@ -4,13 +4,17 @@ import { convertToHourMinuteSecond } from '~/utils/convertToHourMinuteSecond'
 import { useChatMessage } from './hooks'
 import * as S from './styles'
 
-const ChatMessage = (comment: IComment) => {
+interface IChatMessage extends IComment {
+  delay: number
+}
+
+const ChatMessage = (comment: IChatMessage) => {
   const { formattedMessage, formattedBadges } = useChatMessage({ comment })
 
   return (
     <S.ChatMessageContainer>
       <S.ChatMessageTimestamp>
-        {convertToHourMinuteSecond(comment.offsetSeconds)}
+        {convertToHourMinuteSecond(comment.offsetSeconds - comment.delay)}
       </S.ChatMessageTimestamp>
       <S.ChatMessageBadges>{formattedBadges}</S.ChatMessageBadges>
       <S.ChatMessageChatter
