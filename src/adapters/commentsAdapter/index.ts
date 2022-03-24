@@ -1,9 +1,9 @@
-import { ITwitchComment } from '~/@types/ITwitchVideoComment'
+import { Fragment, ITwitchComment } from '~/@types/ITwitchVideoComment'
 
 export interface IComment {
   _id: string
   offsetSeconds: number
-  body: string
+  fragments: Fragment[]
   displayName: string
   userColor: string
 }
@@ -13,7 +13,7 @@ export const commentsAdapter = (comment: ITwitchComment[]): IComment[] => {
     return {
       _id: comment._id,
       offsetSeconds: comment.content_offset_seconds,
-      body: comment.message.body,
+      fragments: comment.message.fragments,
       displayName: comment.commenter.display_name,
       userColor: comment.message.user_color,
     }
