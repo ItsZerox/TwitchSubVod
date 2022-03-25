@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import ChatMessage from '~/components/atoms/ChatMessage'
 import { useChatBox } from './hooks'
 import * as S from './styles'
@@ -25,4 +26,4 @@ const ChatBox = ({ currentVideoTime, streamerId, streamerName }: IChatBox) => {
   )
 }
 
-export default ChatBox
+export default memo(ChatBox)

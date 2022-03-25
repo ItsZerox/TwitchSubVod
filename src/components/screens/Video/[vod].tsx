@@ -13,7 +13,7 @@ import { toast } from 'react-toastify'
 import { PlayerContainer } from '~/components/atoms/Player'
 import Typography from '~/components/atoms/Typography'
 import ChatBox from '~/components/molecules/ChatBox'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
   ssr: false,
   loading: () => <div>...</div>,
@@ -28,6 +28,16 @@ interface VideoProps {
 const Video = ({ video, relatedVideos, isDeleted }: VideoProps) => {
   const { texts } = useGlobal()
   const [currentVideoTime, setCurrentVideoTime] = useState(0)
+
+  const memoizedRelatedVideosReversed = useMemo(
+    () => relatedVideos.slice(-16).reverse(),
+    [relatedVideos],
+  )
+
+  const memoizedRelatedVideos = useMemo(
+    () => relatedVideos.reverse().slice(16),
+    [relatedVideos],
+  )
 
   return (
     <>
@@ -152,7 +162,7 @@ const Video = ({ video, relatedVideos, isDeleted }: VideoProps) => {
               )}
             </Typography>
             <VideoButtonGroup
-              videos={relatedVideos.slice(-16).reverse()}
+              videos={memoizedRelatedVideosReversed}
               minVideoWidth="300px"
             />
           </Box>
@@ -179,7 +189,7 @@ const Video = ({ video, relatedVideos, isDeleted }: VideoProps) => {
           </div>
 
           <VideoButtonGroup
-            videos={relatedVideos.reverse().slice(16)}
+            videos={memoizedRelatedVideos}
             minVideoWidth="300px"
             isMinimal={true}
           />
