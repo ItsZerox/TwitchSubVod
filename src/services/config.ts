@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { cacheAdapterEnhancer } from 'axios-extensions'
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -6,6 +7,7 @@ const api = axios.create({
     Accept: 'application/vnd.twitchtv.v5+json',
     'Client-Id': process.env.NEXT_PUBLIC_TWITCH_GQL_TOKEN as string,
   },
+  adapter: cacheAdapterEnhancer(axios.defaults.adapter!),
 })
 
 const apiV6 = axios.create({
