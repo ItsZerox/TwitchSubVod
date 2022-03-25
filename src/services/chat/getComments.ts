@@ -15,7 +15,7 @@ export const getComments = async ({
   setNewComments,
 }: IGetComments) => {
   const params = {
-    content_offset_seconds: currentVideoTime,
+    content_offset_seconds: Math.round(currentVideoTime),
   }
 
   const { data } = await api.get<ITwitchVideoComment>(
