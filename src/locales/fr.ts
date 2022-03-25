@@ -25,7 +25,7 @@ const fr: Locale = {
   MOST_POPULAR_VODS_TODAY: "Les plus populaires aujourd'hui",
   OTHER_VIDEOS_OF_STREAMER: 'Autres vidéos de {{streamerName}}',
   POGU_LIVE_DESCRIPTION:
-    "pogu.live est un outil gratuit qui vous permet de regarder des vidéos payés ou supprimés gratuitement. Cela fonctionne car quand un streamer supprime une vidéo, elle n'est pas supprimée immédiatement sur les serveurs de Twitch. Elle est marquée comme supprimée et ensuite retirée du site après quelques semaines, ce qui vous permet de regarder et de télécharger la vidéo en attendant.",
+    "pogu.live est un outil gratuit qui vous permet de regarder n'importe quelle VOD Twitch. Nous ne sauvegardons, nous n'enregistrons ou nous n'uploadons aucune vidéo ici, nous justifions juste l'url de l'API Twitch, n'importe qui peut obtenir cette url, elle fonctionne car Twitch valide seulement la vidéo en frontend et pas en backend/API. Pour les vidéos supprimées, elle fonctionne car quand un streamer supprime une vidéo, elle est marquée comme supprimée et ensuite supprimée du site après quelques semaines, donc vous pouvez toujours regarder et télécharger la vidéo en attendant si vous avez l'url.",
   POGU_LIVE_BETA_DESCRIPTION:
     'Nous sommes encore en phase de bêta, si vous trouvez un bug, merci de le signaler avec le bouton "Feedback" en haut à droite ou dans le menu si vous êtes sur mobile. Merci !',
   REMOVED_USER_MESSAGE: 'Supprimé',

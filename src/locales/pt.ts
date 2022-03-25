@@ -26,7 +26,7 @@ const pt: Locale = {
   MOST_POPULAR_VODS_TODAY: 'Vídeos mais populares hoje',
   OTHER_VIDEOS_OF_STREAMER: 'Outros vídeos de {{streamerName}}',
   POGU_LIVE_DESCRIPTION:
-    'pogu.live é um aplicativo gratuito que permite você assistir VODs pagos ou deletados de forma gratuita. Ele funciona porque quando um streamer deleta um vídeo, ele não é deletado do servidor da Twitch imediatamente. Ele é marcado como deletado e depois removido do site após algumas semanas, então você ainda pode assistir e baixá-lo nesse meio tempo.',
+    'pogu.live é uma ferramenta grátis que permite que você assista qualquer VOD do Twitch. Não salvamos, armazenamos ou enviamos qualquer vídeo aqui, apenas linkamos a url da API da Twitch, qualquer pessoa pode obter este link, funciona porque o Twitch só valida o VOD no frontend e não no backend/API. Para vídeos deletados, funciona porque quando um streamer deleta um vídeo, ele não é deletado dos servidores da Twitch imediatamente. Ao invés disso, ele é marcado como deletado e depois removido da página após algumas semanas, então você ainda pode assistir e baixar o vídeo em meio ao tempo se você tem a url.',
   POGU_LIVE_BETA_DESCRIPTION: `Ainda estamos na fase de beta, então é possível que alguns recursos não funcionem como esperado. Se você encontrar algum problema, por favor, reporte-o no botão Feedback no canto superior direito ou no menu.`,
   REMOVED_USER_MESSAGE: 'Removido',
   YOUR_LAST_WATCHED_VODS: 'Seus últimos VODs assistidos',
