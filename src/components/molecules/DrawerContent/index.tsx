@@ -41,6 +41,16 @@ const DrawerContent = () => {
           as="a"
           href="https://old.pogu.live?ref=pogu.live"
         />
+        <Button
+          text={'DMCA Takedown'}
+          title={'DMCA Takedown'}
+          variant="secondary"
+          buttonWidth="100%"
+          as="a"
+          // @ts-ignore
+          target="_blank"
+          href="https://tally.so/r/3ERJLw"
+        />
       </Box>
 
       <Box boxHeight="104px">
@@ -51,24 +61,6 @@ const DrawerContent = () => {
             isButton
             as="a"
             href="https://twitter.com/pogulive"
-            target="_blank"
-            rel="noopener noreferrer"
-          />
-          <Icon
-            icon={<SiKofi size={28} color="#FFFFFF" />}
-            title={texts.SUPPORT_US_ON_KOFI}
-            isButton
-            as="a"
-            href="https://ko-fi.com/pogulive"
-            target="_blank"
-            rel="noopener noreferrer"
-          />
-          <Icon
-            icon={<AiFillGithub size={28} color="#FFFFFF" />}
-            title={texts.STAR_US_ON_GITHUB}
-            isButton
-            as="a"
-            href="https://github.com/Alissonsleal/TwitchSubVod"
             target="_blank"
             rel="noopener noreferrer"
           />
