@@ -13,6 +13,7 @@ const WatchedVideoButtonGroup = ({ videos }: WatchedVideoButtonGroupProps) => {
     <S.WatchedVideoButtonGroupContainer>
       {videos.map((video) => {
         const streamerInformation: StreamerInformation = {
+          id: video.streamerName,
           name: video.streamerName,
           displayName: video.streamerName,
           followers: 0,

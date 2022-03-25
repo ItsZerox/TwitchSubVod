@@ -5,7 +5,13 @@ import {
   DefaultControls,
   DefaultSettings,
 } from '@vime/react'
-import { HTMLAttributes, useEffect, useRef } from 'react'
+import {
+  Dispatch,
+  HTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getCors } from '~/utils/getCors'
@@ -28,6 +34,7 @@ interface PlayerProps {
   thumbnailUrl?: string
   vodId: string
   notFoundText?: string
+  setCurrentVideoTime: Dispatch<SetStateAction<number>>
 }
 
 const getRealHLSUrl = (url: string, notFoundText?: string) => {
@@ -64,6 +71,7 @@ const Player = ({
   thumbnailUrl,
   vodId,
   notFoundText,
+  setCurrentVideoTime,
 }: PlayerProps) => {
   const player = useRef<HTMLVmPlayerElement>(null)
 
@@ -107,8 +115,12 @@ const Player = ({
       )
     }, 10000)
 
+    const currentVideoTimeInterval = setInterval(() => {
+      setCurrentVideoTime(player.current?.currentTime || 0)
+    }, 1000)
+
     return () => {
-      clearInterval(interval)
+      clearInterval(interval), clearInterval(currentVideoTimeInterval)
     }
   }, [])
 

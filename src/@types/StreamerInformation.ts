@@ -1,4 +1,5 @@
 export interface StreamerInformation {
+  id: string
   displayName: string
   name: string
   logo: string

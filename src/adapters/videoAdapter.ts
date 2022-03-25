@@ -5,6 +5,7 @@ import { VodInformation } from '~/@types/VodInformation'
 
 export const videoAdapter = (video: IGQLTwitchVideo): IVideo => {
   const streamerInformation: StreamerInformation = {
+    id: video.owner.id,
     name: video.owner.login,
     logo: video.owner.profileImageURL,
     displayName: video.owner.displayName,
