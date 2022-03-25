@@ -72,6 +72,10 @@ export const useChatBox = ({
   }
 
   useEffect(() => {
+    if (Math.round(currentVideoTimeState) <= 0) {
+      return
+    }
+
     const lastComment = comments?.[comments.length - 1] || {}
     if (
       lastComment.offsetSeconds > currentVideoTimeState ||
