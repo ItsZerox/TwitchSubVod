@@ -12,6 +12,9 @@ const api = axios.create({
 
 const poguApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_POGU_API,
+  headers: {
+    Accept: 'application/json',
+  },
 })
 
 const apiV6 = axios.create({

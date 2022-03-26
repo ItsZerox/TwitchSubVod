@@ -11,6 +11,7 @@ import {
   SetStateAction,
   useEffect,
   useRef,
+  useState,
 } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -24,6 +25,7 @@ import '@vime/core/themes/default.css'
 import localStorageKeys, { IWatchedVod } from '~/constants/localStorageKeys'
 import timeInSeconds from '~/constants/defaultTime'
 import RemovedUser from '~/components/atoms/RemovedUser'
+import { poguApi } from '~/services/config'
 
 interface PlayerProps {
   url: string
@@ -73,9 +75,24 @@ const Player = ({
   notFoundText,
   setCurrentVideoTime,
 }: PlayerProps) => {
+  const [isDeleted, setIsDeleted] = useState(false)
   const player = useRef<HTMLVmPlayerElement>(null)
 
   useEffect(() => {
+    const fetchIsStreamerDeleted = async () => {
+      try {
+        const { data } = await poguApi.get(
+          `/get-removed-streamer/${streamerName}`,
+        )
+
+        setIsDeleted(data?.isDeleted)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    fetchIsStreamerDeleted()
+
     // use localStorage to forward user to last timestamp
     setTimeout(() => {
       const watchedVods = JSON.parse(
@@ -120,7 +137,9 @@ const Player = ({
     }, 1000)
 
     return () => {
-      clearInterval(interval), clearInterval(currentVideoTimeInterval)
+      clearInterval(interval),
+        clearInterval(currentVideoTimeInterval),
+        setIsDeleted(false)
     }
   }, [])
 
@@ -139,7 +158,7 @@ const Player = ({
     process.env.NEXT_PUBLIC_REMOVED_STREAMERS?.split(',') || []
   const isUserRemoved = removedUsers.includes(streamerName?.toLowerCase())
 
-  if (isUserRemoved) {
+  if (isUserRemoved || isDeleted) {
     return <RemovedUser />
   }
 

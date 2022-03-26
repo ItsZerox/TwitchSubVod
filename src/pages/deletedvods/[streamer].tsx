@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const streamer = context.params?.streamer as string
 
-  const removedUser = handleRemovedUser(streamer)
+  const removedUser = await handleRemovedUser(streamer)
 
   if (!removedUser.continue) {
     return removedUser

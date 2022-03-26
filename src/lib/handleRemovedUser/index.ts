@@ -1,13 +1,17 @@
 import revalidate from '~/constants/revalidate'
+import { poguApi } from '~/services/config'
 
-const handleRemovedUser = (streamerName: string) => {
+const handleRemovedUser = async (streamerName: string) => {
+  const { data } = await poguApi.get(`/get-removed-streamer/${streamerName}`)
+  const { isDeleted } = data || {}
+
   const removedUsers =
     process.env.NEXT_PUBLIC_REMOVED_STREAMERS?.split(',') || []
   const isUserRemoved = removedUsers.includes(streamerName?.toLowerCase())
 
-  if (isUserRemoved) {
+  if (isUserRemoved || isDeleted) {
     return {
-      revalidate: revalidate.videos,
+      revalidate: revalidate.videos * 100,
       props: {
         videos: [
           {
@@ -21,7 +25,7 @@ const handleRemovedUser = (streamerName: string) => {
             vodInformation: {},
           },
         ],
-        isUserRemoved,
+        isUserRemoved: true,
       },
     }
   }
