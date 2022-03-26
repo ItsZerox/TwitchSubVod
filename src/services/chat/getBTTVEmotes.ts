@@ -18,7 +18,6 @@ export const loadBTTVEmotes = async (twitchId: string) => {
 
     return allEmotes as ILoadEmotes[]
   } catch {
-    toast.error('Error loading BTTV emotes')
     return []
   }
 }

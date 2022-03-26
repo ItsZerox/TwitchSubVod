@@ -16,7 +16,6 @@ export const loadFFZEmotes = async (twitchId: string) => {
 
     return allEmotes as ILoadEmotes[]
   } catch {
-    toast.error('Error loading FFZ emotes')
     return []
   }
 }

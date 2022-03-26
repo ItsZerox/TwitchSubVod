@@ -23,7 +23,6 @@ export const loadBadges = async (streamerId: string) => {
 
     return allBadges
   } catch {
-    toast.error('Error loading FFZ emotes')
     return null
   }
 }
