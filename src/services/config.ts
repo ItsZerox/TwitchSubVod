@@ -10,6 +10,10 @@ const api = axios.create({
   adapter: cacheAdapterEnhancer(axios.defaults.adapter!),
 })
 
+const poguApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_POGU_API,
+})
+
 const apiV6 = axios.create({
   baseURL: 'https://api.twitch.tv/helix/',
   headers: {
@@ -48,4 +52,4 @@ const scraper = {
 }
 
 export default api
-export { apiV6, scraper, apiGQL }
+export { apiV6, scraper, apiGQL, poguApi }
