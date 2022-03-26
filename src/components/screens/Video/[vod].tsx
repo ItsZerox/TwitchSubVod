@@ -12,9 +12,13 @@ import AdsContainer from '~/components/atoms/AdsContainer'
 import { toast } from 'react-toastify'
 import { PlayerContainer } from '~/components/atoms/Player'
 import Typography from '~/components/atoms/Typography'
-import ChatBox from '~/components/molecules/ChatBox'
 import { useMemo, useState } from 'react'
 const Player = dynamic(() => import('~/components/atoms/Player'), {
+  ssr: false,
+  loading: () => <div>...</div>,
+})
+
+const ChatBox = dynamic(() => import('~/components/molecules/ChatBox'), {
   ssr: false,
   loading: () => <div>...</div>,
 })
